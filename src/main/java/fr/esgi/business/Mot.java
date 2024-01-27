@@ -1,6 +1,9 @@
 package fr.esgi.business;
 
+import fr.esgi.utils.ComparateurLettreParPosition;
+
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Mot {
     private Long id;
@@ -22,6 +25,10 @@ public class Mot {
     }
     public void setLettres(ArrayList<Lettre> lettres) {
         this.lettres = lettres;
+    }
+
+    public String retournerMotEnString(){
+        return lettres.stream().sorted(new ComparateurLettreParPosition()).map(Lettre::getCaractere).map(String::valueOf).collect(Collectors.joining());
     }
 
     // toString et autre
