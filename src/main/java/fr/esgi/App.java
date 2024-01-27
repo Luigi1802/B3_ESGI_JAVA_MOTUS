@@ -51,10 +51,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        Mot motATrouver = initMotATrouver();
-
-        System.out.println(motATrouver);
-        //launch();
+        launch();
     }
 
     private static Mot initMotATrouver() {
@@ -66,14 +63,13 @@ public class App extends Application {
         String stringMotATrouver = importMotsService.recupererListeMots().get(randomIndex);
 
         // Mise en objet Mot la chaine de caractere stringMotATrouver
-        return retournerStringEnMot(stringMotATrouver);
+        return formerMotATrouver(stringMotATrouver);
     }
 
-    private static Mot retournerStringEnMot(String stringMot) {
+    private static Mot formerMotATrouver(String stringMot) {
         Mot stringEnMot = new Mot();
 
         for (int i = 0; i < stringMot.length(); i++) {
-            System.out.print(stringMot.charAt(i) + " ");
             Lettre lettre = new Lettre();
             lettre.setCaractere(stringMot.charAt(i));
             lettre.setStatutValide();
