@@ -2,7 +2,7 @@ package fr.esgi.business;
 
 public class Lettre {
     private Long id;
-    private String caractere;
+    private Character caractere;
     private int position;
     private String statut;
     // Valeurs possibles de statut :
@@ -19,7 +19,7 @@ public class Lettre {
         this.occurence = 0;
     }
 
-    public Lettre(String caractere, int position, String statut, int occurence) {
+    public Lettre(Character caractere, int position, String statut, int occurence) {
         this();
         this.caractere = caractere;
         this.position = position;
@@ -31,10 +31,10 @@ public class Lettre {
     public Long getId() {
         return id;
     }
-    public String getCaractere() {
+    public Character getCaractere() {
         return caractere;
     }
-    public void setCaractere(String caractere) {
+    public void setCaractere(Character caractere) {
         this.caractere = caractere;
     }
     public int getPosition() {
