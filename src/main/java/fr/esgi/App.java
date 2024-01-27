@@ -1,5 +1,7 @@
 package fr.esgi;
 
+import fr.esgi.business.Lettre;
+import fr.esgi.business.Mot;
 import fr.esgi.business.Manche;
 import fr.esgi.business.Partie;
 import fr.esgi.service.ImportMotsService;
@@ -16,17 +18,22 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.Random;
+
 
 /**
  * JavaFX App
  */
 public class App extends Application {
+    private static Random random = new Random();
+
     private static ImportMotsService importMotsService = new ImportMotsServiceImpl();
 
     private static Scene scene;
@@ -106,6 +113,30 @@ public class App extends Application {
         Manche manche = new Manche(numManche);
         return manche;
     }
+    
+     private static Mot initMotATrouver() {
+        // Creation de la liste de mots à partir des trois dictionnaires
+        importMotsService.creerListeMots();
 
+        // Selection aleatoire du mot
+        int randomIndex = random.nextInt(importMotsService.recupererListeMots().size());
+        String stringMotATrouver = importMotsService.recupererListeMots().get(randomIndex);
 
+        // Mise en objet Mot la chaine de caractere stringMotATrouver
+        return formerMotATrouver(stringMotATrouver);
+    }
+
+    private static Mot formerMotATrouver(String stringMot) {
+        Mot stringEnMot = new Mot();
+
+        for (int i = 0; i < stringMot.length(); i++) {
+            Lettre lettre = new Lettre();
+            lettre.setCaractere(stringMot.charAt(i));
+            lettre.setStatutValide();
+            lettre.setPosition(i);
+            //lettre.setOccurence(calculerOccurence(stringMotATrouver, stringMotATrouver.charAt(i)));
+            stringEnMot.ajouterLettre(lettre);
+        }
+        return stringEnMot;
+    }
 }
