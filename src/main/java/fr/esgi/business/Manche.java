@@ -10,6 +10,7 @@ public class Manche {
     private int nbEssais;
     private LocalDateTime heureDebut;
     private LocalDateTime heureFin;
+    private boolean victoire;
     private static Long compteur = 0L;
 
     // Constructeurs
@@ -54,8 +55,14 @@ public class Manche {
     public void setHeureFin(LocalDateTime heureFin) {
         this.heureFin = heureFin;
     }
+    public boolean isVictoire() {
+        return victoire;
+    }
+    public void setVictoire(boolean victoire) {
+        this.victoire = victoire;
+    }
 
-    // toString et autre
+// toString et autre
 
     @Override
     public String toString() {
@@ -68,10 +75,10 @@ public class Manche {
                 ", heureFin=" + heureFin +
                 '}';
     }
-    private void ajouterEssai(){
+    public void ajouterEssai(){
         ++nbEssais;
     }
-    private Long calculerTempsPasse(){
+    public Long calculerTempsPasse(){
         if (heureFin!=null) {
             return Duration.between(heureDebut, heureFin).getSeconds();
         }
