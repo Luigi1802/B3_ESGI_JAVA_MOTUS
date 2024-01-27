@@ -37,4 +37,3 @@ public class Mot {
         this.lettres.add(lettre);
     }
 }
-

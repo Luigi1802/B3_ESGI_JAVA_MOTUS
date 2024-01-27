@@ -1,5 +1,7 @@
 package fr.esgi;
 
+import fr.esgi.business.Lettre;
+import fr.esgi.business.Mot;
 import fr.esgi.service.ImportMotsService;
 import fr.esgi.service.impl.ImportMotsServiceImpl;
 import javafx.application.Application;
@@ -14,15 +16,20 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.Random;
+
 
 /**
  * JavaFX App
  */
 public class App extends Application {
+    private static Random random = new Random();
+
     private static ImportMotsService importMotsService = new ImportMotsServiceImpl();
 
     private static Scene scene;
@@ -44,7 +51,36 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        Mot motATrouver = initMotATrouver();
+
+        System.out.println(motATrouver);
+        //launch();
     }
 
+    private static Mot initMotATrouver() {
+        // Creation de la liste de mots à partir des trois dictionnaires
+        importMotsService.creerListeMots();
+
+        // Selection aleatoire du mot
+        int randomIndex = random.nextInt(importMotsService.recupererListeMots().size());
+        String stringMotATrouver = importMotsService.recupererListeMots().get(randomIndex);
+
+        // Mise en objet Mot la chaine de caractere stringMotATrouver
+        return retournerStringEnMot(stringMotATrouver);
+    }
+
+    private static Mot retournerStringEnMot(String stringMot) {
+        Mot stringEnMot = new Mot();
+
+        for (int i = 0; i < stringMot.length(); i++) {
+            System.out.print(stringMot.charAt(i) + " ");
+            Lettre lettre = new Lettre();
+            lettre.setCaractere(stringMot.charAt(i));
+            lettre.setStatutValide();
+            lettre.setPosition(i);
+            //lettre.setOccurence(calculerOccurence(stringMotATrouver, stringMotATrouver.charAt(i)));
+            stringEnMot.ajouterLettre(lettre);
+        }
+        return stringEnMot;
+    }
 }
