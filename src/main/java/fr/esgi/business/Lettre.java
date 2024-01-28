@@ -1,5 +1,7 @@
 package fr.esgi.business;
 
+import java.util.Objects;
+
 public class Lettre {
     private Long id;
     private Character caractere;
@@ -66,6 +68,36 @@ public class Lettre {
     }
 
     // toString et autres
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Lettre)) return false;
+        Lettre lettre = (Lettre) o;
+        return getPosition() == lettre.getPosition() && Objects.equals(getCaractere(), lettre.getCaractere()) && Objects.equals(getStatut(), lettre.getStatut());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCaractere(), getPosition(), getStatut());
+    }
+
+    public boolean estTrouve(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Lettre)) return false;
+        Lettre lettre = (Lettre) o;
+        return Objects.equals(getCaractere(), lettre.getCaractere()) && Objects.equals("TROUVE", lettre.getStatut());}
+    public boolean estValide(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Lettre)) return false;
+        Lettre lettre = (Lettre) o;
+        return Objects.equals(getCaractere(), lettre.getCaractere()) && Objects.equals("VALIDE", lettre.getStatut());}
+
+    public boolean estAbsent(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Lettre)) return false;
+        Lettre lettre = (Lettre) o;
+        return Objects.equals(getCaractere(), lettre.getCaractere()) && Objects.equals("ABSENT", lettre.getStatut());}
 
     @Override
     public String toString() {

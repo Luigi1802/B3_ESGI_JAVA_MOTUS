@@ -177,7 +177,57 @@ public class App extends Application {
         lettresTrouvees.forEach(Lettre::setStatutTrouve);
         lettresAbsentes.forEach(Lettre::setStatutAbsent);
 
-        System.out.println(motSaisi.getLettres());
+        /* lettresIntermediaires est utilisée comme une référence à motIntermediaire.lettres */
+        ArrayList<Lettre> lettresIntermediaires = motIntermediaire.getLettres();
+        System.out.println("Mot intermediaire Lettres => " + motIntermediaire.getLettres());
+
+        lettresValidees.forEach(lValidee -> {
+            boolean lettreExiste = false;
+            for(Lettre lettreIntermediaire:lettresIntermediaires){
+                if (lValidee.equals(lettreIntermediaire)){
+                    lettreExiste = true;
+                    break;
+                }else if(lValidee.estTrouve(lettreIntermediaire)){
+                    lettresIntermediaires.remove(lettreIntermediaire);
+                    break;
+                }
+            }
+            if(!lettreExiste){
+                lettresIntermediaires.add(lValidee);
+            }
+                });
+
+        lettresTrouvees.forEach(lTrouvees -> {
+            boolean lettreExiste = false;
+            for(Lettre lettreIntermediaire:lettresIntermediaires){
+                if(lTrouvees.estTrouve(lettreIntermediaire) || lTrouvees.estValide(lettreIntermediaire)){
+                    lettreExiste = true;
+                    break;
+                }
+            }
+            if(!lettreExiste){
+                lettresIntermediaires.add(lTrouvees);
+            }
+        });
+
+        lettresAbsentes.forEach(lAbsente ->{
+                boolean lettreExiste = false;
+                for(Lettre lettreIntermediaire:lettresIntermediaires){
+                    if(lAbsente.estTrouve(lettreIntermediaire) || lAbsente.estValide(lettreIntermediaire) || lAbsente.estAbsent(lettreIntermediaire)){
+                        lettreExiste = true;
+                        break;
+                    }
+                }
+            if(!lettreExiste){
+                lettresIntermediaires.add(lAbsente);
+            }
+            }
+        );
+
+
+
+        System.out.println("motSaisi.getLettres()" + motSaisi.getLettres());
+        System.out.println("Mot intermediaire Lettres => " + motIntermediaire.getLettres());
 
 
     }
