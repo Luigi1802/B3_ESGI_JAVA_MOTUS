@@ -11,7 +11,7 @@ public class Lettre {
     // - VALIDE (bonne lettre, bonne position)
     // - TROUVE (bonne lettre, mauvaise position)
     // - DEFAUT (lettres du motATrouver et lettres non testées avec motSaisi)
-    // - ABSENTE (lettre testées avec motSaisi et absentes de motATrouver
+    // - ABSENTE (lettre testées avec motSaisi et absentes de motATrouver)
     //private int occurence;
     private static Long compteur = 0L;
 

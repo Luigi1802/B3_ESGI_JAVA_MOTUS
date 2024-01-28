@@ -7,12 +7,13 @@ import fr.esgi.utils.ComparateurLettreParPosition;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class MotServiceImpl implements MotService{
-    private static Mot motSaisi;
-    private static Mot motATrouver;
-    private static Mot motIntermediaire;
+    private static Mot motSaisi = new Mot();
+    private static Mot motATrouver = new Mot();
+    private static Mot motIntermediaire = new Mot();
 
     @Override
     public Mot getMotATrouver() {
@@ -142,8 +143,51 @@ public class MotServiceImpl implements MotService{
                     }
                 }
         );
-
     }
-
-
+    public boolean testerValiditeMotSaisi(){
+        boolean validite = true;
+        for (Lettre lettre:motSaisi.getLettres()) {
+            if (!Objects.equals(lettre.getStatut(), "VALIDE")){
+                validite = false;
+                break;
+            }
+        }
+        return validite;
+    }
+    // TODO à retirer une fois l'interface graphique en place
+    @Override
+    public String retournerMotSaisiFormate() {
+        String motSaisiFormate = "";
+        for (Lettre lettre:motSaisi.getLettres()) {
+            switch (lettre.getStatut()) {
+                case "VALIDE":
+                    motSaisiFormate += "["+lettre.getCaractere()+"]";
+                    break;
+                case "TROUVE":
+                    motSaisiFormate += "("+lettre.getCaractere()+")";
+                    break;
+                default:
+                    motSaisiFormate += lettre.getCaractere();
+                    break;
+            }
+        }
+        return motSaisiFormate;
+    }
+    // TODO à retirer une fois l'interface graphique en place
+    @Override
+    public String retournerMotIntermediaireFormate() {
+        String motIntermediaireFormate = "";
+        // Tri par position du motIntermediaire
+        for (int position = 0; position<motATrouver.getLettres().size();position++) {
+            for (Lettre lettre:motIntermediaire.getLettres()) {
+                if (lettre.getPosition() == position && Objects.equals(lettre.getStatut(), "VALIDE")) {
+                    motIntermediaireFormate += lettre.getCaractere();
+                }
+            }
+            if (!(motIntermediaireFormate.length() == position+1)) {
+                motIntermediaireFormate += ".";
+            }
+        }
+        return motIntermediaireFormate;
+    }
 }

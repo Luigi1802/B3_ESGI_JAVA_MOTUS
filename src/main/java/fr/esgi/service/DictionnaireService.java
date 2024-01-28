@@ -9,4 +9,5 @@ public interface DictionnaireService {
     void creerListeMots();
     ArrayList<String> transformerStreamStringEnListe(Stream<String> streamATransformer);
     ArrayList<String> recupererListeMots();
+    boolean testerMotPresentDictionnaire(String mot);
 }
