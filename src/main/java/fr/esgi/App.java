@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -67,12 +68,14 @@ public class App extends Application {
     public static void lancerNouvellePartie() {
         System.out.println("Lancement d'une nouvelle partie...");
         Partie partie = new Partie();
+        partie.setVictoire(true);
         int compteurManches = 1;
         // Boucle d'une partie (4 manches)
         while (compteurManches < 5) {
             // Lancement d'une manche
             System.out.println("Manche "+compteurManches);
             Manche mancheActuelle = lancerNouvelleManche(compteurManches);
+            partie.ajouterManche(mancheActuelle);
             if (!mancheActuelle.isVictoire()) {
                 // Arrêt de la partie si une manche est perdue
                 partie.setVictoire(false);
@@ -82,17 +85,17 @@ public class App extends Application {
         }
         // Affichage du résumé de la partie
         if (partie.isVictoire()) {
-            System.out.println("Partie perdue :(");
-        } else {
             System.out.println("Partie gagnée :)");
+        } else {
+            System.out.println("Partie perdue :(");
         }
         System.out.println("Résumé de la partie :");
         // Résumé manche par manche
         for (Manche manche : partie.getManches()) {
             System.out.println("Manche "+manche.getNumManche()+" :");
-            //System.out.println("- Mot à trouver : "+manche.getMotATrouver().retournerMotEnString());
+            System.out.println("- Mot à trouver : "+manche.getMotATrouver().retournerMotEnString());
             System.out.println("- Nombre d'essais : "+manche.getNbEssais());
-            if (manche.isVictoire()) {
+            if (!manche.isVictoire()) {
                 System.out.println("Perdue");
             } else {
                 System.out.println("- Temps écoulé : "+manche.calculerTempsPasse()/60+"m"+manche.calculerTempsPasse()%60+"s");
@@ -103,6 +106,46 @@ public class App extends Application {
 
     private static Manche lancerNouvelleManche(int numManche) {
         Manche manche = new Manche(numManche);
+        // Initialisation du mot à trouver
+        motService.setMotATrouver(initMotATrouver());
+        manche.setMotATrouver(motService.getMotATrouver());
+
+        // TODO retirer quand on passe en interface fx
+        System.out.println("Longueur du mot : "+motService.getMotATrouver().getLettres().size());
+        //System.out.println(motService.getMotATrouver().retournerMotEnString());
+
+        // Clear de motSaisi et motIntermediaire
+        motService.setMotSaisi(new Mot());
+        motService.setMotIntermediaire(new Mot());
+        // Ajout de la première lettre de motATrouver dans motIntermédiaire
+        Lettre premiereLettre = motService.getMotATrouver().getLettres().get(0);
+        premiereLettre.setStatutValide();
+        motService.getMotIntermediaire().ajouterLettre(premiereLettre);
+        // Boucle des saisies joueur
+        for (int i = 0; i < 6; i++){
+            System.out.println(motService.retournerMotIntermediaireFormate());
+            motService.setMotSaisi(motService.retournerStringEnMot(scanner.nextLine()));
+            // Test si mot dans le dictionnaire
+            while (!dictionnaireService.testerMotPresentDictionnaire(motService.getMotSaisi().retournerMotEnString())) {
+                System.out.println("Le mot saisi n'existe pas dans le dictionnaire.");
+                motService.setMotSaisi(motService.retournerStringEnMot(scanner.nextLine()));
+            }
+            manche.ajouterEssai();
+            // Comparaison motSaisi - motATrouver
+            motService.comparateurMotsSaisiATrouver();
+            // Affichage motSaisi traité
+            System.out.println(motService.retournerMotSaisiFormate());
+            // Test victoire
+            if (motService.testerValiditeMotSaisi()) {
+                System.out.println("Manche gagnée !");
+                manche.setHeureFin(LocalDateTime.now());
+                manche.setVictoire(true);
+                return manche;
+            }
+        }
+        System.out.println("Manche perdue...");
+        manche.setHeureFin(LocalDateTime.now());
+        manche.setVictoire(false);
         return manche;
     }
 

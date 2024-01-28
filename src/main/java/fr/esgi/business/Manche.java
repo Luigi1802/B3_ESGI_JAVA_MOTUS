@@ -64,6 +64,7 @@ public class Manche {
 
 // toString et autre
 
+
     @Override
     public String toString() {
         return "Manche{" +
@@ -73,8 +74,10 @@ public class Manche {
                 ", nbEssais=" + nbEssais +
                 ", heureDebut=" + heureDebut +
                 ", heureFin=" + heureFin +
+                ", victoire=" + victoire +
                 '}';
     }
+
     public void ajouterEssai(){
         ++nbEssais;
     }
