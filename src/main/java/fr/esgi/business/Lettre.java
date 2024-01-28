@@ -55,6 +55,9 @@ public class Lettre {
     public void setStatutDefaut() {
         this.statut = "DEFAUT";
     }
+    public void setStatutAbsent() {
+        this.statut = "ABSENT";
+    }
     public int getOccurence() {
         return occurence;
     }

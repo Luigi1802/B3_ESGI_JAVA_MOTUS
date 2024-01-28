@@ -55,7 +55,7 @@ public class App extends Application {
         //launch();
         ArrayList<Lettre> lettres1 = new ArrayList<>();
         Mot mot1 = new Mot();
-        String string1 = "bouilles";
+        String string1 = "bouliste";
         List<Character> characterList1 = string1.chars().mapToObj(c -> (char) c).collect(Collectors.toList());
         for(int i =0 ; i<characterList1.size(); i++){
             lettres1.add(new Lettre(characterList1.get(i), i, "DEFAUT", 1));
@@ -64,7 +64,7 @@ public class App extends Application {
 
         ArrayList<Lettre> lettres2 = new ArrayList<>();
         Mot mot2 = new Mot();
-        String string2 = "bouliste";
+        String string2 = "bouilles";
         List<Character> characterList2 = string2.chars().mapToObj(c -> (char) c).collect(Collectors.toList());
         for(int i =0 ; i<characterList2.size(); i++){
             lettres2.add(new Lettre(characterList2.get(i), i, "DEFAUT", 1));
@@ -80,8 +80,8 @@ public class App extends Application {
 
 
         comparateurMotsSaisiATrouver(mot1 ,mot2, motIntermediaire);
-        System.out.println(mot1);
-        System.out.println(mot2);
+//        System.out.println(mot1);
+//        System.out.println(mot2);
 
 //        System.out.println("Bienvenue sur motus !");
 //        boolean resultatPartie;
@@ -140,27 +140,21 @@ public class App extends Application {
     private static void comparateurMotsSaisiATrouver(Mot motSaisi, Mot motAtrouver, Mot motIntermediaire){
         ArrayList<Lettre> lettresMotSaisi = new ArrayList<>(motSaisi.getLettres());
         lettresMotSaisi = (ArrayList<Lettre>) lettresMotSaisi.stream().sorted(new ComparateurLettreParPosition()).collect(Collectors.toList());
+
         ArrayList<Lettre> lettresMotATrouver = new ArrayList<>(motAtrouver.getLettres());
         lettresMotATrouver = (ArrayList<Lettre>) lettresMotATrouver.stream().sorted(new ComparateurLettreParPosition()).collect(Collectors.toList());
+
         ArrayList<Lettre> lettresValidees = new ArrayList<>();
 
         for(int i = 0; i<lettresMotATrouver.size(); i++){
             if (lettresMotATrouver.get(i).getCaractere().equals(lettresMotSaisi.get(i).getCaractere())){
-                System.out.println(lettresMotSaisi.get(i).getCaractere());
                 lettresValidees.add(lettresMotSaisi.get(i));
                 lettresMotSaisi.remove(i);
                 lettresMotATrouver.remove(i);
                 i--;
             }
-            System.out.println("\nvalidées");
-            lettresValidees.stream().map(Lettre::getCaractere).forEach(System.out::print);
-            System.out.println("\nmot saisi");
-            lettresMotSaisi.stream().map(Lettre::getCaractere).forEach(System.out::print);
-            System.out.println("\nAtrouver");
-            lettresMotATrouver.stream().map(Lettre::getCaractere).forEach(System.out::print);
-            System.out.println("\n");
-
         }
+
         ArrayList<Lettre> lettresTrouvees = new ArrayList<>();
         for(int i = 0; i<lettresMotATrouver.size(); i++){
             List<Character> charListMotATrouver = lettresMotATrouver.stream().map(Lettre::getCaractere).collect(Collectors.toList());
@@ -173,26 +167,26 @@ public class App extends Application {
                 charListMotATrouver.remove(indexOfCharATrouver);
                 i--;
             }
-            System.out.println("\nvalidées");
-            lettresTrouvees.stream().map(Lettre::getCaractere).forEach(System.out::print);
-            System.out.println("\nmot saisi");
-            lettresMotSaisi.stream().map(Lettre::getCaractere).forEach(System.out::print);
-            System.out.println("\nAtrouver");
-            lettresMotATrouver.stream().map(Lettre::getCaractere).forEach(System.out::print);
-            System.out.println("\n");
         }
-        ;
         ArrayList<Lettre> lettresAbsentes = new ArrayList<>(lettresMotSaisi);
-        
+        System.out.println(motSaisi.getLettres());
 
-//        for (int i = 0; i<lettresMotATrouver.size(); i++){
-//            if (lettresMotSaisi.get(i) == lettresMotATrouver.get(i)){
-//                lettresValidees.add(lettresMotSaisi.get(i));
-//                ArrayList
-//            }
-//        }
+        /* Les lettres dans les listes lettresValidees, lettresTrouvees, lettresAbsentes sont des références aux lettres contenues dans motSaisi.lettres
+          La liste motSaisi.lettres n'est jamais modifiée par la fonction (il n'y a pas de changement de l'ordre ni de suppression des éléments) */
+        lettresValidees.forEach(Lettre::setStatutValide);
+        lettresTrouvees.forEach(Lettre::setStatutTrouve);
+        lettresAbsentes.forEach(Lettre::setStatutAbsent);
+
+        System.out.println(motSaisi.getLettres());
 
 
+    }
+
+    public static ArrayList<Lettre> concatenerDeuxListesLettres(ArrayList<Lettre> listeFinale, ArrayList<Lettre> listeAAjouter){
+        for(Lettre lettre:listeAAjouter){
+            listeFinale.add(lettre);
+        }
+        return listeFinale;
     }
 
     private static Manche lancerNouvelleManche(int numManche) {
