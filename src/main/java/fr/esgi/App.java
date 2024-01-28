@@ -1,13 +1,14 @@
 package fr.esgi;
 
 import fr.esgi.business.Lettre;
-import fr.esgi.business.Mot;
 import fr.esgi.business.Manche;
+import fr.esgi.business.Mot;
 import fr.esgi.business.Partie;
 import fr.esgi.service.MotService;
 import fr.esgi.service.impl.MotServiceImpl;
 import fr.esgi.service.ImportMotsService;
 import fr.esgi.service.impl.ImportMotsServiceImpl;
+import fr.esgi.utils.ComparateurLettreParPosition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,16 +21,13 @@ import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.Random;
 
+import static java.lang.System.exit;
 
 /**
  * JavaFX App
@@ -62,20 +60,8 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        //launch();
-        System.out.println("Bienvenue sur motus !");
-        boolean resultatPartie;
-        boolean rejouer = true;
-        // Boucle de jeu (on relance une partie tant que le joueur le veut)
-        while (rejouer) {
-            // Lancement d'une partie
-            lancerNouvellePartie();
-            System.out.println("Voulez-vous rejouer ? (y/N)");
-            if (!scanner.nextLine().equalsIgnoreCase("Y")) {
-                rejouer = false;
-                System.out.println("À bientôt !");
-            }
-        }
+        launch();
+        exit(0);
     }
 
     public static void lancerNouvellePartie() {
@@ -115,20 +101,19 @@ public class App extends Application {
         }
     }
 
+
+
+    public static ArrayList<Lettre> concatenerDeuxListesLettres(ArrayList<Lettre> listeFinale, ArrayList<Lettre> listeAAjouter){
+        for(Lettre lettre:listeAAjouter){
+            listeFinale.add(lettre);
+        }
+        return listeFinale;
+    }
+
     private static Manche lancerNouvelleManche(int numManche) {
         Manche manche = new Manche(numManche);
         return manche;
     }
-    
-     private static Mot initMotATrouver() {
-        // Creation de la liste de mots à partir des trois dictionnaires
-        importMotsService.creerListeMots();
 
-        // Selection aleatoire du mot
-        int randomIndex = random.nextInt(importMotsService.recupererListeMots().size());
-        String stringMotATrouver = importMotsService.recupererListeMots().get(randomIndex);
 
-        // Mise en objet Mot la chaine de caractere stringMotATrouver
-        return motService.retournerStringEnMot(stringMotATrouver);
-    }
 }
