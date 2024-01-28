@@ -10,15 +10,16 @@ public class Lettre {
     // Valeurs possibles de statut :
     // - VALIDE (bonne lettre, bonne position)
     // - TROUVE (bonne lettre, mauvaise position)
-    // - DEFAUT (mauvaise lettre, mauvaise position)
-    private int occurence;
+    // - DEFAUT (lettres du motATrouver et lettres non testées avec motSaisi)
+    // - ABSENTE (lettre testées avec motSaisi et absentes de motATrouver
+    //private int occurence;
     private static Long compteur = 0L;
 
     // Constructeurs
     public Lettre(){
         this.id = ++compteur;
         this.statut = "DEFAUT";
-        this.occurence = 0;
+        //this.occurence = 0;
     }
 
     public Lettre(Character caractere, int position, String statut, int occurence) {
@@ -26,7 +27,7 @@ public class Lettre {
         this.caractere = caractere;
         this.position = position;
         this.statut = statut;
-        this.occurence = occurence;
+        //this.occurence = occurence;
     }
 
     // Getter et Setter
@@ -57,15 +58,16 @@ public class Lettre {
     public void setStatutDefaut() {
         this.statut = "DEFAUT";
     }
-    public void setStatutAbsent() {
-        this.statut = "ABSENT";
+    public void setStatutAbsente() {
+        this.statut = "ABSENTE";
     }
-    public int getOccurence() {
-        return occurence;
-    }
-    public void setOccurence(int occurence) {
-        this.occurence = occurence;
-    }
+
+    //public int getOccurence() {
+    //    return occurence;
+    //}
+    //public void setOccurence(int occurence) {
+    //    this.occurence = occurence;
+    //}
 
     // toString et autres
 
@@ -101,12 +103,12 @@ public class Lettre {
 
     @Override
     public String toString() {
-        return "Lettre{" +
+        return "\nLettre{" +
                 "id=" + id +
                 ", caractere='" + caractere + '\'' +
                 ", position=" + position +
                 ", statut='" + statut + '\'' +
-                ", occurence=" + occurence +
+                //", occurence=" + occurence +
                 '}';
     }
 }

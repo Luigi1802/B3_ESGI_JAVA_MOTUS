@@ -1,9 +1,10 @@
 package fr.esgi;
 
-import fr.esgi.business.Lettre;
 import fr.esgi.business.Manche;
 import fr.esgi.business.Mot;
 import fr.esgi.business.Partie;
+import fr.esgi.service.MotService;
+import fr.esgi.service.impl.MotServiceImpl;
 import fr.esgi.service.ImportMotsService;
 import fr.esgi.service.impl.ImportMotsServiceImpl;
 import fr.esgi.utils.ComparateurLettreParPosition;
@@ -16,21 +17,27 @@ import javafx.stage.Stage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.lang.System.exit;
-
 /**
  * JavaFX App
  */
 public class App extends Application {
+    private static Random random = new Random();
+
+
     private static ImportMotsService importMotsService = new ImportMotsServiceImpl();
+    private static MotService motService = new MotServiceImpl();
+
 
     private static Scene scene;
     private static Scanner scanner = new Scanner(System.in);
@@ -243,8 +250,6 @@ public class App extends Application {
         Manche manche = new Manche(numManche);
         return manche;
     }
-
-
 
 
 }
