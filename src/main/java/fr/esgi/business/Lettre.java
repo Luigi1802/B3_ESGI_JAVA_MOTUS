@@ -58,7 +58,7 @@ public class Lettre {
     public void setStatutDefaut() {
         this.statut = "DEFAUT";
     }
-    public void setStatutAbsente() {
+    public void setStatutAbsent() {
         this.statut = "ABSENTE";
     }
 
