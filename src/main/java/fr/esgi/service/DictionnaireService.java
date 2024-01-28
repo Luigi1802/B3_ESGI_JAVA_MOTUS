@@ -3,7 +3,7 @@ package fr.esgi.service;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-public interface ImportMotsService {
+public interface DictionnaireService {
 
     Stream<String> retournerImportMot(String urlPath);
     void creerListeMots();

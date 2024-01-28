@@ -1,6 +1,6 @@
 package fr.esgi.service.impl;
 
-import fr.esgi.service.ImportMotsService;
+import fr.esgi.service.DictionnaireService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ImportMotsServiceImpl implements ImportMotsService {
+public class DictionnaireServiceImpl implements DictionnaireService {
     private final String sixLettresURL = "https://raw.githubusercontent.com/gverdier/motus/master/Console/Dictionnaire6.txt";
     private final String septLettresURL = "https://raw.githubusercontent.com/gverdier/motus/master/Console/Dictionnaire7.txt";
     private final String huitLettresURL = "https://raw.githubusercontent.com/gverdier/motus/master/Console/Dictionnaire8.txt";

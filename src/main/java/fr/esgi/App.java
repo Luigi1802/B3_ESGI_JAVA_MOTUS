@@ -6,28 +6,16 @@ import fr.esgi.business.Mot;
 import fr.esgi.business.Partie;
 import fr.esgi.service.MotService;
 import fr.esgi.service.impl.MotServiceImpl;
-import fr.esgi.service.ImportMotsService;
-import fr.esgi.service.impl.ImportMotsServiceImpl;
-import fr.esgi.utils.ComparateurLettreParPosition;
+import fr.esgi.service.DictionnaireService;
+import fr.esgi.service.impl.DictionnaireServiceImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static java.lang.System.exit;
 
 /**
  * JavaFX App
@@ -36,7 +24,7 @@ public class App extends Application {
     private static Random random = new Random();
 
 
-    private static ImportMotsService importMotsService = new ImportMotsServiceImpl();
+    private static DictionnaireService dictionnaireService = new DictionnaireServiceImpl();
     private static MotService motService = new MotServiceImpl();
 
 
@@ -60,8 +48,20 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
-        exit(0);
+        //launch();
+        System.out.println("Bienvenue sur motus !");
+        boolean resultatPartie;
+        boolean rejouer = true;
+        // Boucle de jeu (on relance une partie tant que le joueur le veut)
+        while (rejouer) {
+            // Lancement d'une partie
+            lancerNouvellePartie();
+            System.out.println("Voulez-vous rejouer ? (y/N)");
+            if (!scanner.nextLine().equalsIgnoreCase("Y")) {
+                rejouer = false;
+                System.out.println("À bientôt !");
+            }
+        }
     }
 
     public static void lancerNouvellePartie() {
@@ -101,7 +101,22 @@ public class App extends Application {
         }
     }
 
+    private static Manche lancerNouvelleManche(int numManche) {
+        Manche manche = new Manche(numManche);
+        return manche;
+    }
 
+    private static Mot initMotATrouver() {
+        // Creation de la liste de mots à partir des trois dictionnaires
+        dictionnaireService.creerListeMots();
+
+        // Selection aleatoire du mot
+        int randomIndex = random.nextInt(dictionnaireService.recupererListeMots().size());
+        String stringMotATrouver = dictionnaireService.recupererListeMots().get(randomIndex);
+
+        // Mise en objet Mot la chaine de caractere stringMotATrouver
+        return motService.retournerStringEnMot(stringMotATrouver);
+    }
 
     public static ArrayList<Lettre> concatenerDeuxListesLettres(ArrayList<Lettre> listeFinale, ArrayList<Lettre> listeAAjouter){
         for(Lettre lettre:listeAAjouter){
@@ -109,11 +124,5 @@ public class App extends Application {
         }
         return listeFinale;
     }
-
-    private static Manche lancerNouvelleManche(int numManche) {
-        Manche manche = new Manche(numManche);
-        return manche;
-    }
-
 
 }
