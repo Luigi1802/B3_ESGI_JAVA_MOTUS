@@ -18,10 +18,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -74,8 +71,17 @@ public class App extends Application {
         }
         mot2.setLettres(lettres2);
 
-        comparateurMotsSaisiATrouver(mot1 ,mot2);
+        Mot motIntermediaire = new Mot();
+        ArrayList<Lettre> test = new ArrayList<>();
+        test.add(new Lettre('b', 0, "VALIDE", 1));
+        test.add(new Lettre('o', 1, "TROUVE", 1));
 
+        motIntermediaire.setLettres(test);
+
+
+        comparateurMotsSaisiATrouver(mot1 ,mot2, motIntermediaire);
+        System.out.println(mot1);
+        System.out.println(mot2);
 
 //        System.out.println("Bienvenue sur motus !");
 //        boolean resultatPartie;
@@ -131,13 +137,13 @@ public class App extends Application {
         }
     }
 
-    private static void comparateurMotsSaisiATrouver(Mot motSaisi, Mot motAtrouver){
+    private static void comparateurMotsSaisiATrouver(Mot motSaisi, Mot motAtrouver, Mot motIntermediaire){
         ArrayList<Lettre> lettresMotSaisi = new ArrayList<>(motSaisi.getLettres());
         lettresMotSaisi = (ArrayList<Lettre>) lettresMotSaisi.stream().sorted(new ComparateurLettreParPosition()).collect(Collectors.toList());
         ArrayList<Lettre> lettresMotATrouver = new ArrayList<>(motAtrouver.getLettres());
         lettresMotATrouver = (ArrayList<Lettre>) lettresMotATrouver.stream().sorted(new ComparateurLettreParPosition()).collect(Collectors.toList());
         ArrayList<Lettre> lettresValidees = new ArrayList<>();
-        ArrayList<Integer> indexList = new ArrayList<Integer>();
+
         for(int i = 0; i<lettresMotATrouver.size(); i++){
             if (lettresMotATrouver.get(i).getCaractere().equals(lettresMotSaisi.get(i).getCaractere())){
                 System.out.println(lettresMotSaisi.get(i).getCaractere());
@@ -155,9 +161,30 @@ public class App extends Application {
             System.out.println("\n");
 
         }
-//        for(int i = 0; i<lettresMotATrouver.size(); i++){
-//            if(lettresMotATrouver)
-//        }
+        ArrayList<Lettre> lettresTrouvees = new ArrayList<>();
+        for(int i = 0; i<lettresMotATrouver.size(); i++){
+            List<Character> charListMotATrouver = lettresMotATrouver.stream().map(Lettre::getCaractere).collect(Collectors.toList());
+            Character charSaisi = lettresMotSaisi.get(i).getCaractere();
+            if(charListMotATrouver.contains(charSaisi)){
+                lettresTrouvees.add(lettresMotSaisi.get(i));
+                lettresMotSaisi.remove(i);
+                int indexOfCharATrouver = lettresMotATrouver.stream().map(Lettre::getCaractere).collect(Collectors.toList()).indexOf(charSaisi);
+                lettresMotATrouver.remove(indexOfCharATrouver);
+                charListMotATrouver.remove(indexOfCharATrouver);
+                i--;
+            }
+            System.out.println("\nvalidées");
+            lettresTrouvees.stream().map(Lettre::getCaractere).forEach(System.out::print);
+            System.out.println("\nmot saisi");
+            lettresMotSaisi.stream().map(Lettre::getCaractere).forEach(System.out::print);
+            System.out.println("\nAtrouver");
+            lettresMotATrouver.stream().map(Lettre::getCaractere).forEach(System.out::print);
+            System.out.println("\n");
+        }
+        ;
+        ArrayList<Lettre> lettresAbsentes = new ArrayList<>(lettresMotSaisi);
+        
+
 //        for (int i = 0; i<lettresMotATrouver.size(); i++){
 //            if (lettresMotSaisi.get(i) == lettresMotATrouver.get(i)){
 //                lettresValidees.add(lettresMotSaisi.get(i));
