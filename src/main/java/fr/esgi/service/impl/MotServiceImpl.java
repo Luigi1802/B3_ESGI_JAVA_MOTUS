@@ -4,6 +4,7 @@ import fr.esgi.business.Mot;
 import fr.esgi.business.Lettre;
 import fr.esgi.service.MotService;
 import fr.esgi.utils.ComparateurLettreParPosition;
+import fr.esgi.business.StatutLettre;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -147,7 +148,7 @@ public class MotServiceImpl implements MotService{
     public boolean testerValiditeMotSaisi(){
         boolean validite = true;
         for (Lettre lettre:motSaisi.getLettres()) {
-            if (!Objects.equals(lettre.getStatut(), "VALIDE")){
+            if (!Objects.equals(lettre.getStatut(), StatutLettre.VALIDE)){
                 validite = false;
                 break;
             }
@@ -160,10 +161,10 @@ public class MotServiceImpl implements MotService{
         String motSaisiFormate = "";
         for (Lettre lettre:motSaisi.getLettres()) {
             switch (lettre.getStatut()) {
-                case "VALIDE":
+                case VALIDE:
                     motSaisiFormate += "["+lettre.getCaractere()+"]";
                     break;
-                case "TROUVE":
+                case TROUVE:
                     motSaisiFormate += "("+lettre.getCaractere()+")";
                     break;
                 default:
@@ -180,7 +181,7 @@ public class MotServiceImpl implements MotService{
         // Tri par position du motIntermediaire
         for (int position = 0; position<motATrouver.getLettres().size();position++) {
             for (Lettre lettre:motIntermediaire.getLettres()) {
-                if (lettre.getPosition() == position && Objects.equals(lettre.getStatut(), "VALIDE")) {
+                if (lettre.getPosition() == position && Objects.equals(lettre.getStatut(), StatutLettre.VALIDE)) {
                     motIntermediaireFormate += lettre.getCaractere();
                 }
             }

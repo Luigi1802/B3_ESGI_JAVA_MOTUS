@@ -6,7 +6,7 @@ public class Lettre {
     private Long id;
     private Character caractere;
     private int position;
-    private String statut;
+    private StatutLettre statut;
     // Valeurs possibles de statut :
     // - VALIDE (bonne lettre, bonne position)
     // - TROUVE (bonne lettre, mauvaise position)
@@ -18,11 +18,11 @@ public class Lettre {
     // Constructeurs
     public Lettre(){
         this.id = ++compteur;
-        this.statut = "DEFAUT";
+        this.statut = StatutLettre.DEFAUT;
         //this.occurence = 0;
     }
 
-    public Lettre(Character caractere, int position, String statut, int occurence) {
+    public Lettre(Character caractere, int position, StatutLettre statut, int occurence) {
         this();
         this.caractere = caractere;
         this.position = position;
@@ -46,20 +46,20 @@ public class Lettre {
     public void setPosition(int position) {
         this.position = position;
     }
-    public String getStatut() {
+    public StatutLettre getStatut() {
         return statut;
     }
     public void setStatutValide() {
-        this.statut = "VALIDE";
+        this.statut = StatutLettre.VALIDE;
     }
     public void setStatutTrouve() {
-        this.statut = "TROUVE";
+        this.statut = StatutLettre.TROUVE;
     }
     public void setStatutDefaut() {
-        this.statut = "DEFAUT";
+        this.statut = StatutLettre.DEFAUT;
     }
     public void setStatutAbsent() {
-        this.statut = "ABSENTE";
+        this.statut = StatutLettre.ABSENTE;
     }
 
     //public int getOccurence() {
@@ -88,18 +88,18 @@ public class Lettre {
         if (this == o) return true;
         if (!(o instanceof Lettre)) return false;
         Lettre lettre = (Lettre) o;
-        return Objects.equals(getCaractere(), lettre.getCaractere()) && Objects.equals("TROUVE", lettre.getStatut());}
+        return Objects.equals(getCaractere(), lettre.getCaractere()) && Objects.equals(StatutLettre.TROUVE, lettre.getStatut());}
     public boolean estValide(Object o) {
         if (this == o) return true;
         if (!(o instanceof Lettre)) return false;
         Lettre lettre = (Lettre) o;
-        return Objects.equals(getCaractere(), lettre.getCaractere()) && Objects.equals("VALIDE", lettre.getStatut());}
+        return Objects.equals(getCaractere(), lettre.getCaractere()) && Objects.equals(StatutLettre.VALIDE, lettre.getStatut());}
 
     public boolean estAbsent(Object o) {
         if (this == o) return true;
         if (!(o instanceof Lettre)) return false;
         Lettre lettre = (Lettre) o;
-        return Objects.equals(getCaractere(), lettre.getCaractere()) && Objects.equals("ABSENT", lettre.getStatut());}
+        return Objects.equals(getCaractere(), lettre.getCaractere()) && Objects.equals(StatutLettre.ABSENTE, lettre.getStatut());}
 
     @Override
     public String toString() {
