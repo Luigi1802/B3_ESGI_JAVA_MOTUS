@@ -110,10 +110,6 @@ public class App extends Application {
         motService.setMotATrouver(initMotATrouver());
         manche.setMotATrouver(motService.getMotATrouver());
 
-        // TODO retirer quand on passe en interface fx
-        System.out.println("Longueur du mot : "+motService.getMotATrouver().getLettres().size());
-        //System.out.println(motService.getMotATrouver().retournerMotEnString());
-
         // Clear de motSaisi et motIntermediaire
         motService.setMotSaisi(new Mot());
         motService.setMotIntermediaire(new Mot());
@@ -125,7 +121,11 @@ public class App extends Application {
         for (int i = 0; i < 6; i++){
             System.out.println(motService.retournerMotIntermediaireFormate());
             motService.setMotSaisi(motService.retournerStringEnMot(scanner.nextLine()));
-            // Test si mot dans le dictionnaire
+            // Test si mot de la bonne taille et dans le dictionnaire
+            while (motService.getMotSaisi().getLettres().size() != motService.getMotATrouver().getLettres().size()) {
+                System.out.println("Le mot doit compter "+motService.getMotATrouver().getLettres().size()+" lettres.");
+                motService.setMotSaisi(motService.retournerStringEnMot(scanner.nextLine()));
+            }
             while (!dictionnaireService.testerMotPresentDictionnaire(motService.getMotSaisi().retournerMotEnString())) {
                 System.out.println("Le mot saisi n'existe pas dans le dictionnaire.");
                 motService.setMotSaisi(motService.retournerStringEnMot(scanner.nextLine()));
