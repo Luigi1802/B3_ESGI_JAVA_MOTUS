@@ -36,7 +36,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 1920, 1080);
+        scene = new Scene(loadFXML("Grille7"), 1920, 1080);
         stage.setScene(scene);
         stage.show();
     }
@@ -51,7 +51,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        //launch();
+        launch();
         System.out.println("Bienvenue sur motus !");
         boolean rejouer = true;
         // Boucle de jeu (on relance une partie tant que le joueur le veut)
