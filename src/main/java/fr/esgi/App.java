@@ -36,7 +36,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Grille7"), 1920, 1080);
+        scene = new Scene(loadFXML("grille"), 1920, 1080);
         stage.setScene(scene);
         stage.show();
     }
@@ -52,19 +52,19 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
-        System.out.println("Bienvenue sur motus !");
-        boolean rejouer = true;
-        // Boucle de jeu (on relance une partie tant que le joueur le veut)
-        while (rejouer) {
-            // Lancement d'une partie
-            partieService.lancerNouvellePartie();
-            System.out.println("Voulez-vous rejouer ? (y/N)");
-            if (!scanner.nextLine().equalsIgnoreCase("Y")) {
-                rejouer = false;
-                System.out.println("À bientôt !");
-                System.exit(0);
-            }
-        }
+        //System.out.println("Bienvenue sur motus !");
+        //boolean rejouer = true;
+        //// Boucle de jeu (on relance une partie tant que le joueur le veut)
+        //while (rejouer) {
+        //   // Lancement d'une partie
+        //    partieService.lancerNouvellePartie();
+        //    System.out.println("Voulez-vous rejouer ? (y/N)");
+        //    if (!scanner.nextLine().equalsIgnoreCase("Y")) {
+        //        rejouer = false;
+        //        System.out.println("À bientôt !");
+        //        System.exit(0);
+        //    }
+        //}
     }
 
     public static ArrayList<Lettre> concatenerDeuxListesLettres(ArrayList<Lettre> listeFinale, ArrayList<Lettre> listeAAjouter){
