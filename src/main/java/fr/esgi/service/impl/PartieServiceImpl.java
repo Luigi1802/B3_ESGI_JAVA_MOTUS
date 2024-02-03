@@ -2,6 +2,7 @@ package fr.esgi.service.impl;
 
 import fr.esgi.business.Manche;
 import fr.esgi.business.Partie;
+import fr.esgi.controller.PrimaryController;
 import fr.esgi.service.MancheService;
 import fr.esgi.service.PartieService;
 
@@ -16,6 +17,7 @@ public class PartieServiceImpl implements PartieService {
     public void setPartie(Partie partie) {
         PartieServiceImpl.partie = partie;
     }
+    private static PrimaryController controller= new PrimaryController();
 
     @Override
     public void lancerNouvellePartie() {

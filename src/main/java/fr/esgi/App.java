@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import fr.esgi.controller.PrimaryController;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -31,12 +32,14 @@ public class App extends Application {
     private static PartieService partieService = new PartieServiceImpl();
 
 
+
+
     private static Scene scene;
     private static Scanner scanner = new Scanner(System.in);
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Grille7"), 1920, 1080);
+        scene = new Scene(loadFXML("Grilles"), 1920, 1080);
         stage.setScene(scene);
         stage.show();
     }
@@ -52,6 +55,7 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+
         System.out.println("Bienvenue sur motus !");
         boolean rejouer = true;
         // Boucle de jeu (on relance une partie tant que le joueur le veut)
@@ -65,6 +69,7 @@ public class App extends Application {
                 System.exit(0);
             }
         }
+
     }
 
     public static ArrayList<Lettre> concatenerDeuxListesLettres(ArrayList<Lettre> listeFinale, ArrayList<Lettre> listeAAjouter){
