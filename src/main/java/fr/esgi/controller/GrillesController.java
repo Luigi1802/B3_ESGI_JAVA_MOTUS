@@ -445,12 +445,10 @@ public class GrillesController implements Initializable {
             Label labelASuppr = new Label();
             colone=colone-1;
             labelASuppr = ligne1.get(colone);
-            // TODO Gerer le point !
-           //labelASuppr.setText(".");
+            labelASuppr.setText(".");
             labelASuppr.setBackground(null);
-            labelASuppr.setText("");
             lettres.remove(colone);
-            System.out.println(lettres);
+            //System.out.println(lettres);
 
         }
 
