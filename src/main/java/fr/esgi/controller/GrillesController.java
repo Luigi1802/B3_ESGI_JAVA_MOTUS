@@ -2,6 +2,7 @@ package fr.esgi.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -9,11 +10,14 @@ import javafx.fxml.Initializable;
 import fr.esgi.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.Background;
+import javafx.scene.input.KeyEvent;
 
 import fr.esgi.service.PartieService;
 import fr.esgi.service.impl.PartieServiceImpl;
@@ -95,7 +99,7 @@ public class GrillesController implements Initializable {
     // Liste des touches saisies
     ArrayList<Character> lettres = new ArrayList<Character>();
     //index
-    int colone=1;
+    int colonne=1;
     int ligne=0;
 
     @FXML
@@ -121,7 +125,6 @@ public class GrillesController implements Initializable {
         mancheService.lancerNouvelleManche(1);
         // log
         System.out.println(motService.getMotATrouver().retournerMotEnString());
-
         System.out.println(motService.getMotIntermediaire().retournerMotEnString());
 
         // Initialisation grille
@@ -170,7 +173,7 @@ public class GrillesController implements Initializable {
                 break;
         }
 
-        // Affichage premiere lignr
+        // Affichage premiere ligne
         ligne1.get(0).setText(String.valueOf(motService.getMotATrouver().getLettres().get(0).getCaractere()).toUpperCase());
         for (int i = 1; i < ligne1.size(); i++) {
             ligne1.get(i).setText(".");
@@ -178,281 +181,73 @@ public class GrillesController implements Initializable {
 
     }
 
+    // TODO adapter pour ligne 2 à 6
+
+    // Saisie de lettre
     @FXML
-    public void ajouterA(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("A");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('A');
-        colone= colone+1;
+    public void saisirLettre(ActionEvent actionEvent) {
+        Label caseGrille = ligne1.get(colonne);
+        Button boutonSource = (Button) actionEvent.getSource();
+        String boutonLettre = boutonSource.getText();
+
+        caseGrille.setText(boutonLettre);
+        caseGrille.setBackground(backgroundBleu);
+        lettres.add(caseGrille.getText().charAt(0));
+        ++colonne;
     }
 
     @FXML
-    public void ajouterZ(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("Z");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('Z');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterE(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("E");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('E');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterR(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("R");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('R');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterT(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("T");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('T');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterY(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("Y");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('Y');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterU(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("U");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('U');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterI(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("I");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('I');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterO(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("O");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('O');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterP(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("P");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('P');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterQ(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("Q");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('Q');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterS(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("S");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('S');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterD(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("D");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('D');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterF(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("F");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('F');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterG(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("G");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('G');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterH(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("H");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('H');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterJ(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("J");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('J');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterK(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("K");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('K');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterL(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("L");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('L');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterM(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("M");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('M');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterW(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("W");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('W');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterX(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("X");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('X');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterC(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("C");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('C');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterV(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("V");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('V');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterB(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("B");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('B');
-        colone= colone+1;
-
-    }
-    @FXML
-    public void ajouterN(ActionEvent actionEvent){
-        Label labelEnCours= new Label();
-        labelEnCours=ligne1.get(colone);
-        labelEnCours.setText("N");
-        labelEnCours.setBackground(backgroundBleu);
-        lettres.add('N');
-        colone= colone+1;
-
+    public void saisirLettreClavier(KeyEvent keyEvent) {
+        String lettreClavier = keyEvent.getCharacter();
+        // Lettre seulement
+        //if (validerLettre(lettreClavier)) {
+        if (Character.isLetter(lettreClavier.charAt(0))) {
+            Label caseGrille= ligne1.get(colonne);
+            caseGrille.setText(lettreClavier.toUpperCase());
+            caseGrille.setBackground(backgroundBleu);
+            lettres.add(lettreClavier.charAt(0));
+            ++colonne;
+        }
     }
 
-    @FXML
-    public void suppr(ActionEvent actionEvent){
-        if (colone>1){
-            Label labelASuppr = new Label();
-            colone=colone-1;
-            labelASuppr = ligne1.get(colone);
-            labelASuppr.setText(".");
-            labelASuppr.setBackground(null);
-            lettres.remove(colone);
-            //System.out.println(lettres);
+    // test filtrer lettre avec accent
+    private boolean validerLettre(String lettre) {
+        String lettreNormalisee = Normalizer.normalize(lettre, Normalizer.Form.NFD);
+        lettreNormalisee = lettreNormalisee.replaceAll("\\p{M}", "");
+        return lettreNormalisee.matches("[a-zA-Z]");
+    }
 
+    // Suppression et validation
+    @FXML
+    public void supprimerLettre(ActionEvent actionEvent){
+        if (colonne>1){
+            Label caseGrille;
+            colonne = colonne-1;
+            caseGrille = ligne1.get(colonne);
+            caseGrille.setText(".");
+            caseGrille.setBackground(null);
+            lettres.remove(colonne);
         }
 
     }
+
+    // TODO faire fonctionner
+    @FXML
+    public void supprimerLettreClavier(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.TAB) {
+            System.out.println("wsh");
+            if (colonne>1) {
+                Label caseGrille;
+                colonne = colonne-1;
+                caseGrille = ligne1.get(colonne);
+                caseGrille.setText(".");
+                caseGrille.setBackground(null);
+                lettres.remove(colonne);
+                // System.out.println(lettres);
+            }
+        }
+    }
+
 
     @FXML
     public void entrer(ActionEvent actionEvent){
