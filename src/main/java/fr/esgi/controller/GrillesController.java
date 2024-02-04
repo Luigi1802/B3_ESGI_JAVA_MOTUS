@@ -31,10 +31,8 @@ public class GrillesController implements Initializable {
     // Couleur de fond
     BackgroundFill backgroundFillBleu = new BackgroundFill(Color.web("#177E89"),null,null);
     Background backgroundBleu = new Background(backgroundFillBleu);
-    // Couleur de fond
     BackgroundFill backgroundFillJaune = new BackgroundFill(Color.web("#F7B735"),null,null);
     Background backgroundJaune = new Background(backgroundFillJaune);
-    // Couleur de fond
     BackgroundFill backgroundFillRouge = new BackgroundFill(Color.web("#DB3A34"),null,null);
     Background backgroundRouge = new Background(backgroundFillRouge);
 
