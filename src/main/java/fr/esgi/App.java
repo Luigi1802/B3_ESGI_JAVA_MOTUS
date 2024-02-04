@@ -1,9 +1,6 @@
 package fr.esgi;
 
 import fr.esgi.business.Lettre;
-import fr.esgi.business.Manche;
-import fr.esgi.business.Mot;
-import fr.esgi.business.Partie;
 import fr.esgi.service.MotService;
 import fr.esgi.service.PartieService;
 import fr.esgi.service.impl.MotServiceImpl;
@@ -15,10 +12,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import fr.esgi.controller.PrimaryController;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -30,9 +25,6 @@ public class App extends Application {
     private static DictionnaireService dictionnaireService = new DictionnaireServiceImpl();
     private static MotService motService = new MotServiceImpl();
     private static PartieService partieService = new PartieServiceImpl();
-
-
-
 
     private static Scene scene;
     private static Scanner scanner = new Scanner(System.in);

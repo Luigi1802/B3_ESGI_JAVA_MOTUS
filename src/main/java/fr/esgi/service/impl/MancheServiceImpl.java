@@ -3,7 +3,6 @@ package fr.esgi.service.impl;
 import fr.esgi.business.Lettre;
 import fr.esgi.business.Manche;
 import fr.esgi.business.Mot;
-import fr.esgi.controller.PrimaryController;
 import fr.esgi.service.DictionnaireService;
 import fr.esgi.service.MancheService;
 import fr.esgi.service.MotService;
