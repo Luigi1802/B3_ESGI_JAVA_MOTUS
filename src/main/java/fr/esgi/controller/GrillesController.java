@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import fr.esgi.service.impl.MotServiceImpl;
 import javafx.fxml.Initializable;
 import fr.esgi.App;
 import javafx.event.ActionEvent;
@@ -15,12 +14,20 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.Background;
-import fr.esgi.service.MotService;
 
+import fr.esgi.service.PartieService;
+import fr.esgi.service.impl.PartieServiceImpl;
+import fr.esgi.service.MancheService;
+import fr.esgi.service.impl.MancheServiceImpl;
+import fr.esgi.service.MotService;
+import fr.esgi.service.impl.MotServiceImpl;
 
 public class GrillesController implements Initializable {
 
+    private static PartieService partieService = new PartieServiceImpl();
+    private static MancheService mancheService = new MancheServiceImpl();
     private static MotService motService = new MotServiceImpl();
+
 
     // id Grille6 : pane et labels
     @FXML
@@ -95,6 +102,36 @@ public class GrillesController implements Initializable {
 
     // Initialisation des id
     public void initialize(URL location, ResourceBundle resources) {
+        // Lancement de la partie
+        //partieService.lancerNouvellePartie();
+
+        // DEV
+        // Lancement de la manche
+        mancheService.lancerNouvelleManche(1);
+        // log
+        System.out.println(motService.getMotATrouver().getLettres().size());
+
+        // Affichage de la bonne grille
+        switch (motService.getMotATrouver().getLettres().size()) {
+            case 6:
+                pane6.setVisible(true);
+                pane7.setVisible(false);
+                pane8.setVisible(false);
+                break;
+            case 7:
+                pane6.setVisible(false);
+                pane7.setVisible(true);
+                pane8.setVisible(false);
+                break;
+            case 8:
+                pane6.setVisible(false);
+                pane7.setVisible(false);
+                pane8.setVisible(true);
+                break;
+            default:
+                System.out.println("Taille du mot incorrect");
+                break;
+        }
 
         ligne1.add(G711);
         ligne1.add(G712);
@@ -103,11 +140,6 @@ public class GrillesController implements Initializable {
         ligne1.add(G715);
         ligne1.add(G716);
         ligne1.add(G717);
-
-        // DEV
-        pane6.setVisible(true);
-        pane7.setVisible(true);
-        pane8.setVisible(true);
 
     }
 
