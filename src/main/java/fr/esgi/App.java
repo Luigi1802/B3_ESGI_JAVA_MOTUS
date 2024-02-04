@@ -48,7 +48,7 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
 
-        System.out.println("Bienvenue sur motus !");
+        /*System.out.println("Bienvenue sur motus !");
         boolean rejouer = true;
         // Boucle de jeu (on relance une partie tant que le joueur le veut)
         while (rejouer) {
@@ -60,7 +60,7 @@ public class App extends Application {
                 System.out.println("À bientôt !");
                 System.exit(0);
             }
-        }
+        }*/
 
     }
 
