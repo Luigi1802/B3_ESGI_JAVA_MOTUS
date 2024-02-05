@@ -957,7 +957,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <Button fx:id="suppr" alignment="CENTER" mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0"
-                       onAction="#supprimerLettre" onKeyTyped="#saisirLettreClavier"
+                       onAction="#supprimerLettre" onKeyTyped="#supprimerLettreClavier" onKeyPressed="#supprimerLettreClavier"
                        style="-fx-background-color: null;"
                        text="SUP" textFill="WHITE" GridPane.halignment="CENTER"
                        GridPane.valignment="CENTER">
@@ -1014,7 +1014,7 @@
                   </font>
                </Button>
                <Button fx:id="entrer" alignment="CENTER" mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0"
-                       onAction="#entrer"
+                       onAction="#entrer" onKeyTyped="#entrerClavier"
                        style="-fx-background-color: null;" text="..." textFill="WHITE" GridPane.columnIndex="7" GridPane.halignment="CENTER"
                        GridPane.valignment="CENTER">
                   <font>

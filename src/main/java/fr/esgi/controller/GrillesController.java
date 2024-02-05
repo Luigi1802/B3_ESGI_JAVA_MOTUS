@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
@@ -33,14 +34,14 @@ public class GrillesController implements Initializable {
     private static MotService motService = new MotServiceImpl();
 
     // Couleur de fond
-    BackgroundFill backgroundFillBleu = new BackgroundFill(Color.web("#177E89"),null,null);
-    Background backgroundBleu = new Background(backgroundFillBleu);
-    BackgroundFill backgroundFillJaune = new BackgroundFill(Color.web("#F7B735"),null,null);
-    Background backgroundJaune = new Background(backgroundFillJaune);
-    BackgroundFill backgroundFillRouge = new BackgroundFill(Color.web("#DB3A34"),null,null);
-    Background backgroundRouge = new Background(backgroundFillRouge);
+    private static final BackgroundFill BACKGROUND_FILL_BLEU = new BackgroundFill(Color.web("#177E89"), null, null);
+    private static final Background BACKGROUND_BLEU = new Background(BACKGROUND_FILL_BLEU);
+    private static final BackgroundFill BACKGROUND_FILL_JAUNE = new BackgroundFill(Color.web("#F7B735"), null, null);
+    private static final Background BACKGROUND_JAUNE = new Background(BACKGROUND_FILL_JAUNE);
+    private static final BackgroundFill BACKGROUND_FILL_ROUGE = new BackgroundFill(Color.web("#DB3A34"), null, null);
+    private static final Background BACKGROUND_ROUGE = new Background(BACKGROUND_FILL_ROUGE);
 
-    // id Grille6 : pane et labels
+    // Id Grille6 : pane et labels
     @FXML
     private Pane pane6;
     @FXML
@@ -56,7 +57,7 @@ public class GrillesController implements Initializable {
     @FXML
     private  Label G661,G662,G663,G664,G665,G666;
 
-    // id Grille7 : pane et labels
+    // Id Grille7 : pane et labels
     @FXML
     private Pane pane7;
     @FXML
@@ -72,7 +73,7 @@ public class GrillesController implements Initializable {
     @FXML
     private  Label G761,G762,G763,G764,G765,G766,G767;
 
-    // id Grille8 : pane et labels
+    // Id Grille8 : pane et labels
     @FXML
     private Pane pane8;
     @FXML
@@ -88,7 +89,9 @@ public class GrillesController implements Initializable {
     @FXML
     private  Label G861,G862,G863,G864,G865,G866,G867,G868;
 
-    // Lignes du tableau pour liage des id
+    // Grille de lignes
+    ArrayList<ArrayList<Label>> grille = new ArrayList<ArrayList<Label>>();
+    // Lignes de label (fxml) pour liage des id
     ArrayList<Label> ligne1= new ArrayList<>();
     ArrayList<Label> ligne2= new ArrayList<>();
     ArrayList<Label> ligne3= new ArrayList<>();
@@ -100,19 +103,11 @@ public class GrillesController implements Initializable {
     ArrayList<Character> lettres = new ArrayList<Character>();
     //index
     int colonne=1;
-    int ligne=0;
+    int ligne;
 
     @FXML
     private void switchToSecondary() throws IOException {
         App.setRoot("secondary");
-    }
-
-    //Test echange avec back pour premiere lettre
-    public void startJeu(Character premiereLettre){
-
-        lettres.add(premiereLettre);
-        G711.setText(premiereLettre.toString());
-        System.out.println("premiere lettre"+premiereLettre);
     }
 
     // Initialisation des id
@@ -128,9 +123,16 @@ public class GrillesController implements Initializable {
         System.out.println(motService.getMotIntermediaire().retournerMotEnString());
 
         // Initialisation grille
+        initialiserGrille();
+
+
+    }
+
+    public void initialiserGrille() {
+        // Grille selon longueur du mot
         switch (motService.getMotATrouver().getLettres().size()) {
             case 6:
-                // Affichage de la bonne grille
+                // Affichage grille longueur 6
                 pane6.setVisible(true);
                 pane7.setVisible(false);
                 pane8.setVisible(false);
@@ -141,9 +143,16 @@ public class GrillesController implements Initializable {
                 ligne4.add(G641); ligne4.add(G642); ligne4.add(G643); ligne4.add(G644); ligne4.add(G645); ligne4.add(G646);
                 ligne5.add(G651); ligne5.add(G652); ligne5.add(G653); ligne5.add(G654); ligne5.add(G655); ligne5.add(G656);
                 ligne6.add(G661); ligne6.add(G662); ligne6.add(G663); ligne6.add(G664); ligne6.add(G665); ligne6.add(G666);
+                // Ajout dans notre grille a deux dimension
+                grille.add(ligne1);
+                grille.add(ligne2);
+                grille.add(ligne3);
+                grille.add(ligne4);
+                grille.add(ligne5);
+                grille.add(ligne6);
                 break;
             case 7:
-                // Affichage de la bonne grille
+                // Affichage grille longueur 7
                 pane6.setVisible(false);
                 pane7.setVisible(true);
                 pane8.setVisible(false);
@@ -154,9 +163,16 @@ public class GrillesController implements Initializable {
                 ligne4.add(G741); ligne4.add(G742); ligne4.add(G743); ligne4.add(G744); ligne4.add(G745); ligne4.add(G746); ligne4.add(G747);
                 ligne5.add(G751); ligne5.add(G752); ligne5.add(G753); ligne5.add(G754); ligne5.add(G755); ligne5.add(G756); ligne5.add(G757);
                 ligne6.add(G761); ligne6.add(G762); ligne6.add(G763); ligne6.add(G764); ligne6.add(G765); ligne6.add(G766); ligne6.add(G767);
+                // Ajout dans notre grille a deux dimension
+                grille.add(ligne1);
+                grille.add(ligne2);
+                grille.add(ligne3);
+                grille.add(ligne4);
+                grille.add(ligne5);
+                grille.add(ligne6);
                 break;
             case 8:
-                // Affichage de la bonne grille
+                // Ajout dans notre grille a deux dimension
                 pane6.setVisible(false);
                 pane7.setVisible(false);
                 pane8.setVisible(true);
@@ -167,31 +183,42 @@ public class GrillesController implements Initializable {
                 ligne4.add(G841); ligne4.add(G842); ligne4.add(G843); ligne4.add(G844); ligne4.add(G845); ligne4.add(G846); ligne4.add(G847); ligne4.add(G848);
                 ligne5.add(G851); ligne5.add(G852); ligne5.add(G853); ligne5.add(G854); ligne5.add(G855); ligne5.add(G856); ligne5.add(G857); ligne5.add(G858);
                 ligne6.add(G861); ligne6.add(G862); ligne6.add(G863); ligne6.add(G864); ligne6.add(G865); ligne6.add(G866); ligne6.add(G867); ligne6.add(G868);
+                // Ajout dans notre tableau a deux dmension
+                grille.add(ligne1);
+                grille.add(ligne2);
+                grille.add(ligne3);
+                grille.add(ligne4);
+                grille.add(ligne5);
+                grille.add(ligne6);
                 break;
             default:
                 System.out.println("Taille du mot incorrect");
                 break;
         }
-
+        // Depart sur la premiere ligne
+        ligne = 0;
         // Affichage premiere ligne
+        afficherPremiereLigne();
+
+    }
+
+    public void afficherPremiereLigne() {
+        // Première lettre suivie de '.'
         ligne1.get(0).setText(String.valueOf(motService.getMotATrouver().getLettres().get(0).getCaractere()).toUpperCase());
         for (int i = 1; i < ligne1.size(); i++) {
             ligne1.get(i).setText(".");
         }
-
     }
-
-    // TODO adapter pour ligne 2 à 6
 
     // Saisie de lettre
     @FXML
     public void saisirLettre(ActionEvent actionEvent) {
-        Label caseGrille = ligne1.get(colonne);
+        Label caseGrille = grille.get(ligne).get(colonne);
         Button boutonSource = (Button) actionEvent.getSource();
         String boutonLettre = boutonSource.getText();
 
         caseGrille.setText(boutonLettre);
-        caseGrille.setBackground(backgroundBleu);
+        caseGrille.setBackground(BACKGROUND_BLEU);
         lettres.add(caseGrille.getText().charAt(0));
         ++colonne;
     }
@@ -200,21 +227,13 @@ public class GrillesController implements Initializable {
     public void saisirLettreClavier(KeyEvent keyEvent) {
         String lettreClavier = keyEvent.getCharacter();
         // Lettre seulement
-        //if (validerLettre(lettreClavier)) {
-        if (Character.isLetter(lettreClavier.charAt(0))) {
-            Label caseGrille= ligne1.get(colonne);
+        if (lettreClavier.matches("[a-zA-Z]")) {
+            Label caseGrille= grille.get(ligne).get(colonne);
             caseGrille.setText(lettreClavier.toUpperCase());
-            caseGrille.setBackground(backgroundBleu);
+            caseGrille.setBackground(BACKGROUND_BLEU);
             lettres.add(lettreClavier.charAt(0));
             ++colonne;
         }
-    }
-
-    // test filtrer lettre avec accent
-    private boolean validerLettre(String lettre) {
-        String lettreNormalisee = Normalizer.normalize(lettre, Normalizer.Form.NFD);
-        lettreNormalisee = lettreNormalisee.replaceAll("\\p{M}", "");
-        return lettreNormalisee.matches("[a-zA-Z]");
     }
 
     // Suppression et validation
@@ -223,7 +242,7 @@ public class GrillesController implements Initializable {
         if (colonne>1){
             Label caseGrille;
             colonne = colonne-1;
-            caseGrille = ligne1.get(colonne);
+            caseGrille = grille.get(ligne).get(colonne);
             caseGrille.setText(".");
             caseGrille.setBackground(null);
             lettres.remove(colonne);
@@ -234,12 +253,14 @@ public class GrillesController implements Initializable {
     // TODO faire fonctionner
     @FXML
     public void supprimerLettreClavier(KeyEvent keyEvent) {
-        if (keyEvent.getCode() == KeyCode.TAB) {
+        System.out.println("Touche pressée: " + keyEvent.getCode());
+        if (keyEvent.getCode() == KeyCode.BACK_SPACE || keyEvent.getCode() == KeyCode.DELETE) {
+            System.out.println("BACK_SPACE détecté");
             System.out.println("wsh");
             if (colonne>1) {
                 Label caseGrille;
                 colonne = colonne-1;
-                caseGrille = ligne1.get(colonne);
+                caseGrille = grille.get(ligne).get(colonne);
                 caseGrille.setText(".");
                 caseGrille.setBackground(null);
                 lettres.remove(colonne);
@@ -248,11 +269,30 @@ public class GrillesController implements Initializable {
         }
     }
 
-
     @FXML
     public void entrer(ActionEvent actionEvent){
-        // TODO validation du mot et traitement
+        // TODO boucle de traitement
+        // Si mot valide -> ligne suivante
+        // TODO afficher mot intermediaire
+        if (ligne < 5) {
+            ++ligne;
+            colonne = 1;
+        }
     }
 
-
+    // TODO faire fonctionner
+    @FXML
+    public void entrerClavier(KeyEvent keyEvent) {
+        System.out.println("Touche pressée: " + keyEvent.getCode());
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            System.out.println("ENTER détecté");
+            // TODO boucle de traitement
+            // Si mot valide -> ligne suivante
+            // TODO afficher mot intermediaire
+            if (ligne < 5) {
+                ++ligne;
+                colonne = 1;
+            }
+        }
+    }
 }
