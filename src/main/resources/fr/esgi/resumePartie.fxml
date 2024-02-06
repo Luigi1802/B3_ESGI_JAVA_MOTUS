@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.esgi.controller.ResumePartieController">
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #084c61;">
+      <Label fx:id="labelVictoirePartie" layoutX="903.0" layoutY="130.0" text="PERDU" textFill="#db3a34">
+         <font>
+            <Font size="75.0" />
+         </font>
+      </Label>
+        <Button fx:id="boutonMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="541.0" layoutY="75.0" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="52.0" prefWidth="53.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #ffffff; -fx-background-radius: 10;" text="&lt;" textFill="#177e89">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Button>
+       <Button fx:id="boutonTriSurLeMot" alignment="CENTER" contentDisplay="CENTER" layoutX="348.0" layoutY="260.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="184.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #ffffff; -fx-background-radius: 10;" text="Tri sur le mot" textFill="#177e89">
+          <font>
+             <Font name="System Bold" size="20.0" />
+          </font>
+       </Button>
+       <Button fx:id="boutonTriSurLeTemps" alignment="CENTER" contentDisplay="CENTER" layoutX="348.0" layoutY="319.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="184.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #ffffff; -fx-background-radius: 10;" text="Tri sur le temps" textFill="#177e89">
+          <font>
+             <Font name="System Bold" size="20.0" />
+          </font>
+       </Button>
+       <Pane fx:id="paneManche1" layoutX="567.0" layoutY="260.0" prefHeight="290.0" prefWidth="450.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+          <GridPane prefHeight="290.0" prefWidth="450.0">
+             <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+             </columnConstraints>
+             <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+             </rowConstraints>
+             <Label fx:id="labelManche1" text="Manche 1" textFill="#177e89" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <font>
+                   <Font name="System Bold" size="40.0" />
+                </font>
+             </Label>
+             <Label fx:id="labelVictoireManche1" text="Gagné" textFill="#41b923" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                <font>
+                   <Font name="System Bold" size="40.0" />
+                </font>
+             </Label>
+             <GridPane GridPane.rowIndex="2">
+                <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Label text="Mot à trouver :" textFill="#177e89">
+                   <font>
+                      <Font name="System Bold" size="25.0" />
+                   </font>
+                   <GridPane.margin>
+                      <Insets left="15.0" />
+                   </GridPane.margin>
+                </Label>
+                <Label fx:id="labelMotATrouverManche1" text="MINION" textFill="#177e89" GridPane.columnIndex="1">
+                   <font>
+                      <Font name="System Bold" size="30.0" />
+                   </font>
+                </Label>
+             </GridPane>
+             <GridPane layoutX="10.0" layoutY="85.0" GridPane.rowIndex="3">
+                <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Label text="Nombre d'essai :" textFill="#177e89">
+                   <font>
+                      <Font name="System Bold" size="25.0" />
+                   </font>
+                   <GridPane.margin>
+                      <Insets left="15.0" />
+                   </GridPane.margin>
+                </Label>
+                <Label fx:id="labelNombreEssaiManche1" text="4" textFill="#177e89" GridPane.columnIndex="1">
+                   <font>
+                      <Font name="System Bold" size="30.0" />
+                   </font>
+                </Label>
+             </GridPane>
+             <GridPane layoutX="10.0" layoutY="10.0" GridPane.rowIndex="4">
+                <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Label text="Temps passé :" textFill="#177e89">
+                   <font>
+                      <Font name="System Bold" size="25.0" />
+                   </font>
+                   <opaqueInsets>
+                      <Insets left="105.0" />
+                   </opaqueInsets>
+                   <GridPane.margin>
+                      <Insets left="15.0" />
+                   </GridPane.margin>
+                </Label>
+                <Label fx:id="tempsPasseManche1" text="2 min 34 sec" textFill="#177e89" GridPane.columnIndex="1">
+                   <font>
+                      <Font name="System Bold" size="30.0" />
+                   </font>
+                </Label>
+             </GridPane>
+          </GridPane>
+       </Pane>
+       <Pane fx:id="paneManche2" layoutX="1042.0" layoutY="260.0" prefHeight="290.0" prefWidth="450.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+          <GridPane prefHeight="290.0" prefWidth="450.0">
+             <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+             </columnConstraints>
+             <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+             </rowConstraints>
+             <Label fx:id="labelManche2" text="Manche 2" textFill="#177e89" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <font>
+                   <Font name="System Bold" size="40.0" />
+                </font>
+             </Label>
+             <Label fx:id="labelVictoireManche2" text="Gagné" textFill="#41b923" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                <font>
+                   <Font name="System Bold" size="40.0" />
+                </font>
+             </Label>
+             <GridPane GridPane.rowIndex="2">
+                <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Label text="Mot à trouver :" textFill="#177e89">
+                   <font>
+                      <Font name="System Bold" size="25.0" />
+                   </font>
+                   <GridPane.margin>
+                      <Insets left="15.0" />
+                   </GridPane.margin>
+                </Label>
+                <Label fx:id="labelMotATrouverManche2" text="CHANGE" textFill="#177e89" GridPane.columnIndex="1">
+                   <font>
+                      <Font name="System Bold" size="30.0" />
+                   </font>
+                </Label>
+             </GridPane>
+             <GridPane layoutX="10.0" layoutY="85.0" GridPane.rowIndex="3">
+                <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Label text="Nombre d'essai :" textFill="#177e89">
+                   <font>
+                      <Font name="System Bold" size="25.0" />
+                   </font>
+                   <GridPane.margin>
+                      <Insets left="15.0" />
+                   </GridPane.margin>
+                </Label>
+                <Label fx:id="labelNombreEssaiManche2" text="2" textFill="#177e89" GridPane.columnIndex="1">
+                   <font>
+                      <Font size="30.0" />
+                   </font>
+                </Label>
+             </GridPane>
+             <GridPane layoutX="10.0" layoutY="10.0" GridPane.rowIndex="4">
+                <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Label text="Temps passé :" textFill="#177e89">
+                   <font>
+                      <Font name="System Bold" size="25.0" />
+                   </font>
+                   <opaqueInsets>
+                      <Insets left="105.0" />
+                   </opaqueInsets>
+                   <GridPane.margin>
+                      <Insets left="15.0" />
+                   </GridPane.margin>
+                </Label>
+                <Label fx:id="tempsPasseManche2" text="1 min 09 sec" textFill="#177e89" GridPane.columnIndex="1">
+                   <font>
+                      <Font name="System Bold" size="30.0" />
+                   </font>
+                </Label>
+             </GridPane>
+          </GridPane>
+       </Pane>
+       <Pane fx:id="paneManche3" layoutX="567.0" layoutY="573.0" prefHeight="290.0" prefWidth="450.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+          <GridPane prefHeight="290.0" prefWidth="450.0">
+             <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+             </columnConstraints>
+             <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+             </rowConstraints>
+             <Label fx:id="labelManche3" text="Manche 3" textFill="#177e89" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <font>
+                   <Font name="System Bold" size="40.0" />
+                </font>
+             </Label>
+             <Label fx:id="labelVictoireManche3" text="Gagné" textFill="#41b923" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                <font>
+                   <Font name="System Bold" size="40.0" />
+                </font>
+             </Label>
+             <GridPane GridPane.rowIndex="2">
+                <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Label text="Mot à trouver :" textFill="#177e89">
+                   <font>
+                      <Font name="System Bold" size="25.0" />
+                   </font>
+                   <GridPane.margin>
+                      <Insets left="15.0" />
+                   </GridPane.margin>
+                </Label>
+                <Label fx:id="labelMotATrouverManche3" text="VOITURE" textFill="#177e89" GridPane.columnIndex="1">
+                   <font>
+                      <Font name="System Bold" size="30.0" />
+                   </font>
+                </Label>
+             </GridPane>
+             <GridPane layoutX="10.0" layoutY="85.0" GridPane.rowIndex="3">
+                <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Label text="Nombre d'essai :" textFill="#177e89">
+                   <font>
+                      <Font name="System Bold" size="25.0" />
+                   </font>
+                   <GridPane.margin>
+                      <Insets left="15.0" />
+                   </GridPane.margin>
+                </Label>
+                <Label fx:id="labelNombreEssaiManche3" text="5" textFill="#177e89" GridPane.columnIndex="1">
+                   <font>
+                      <Font name="System Bold" size="30.0" />
+                   </font>
+                </Label>
+             </GridPane>
+             <GridPane layoutX="10.0" layoutY="10.0" GridPane.rowIndex="4">
+                <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Label text="Temps passé :" textFill="#177e89">
+                   <font>
+                      <Font name="System Bold" size="25.0" />
+                   </font>
+                   <opaqueInsets>
+                      <Insets left="105.0" />
+                   </opaqueInsets>
+                   <GridPane.margin>
+                      <Insets left="15.0" />
+                   </GridPane.margin>
+                </Label>
+                <Label fx:id="tempsPasseManche3" text="4 min 56 sec" textFill="#177e89" GridPane.columnIndex="1">
+                   <font>
+                      <Font name="System Bold" size="30.0" />
+                   </font>
+                </Label>
+             </GridPane>
+          </GridPane>
+       </Pane>
+       <Pane fx:id="paneManche4" layoutX="1042.0" layoutY="573.0" prefHeight="290.0" prefWidth="450.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+          <GridPane prefHeight="290.0" prefWidth="450.0">
+             <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+             </columnConstraints>
+             <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+             </rowConstraints>
+             <Label fx:id="labelManche4" text="Manche 4" textFill="#177e89" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <font>
+                   <Font name="System Bold" size="40.0" />
+                </font>
+             </Label>
+             <Label fx:id="labelVictoireManche4" text="Perdu" textFill="#db3a34" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                <font>
+                   <Font name="System Bold" size="40.0" />
+                </font>
+             </Label>
+             <GridPane GridPane.rowIndex="2">
+                <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Label text="Mot à trouver :" textFill="#177e89">
+                   <font>
+                      <Font name="System Bold" size="25.0" />
+                   </font>
+                   <GridPane.margin>
+                      <Insets left="15.0" />
+                   </GridPane.margin>
+                </Label>
+                <Label fx:id="labelMotATrouverManche4" text="MANQUER" textFill="#177e89" GridPane.columnIndex="1">
+                   <font>
+                      <Font name="System Bold" size="30.0" />
+                   </font>
+                </Label>
+             </GridPane>
+             <GridPane layoutX="10.0" layoutY="85.0" GridPane.rowIndex="3">
+                <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Label text="Nombre d'essai :" textFill="#177e89">
+                   <font>
+                      <Font name="System Bold" size="25.0" />
+                   </font>
+                   <GridPane.margin>
+                      <Insets left="15.0" />
+                   </GridPane.margin>
+                </Label>
+                <Label fx:id="labelNombreEssaiManche4" text="6" textFill="#177e89" GridPane.columnIndex="1">
+                   <font>
+                      <Font name="System Bold" size="30.0" />
+                   </font>
+                </Label>
+             </GridPane>
+             <GridPane layoutX="10.0" layoutY="10.0" GridPane.rowIndex="4">
+                <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Label text="Temps passé :" textFill="#177e89">
+                   <font>
+                      <Font name="System Bold" size="25.0" />
+                   </font>
+                   <opaqueInsets>
+                      <Insets left="105.0" />
+                   </opaqueInsets>
+                   <GridPane.margin>
+                      <Insets left="15.0" />
+                   </GridPane.margin>
+                </Label>
+                <Label fx:id="tempsPasseManche4" text="-" textFill="#177e89" GridPane.columnIndex="1">
+                   <font>
+                      <Font name="System Bold" size="30.0" />
+                   </font>
+                </Label>
+             </GridPane>
+          </GridPane>
+       </Pane>
+    </AnchorPane>
+</VBox>

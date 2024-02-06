@@ -106,8 +106,8 @@ public class GrillesController implements Initializable {
     int ligne;
 
     @FXML
-    private void switchToSecondary() throws IOException {
-        App.setRoot("secondary");
+    private void switchToMenu() throws IOException {
+        App.setRoot("menu");
     }
 
     // Initialisation des id
