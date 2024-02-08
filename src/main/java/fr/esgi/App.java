@@ -1,9 +1,6 @@
 package fr.esgi;
 
 import fr.esgi.business.Lettre;
-import fr.esgi.business.Manche;
-import fr.esgi.business.Mot;
-import fr.esgi.business.Partie;
 import fr.esgi.service.MotService;
 import fr.esgi.service.PartieService;
 import fr.esgi.service.impl.MotServiceImpl;
@@ -17,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -30,13 +26,12 @@ public class App extends Application {
     private static MotService motService = new MotServiceImpl();
     private static PartieService partieService = new PartieServiceImpl();
 
-
     private static Scene scene;
     private static Scanner scanner = new Scanner(System.in);
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 1920, 1080);
+        scene = new Scene(loadFXML("menu"), 1000, 900);
         stage.setScene(scene);
         stage.show();
     }
@@ -51,8 +46,9 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        //launch();
-        System.out.println("Bienvenue sur motus !");
+        launch();
+
+        /*System.out.println("Bienvenue sur motus !");
         boolean rejouer = true;
         // Boucle de jeu (on relance une partie tant que le joueur le veut)
         while (rejouer) {
@@ -64,7 +60,8 @@ public class App extends Application {
                 System.out.println("À bientôt !");
                 System.exit(0);
             }
-        }
+        }*/
+
     }
 
     public static ArrayList<Lettre> concatenerDeuxListesLettres(ArrayList<Lettre> listeFinale, ArrayList<Lettre> listeAAjouter){

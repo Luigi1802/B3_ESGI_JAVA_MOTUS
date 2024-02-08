@@ -15,6 +15,7 @@ public class MancheServiceImpl implements MancheService {
     private static DictionnaireService dictionnaireService = new DictionnaireServiceImpl();
     private static MotService motService = new MotServiceImpl();
 
+
     private static Random random = new Random();
     private static Scanner scanner = new Scanner(System.in);
 
@@ -40,9 +41,9 @@ public class MancheServiceImpl implements MancheService {
         premiereLettre.setStatutValide();
         motService.getMotIntermediaire().ajouterLettre(premiereLettre);
         // Boucle des saisies joueur
-        for (int i = 0; i < 6; i++){
+        /*for (int i = 0; i < 6; i++){
             System.out.println(motService.retournerMotIntermediaireFormate());
-            motService.setMotSaisi(motService.retournerStringEnMot(scanner.nextLine()));
+            //motService.setMotSaisi(motService.retournerStringEnMot(scanner.nextLine()));
             // Test si mot de la bonne taille et dans le dictionnaire
             while (motService.getMotSaisi().getLettres().size() != motService.getMotATrouver().getLettres().size()
                     || !dictionnaireService.testerMotPresentDictionnaire(motService.getMotSaisi().retournerMotEnString())) {
@@ -51,15 +52,15 @@ public class MancheServiceImpl implements MancheService {
                 } else {
                     System.out.println("Le mot saisi n'existe pas dans le dictionnaire.");
                 }
-                motService.setMotSaisi(motService.retournerStringEnMot(scanner.nextLine()));
+                //motService.setMotSaisi(motService.retournerStringEnMot(scanner.nextLine()));
             }
             while (motService.getMotSaisi().getLettres().size() != motService.getMotATrouver().getLettres().size()) {
                 System.out.println("Le mot doit compter "+motService.getMotATrouver().getLettres().size()+" lettres.");
-                motService.setMotSaisi(motService.retournerStringEnMot(scanner.nextLine()));
+                //motService.setMotSaisi(motService.retournerStringEnMot(scanner.nextLine()));
             }
             while (!dictionnaireService.testerMotPresentDictionnaire(motService.getMotSaisi().retournerMotEnString())) {
                 System.out.println("Le mot saisi n'existe pas dans le dictionnaire.");
-                motService.setMotSaisi(motService.retournerStringEnMot(scanner.nextLine()));
+                //motService.setMotSaisi(motService.retournerStringEnMot(scanner.nextLine()));
             }
             manche.ajouterEssai();
             // Comparaison motSaisi - motATrouver
@@ -76,7 +77,7 @@ public class MancheServiceImpl implements MancheService {
         }
         System.out.println("Manche perdue...");
         manche.setHeureFin(LocalDateTime.now());
-        manche.setVictoire(false);
+        manche.setVictoire(false);*/
         return manche;
     }
 
