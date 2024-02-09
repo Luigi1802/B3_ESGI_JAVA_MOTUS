@@ -133,9 +133,7 @@ public class GrillesController implements Initializable {
         switch (motService.getMotATrouver().getLettres().size()) {
             case 6:
                 // Affichage grille longueur 6
-                pane6.setVisible(true);
-                pane7.setVisible(false);
-                pane8.setVisible(false);
+                afficherPane(true, false, false);
                 // Liage des id dans les lignes
                 ligne1.add(G611); ligne1.add(G612); ligne1.add(G613); ligne1.add(G614); ligne1.add(G615); ligne1.add(G616);
                 ligne2.add(G621); ligne2.add(G622); ligne2.add(G623); ligne2.add(G624); ligne2.add(G625); ligne2.add(G626);
@@ -143,19 +141,12 @@ public class GrillesController implements Initializable {
                 ligne4.add(G641); ligne4.add(G642); ligne4.add(G643); ligne4.add(G644); ligne4.add(G645); ligne4.add(G646);
                 ligne5.add(G651); ligne5.add(G652); ligne5.add(G653); ligne5.add(G654); ligne5.add(G655); ligne5.add(G656);
                 ligne6.add(G661); ligne6.add(G662); ligne6.add(G663); ligne6.add(G664); ligne6.add(G665); ligne6.add(G666);
-                // Ajout dans notre grille a deux dimension
-                grille.add(ligne1);
-                grille.add(ligne2);
-                grille.add(ligne3);
-                grille.add(ligne4);
-                grille.add(ligne5);
-                grille.add(ligne6);
+                /// Ajout dans notre grille a deux dimension
+                ajouterLignesdansGrille();
                 break;
             case 7:
                 // Affichage grille longueur 7
-                pane6.setVisible(false);
-                pane7.setVisible(true);
-                pane8.setVisible(false);
+                afficherPane(false, true, false);
                 // Liage des id dans les lignes
                 ligne1.add(G711); ligne1.add(G712); ligne1.add(G713); ligne1.add(G714); ligne1.add(G715); ligne1.add(G716); ligne1.add(G717);
                 ligne2.add(G721); ligne2.add(G722); ligne2.add(G723); ligne2.add(G724); ligne2.add(G725); ligne2.add(G726); ligne2.add(G727);
@@ -164,18 +155,11 @@ public class GrillesController implements Initializable {
                 ligne5.add(G751); ligne5.add(G752); ligne5.add(G753); ligne5.add(G754); ligne5.add(G755); ligne5.add(G756); ligne5.add(G757);
                 ligne6.add(G761); ligne6.add(G762); ligne6.add(G763); ligne6.add(G764); ligne6.add(G765); ligne6.add(G766); ligne6.add(G767);
                 // Ajout dans notre grille a deux dimension
-                grille.add(ligne1);
-                grille.add(ligne2);
-                grille.add(ligne3);
-                grille.add(ligne4);
-                grille.add(ligne5);
-                grille.add(ligne6);
+                ajouterLignesdansGrille();
                 break;
             case 8:
-                // Ajout dans notre grille a deux dimension
-                pane6.setVisible(false);
-                pane7.setVisible(false);
-                pane8.setVisible(true);
+                // Affichage grille longueur 8
+                afficherPane(false, false, true);
                 // Liage des id dans les lignes
                 ligne1.add(G811); ligne1.add(G812); ligne1.add(G813); ligne1.add(G814); ligne1.add(G815); ligne1.add(G816); ligne1.add(G817); ligne1.add(G818);
                 ligne2.add(G821); ligne2.add(G822); ligne2.add(G823); ligne2.add(G824); ligne2.add(G825); ligne2.add(G826); ligne2.add(G827); ligne2.add(G828);
@@ -183,13 +167,8 @@ public class GrillesController implements Initializable {
                 ligne4.add(G841); ligne4.add(G842); ligne4.add(G843); ligne4.add(G844); ligne4.add(G845); ligne4.add(G846); ligne4.add(G847); ligne4.add(G848);
                 ligne5.add(G851); ligne5.add(G852); ligne5.add(G853); ligne5.add(G854); ligne5.add(G855); ligne5.add(G856); ligne5.add(G857); ligne5.add(G858);
                 ligne6.add(G861); ligne6.add(G862); ligne6.add(G863); ligne6.add(G864); ligne6.add(G865); ligne6.add(G866); ligne6.add(G867); ligne6.add(G868);
-                // Ajout dans notre tableau a deux dmension
-                grille.add(ligne1);
-                grille.add(ligne2);
-                grille.add(ligne3);
-                grille.add(ligne4);
-                grille.add(ligne5);
-                grille.add(ligne6);
+                // Ajout dans notre grille a deux dimension
+                ajouterLignesdansGrille();
                 break;
             default:
                 System.out.println("Taille du mot incorrect");
@@ -200,6 +179,22 @@ public class GrillesController implements Initializable {
         // Affichage premiere ligne
         afficherPremiereLigne();
 
+    }
+
+    public void afficherPane(boolean p6, boolean p7, boolean p8) {
+        pane6.setVisible(p6);
+        pane7.setVisible(p7);
+        pane8.setVisible(p8);
+    }
+
+    public void ajouterLignesdansGrille() {
+        // Ajout dans notre tableau a deux dmension
+        grille.add(ligne1);
+        grille.add(ligne2);
+        grille.add(ligne3);
+        grille.add(ligne4);
+        grille.add(ligne5);
+        grille.add(ligne6);
     }
 
     public void afficherPremiereLigne() {
