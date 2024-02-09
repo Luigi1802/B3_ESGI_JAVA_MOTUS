@@ -6,7 +6,9 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import fr.esgi.App;
 import javafx.event.ActionEvent;
@@ -16,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.Background;
 import javafx.scene.input.KeyEvent;
@@ -26,6 +29,9 @@ import fr.esgi.service.MancheService;
 import fr.esgi.service.impl.MancheServiceImpl;
 import fr.esgi.service.MotService;
 import fr.esgi.service.impl.MotServiceImpl;
+
+import static java.lang.Thread.sleep;
+import static javafx.scene.input.KeyCode.A;
 
 public class GrillesController implements Initializable {
 
@@ -89,6 +95,10 @@ public class GrillesController implements Initializable {
     @FXML
     private  Label G861,G862,G863,G864,G865,G866,G867,G868;
 
+    @FXML
+    private Button suppr;
+
+
     // Grille de lignes
     ArrayList<ArrayList<Label>> grille = new ArrayList<ArrayList<Label>>();
     // Lignes de label (fxml) pour liage des id
@@ -104,6 +114,7 @@ public class GrillesController implements Initializable {
     //index
     int colonne=1;
     int ligne;
+    Button button = new Button(" ");
 
     @FXML
     private void switchToMenu() throws IOException {
@@ -125,6 +136,7 @@ public class GrillesController implements Initializable {
         // Initialisation grille
         initialiserGrille();
 
+        Platform.runLater(() -> suppr.requestFocus());
 
     }
 
@@ -141,7 +153,7 @@ public class GrillesController implements Initializable {
                 ligne4.add(G641); ligne4.add(G642); ligne4.add(G643); ligne4.add(G644); ligne4.add(G645); ligne4.add(G646);
                 ligne5.add(G651); ligne5.add(G652); ligne5.add(G653); ligne5.add(G654); ligne5.add(G655); ligne5.add(G656);
                 ligne6.add(G661); ligne6.add(G662); ligne6.add(G663); ligne6.add(G664); ligne6.add(G665); ligne6.add(G666);
-                /// Ajout dans notre grille a deux dimension
+                // Ajout dans notre grille a deux dimension
                 ajouterLignesdansGrille();
                 break;
             case 7:
@@ -223,11 +235,52 @@ public class GrillesController implements Initializable {
         String lettreClavier = keyEvent.getCharacter();
         // Lettre seulement
         if (lettreClavier.matches("[a-zA-Z]")) {
-            Label caseGrille= grille.get(ligne).get(colonne);
+            Label caseGrille = grille.get(ligne).get(colonne);
             caseGrille.setText(lettreClavier.toUpperCase());
             caseGrille.setBackground(BACKGROUND_BLEU);
             lettres.add(lettreClavier.charAt(0));
             ++colonne;
+            System.out.println(lettres);
+        }
+        if (keyEvent.getCode() == KeyCode.BACK_SPACE || keyEvent.getCode() == KeyCode.DELETE) {
+            System.out.println("BACK_SPACE détecté");
+            if (colonne > 1) {
+                Label caseGrille;
+                colonne = colonne - 1;
+                caseGrille = grille.get(ligne).get(colonne);
+                caseGrille.setText(".");
+                caseGrille.setBackground(null);
+                lettres.remove(colonne);
+                // System.out.println(lettres);
+            }
+        }
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            if (motService.getMotATrouver().getLettres().size() == lettres.size()) {
+
+                // TODO boucle de traitement mauvais mots
+                System.out.println("ENTER détecté");
+                while (lettres.size() > 1) {
+                    if (colonne > 1) {
+                        Label caseGrille;
+                        colonne = colonne - 1;
+                        caseGrille = grille.get(ligne).get(colonne);
+                        caseGrille.setText(".");
+                        caseGrille.setBackground(null);
+                        lettres.remove(colonne);
+                        // System.out.println(lettres);
+
+
+                    }
+                    // TODO boucle de traitement bon mots
+                    // Si mot valide -> ligne suivante
+                    // TODO afficher mot intermediaire
+                /*if (ligne < 5) {
+                    ++ligne;
+                    colonne = 1;
+                }*/
+                }
+            }
+
         }
     }
 
@@ -246,48 +299,18 @@ public class GrillesController implements Initializable {
     }
 
     // TODO faire fonctionner
-    @FXML
-    public void supprimerLettreClavier(KeyEvent keyEvent) {
-        System.out.println("Touche pressée: " + keyEvent.getCode());
-        if (keyEvent.getCode() == KeyCode.BACK_SPACE || keyEvent.getCode() == KeyCode.DELETE) {
-            System.out.println("BACK_SPACE détecté");
-            System.out.println("wsh");
-            if (colonne>1) {
-                Label caseGrille;
-                colonne = colonne-1;
-                caseGrille = grille.get(ligne).get(colonne);
-                caseGrille.setText(".");
-                caseGrille.setBackground(null);
-                lettres.remove(colonne);
-                // System.out.println(lettres);
-            }
-        }
-    }
 
     @FXML
     public void entrer(ActionEvent actionEvent){
         // TODO boucle de traitement
         // Si mot valide -> ligne suivante
         // TODO afficher mot intermediaire
-        if (ligne < 5) {
+       /* if (ligne < 5) {
             ++ligne;
             colonne = 1;
-        }
+        }*/
     }
 
     // TODO faire fonctionner
-    @FXML
-    public void entrerClavier(KeyEvent keyEvent) {
-        System.out.println("Touche pressée: " + keyEvent.getCode());
-        if (keyEvent.getCode() == KeyCode.ENTER) {
-            System.out.println("ENTER détecté");
-            // TODO boucle de traitement
-            // Si mot valide -> ligne suivante
-            // TODO afficher mot intermediaire
-            if (ligne < 5) {
-                ++ligne;
-                colonne = 1;
-            }
-        }
-    }
+
 }
