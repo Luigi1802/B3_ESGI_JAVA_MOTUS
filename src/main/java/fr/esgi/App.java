@@ -7,11 +7,14 @@ import fr.esgi.service.impl.MotServiceImpl;
 import fr.esgi.service.DictionnaireService;
 import fr.esgi.service.impl.DictionnaireServiceImpl;
 import fr.esgi.service.impl.PartieServiceImpl;
+
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 import java.util.*;
@@ -35,6 +38,26 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
+    /*@Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
+        Parent root = loader.load();
+        ModuleLayer.Controller grillesController = loader.getController();
+
+        Scene scene = new Scene(root);
+
+        // Gestion du clavier
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                System.out.println(keyEvent.getCode());
+            }
+        });
+
+        stage.setScene(scene);
+        stage.show();
+    }*/
 
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
