@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import fr.esgi.App;
 import javafx.fxml.FXML;
+import javafx.scene.input.KeyEvent;
 
 public class MenuController {
     @FXML
@@ -21,4 +22,5 @@ public class MenuController {
     private void switchToResumePartie() throws IOException {
         App.setRoot("resumePartie");
     }
+
 }

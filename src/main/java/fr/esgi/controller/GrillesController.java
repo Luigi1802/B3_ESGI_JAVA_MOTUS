@@ -110,11 +110,13 @@ public class GrillesController implements Initializable {
     ArrayList<Label> ligne6= new ArrayList<>();
 
     // Liste des touches saisies
-    ArrayList<Character> lettres = new ArrayList<Character>();
+    ArrayList<String> lettres = new ArrayList<String>();
     //index
-    int colonne=1;
+    int colonne;
     int ligne;
-    Button button = new Button(" ");
+
+    // Placement de la case sur la grille
+    Label caseGrille;
 
     @FXML
     private void switchToMenu() throws IOException {
@@ -186,11 +188,13 @@ public class GrillesController implements Initializable {
                 System.out.println("Taille du mot incorrect");
                 break;
         }
-        // Depart sur la premiere ligne
+        // Depart sur la premiere ligne ; deuxième lettre
         ligne = 0;
+        colonne = 1;
+        // Initialisation motSaisi avec premiere lettre de motATrouver
+        lettres.add(motService.getMotATrouver().getLettres().get(0).getCaractere().toString());
         // Affichage premiere ligne
         afficherPremiereLigne();
-
     }
 
     public void afficherPane(boolean p6, boolean p7, boolean p8) {
@@ -211,106 +215,102 @@ public class GrillesController implements Initializable {
 
     public void afficherPremiereLigne() {
         // Première lettre suivie de '.'
-        ligne1.get(0).setText(String.valueOf(motService.getMotATrouver().getLettres().get(0).getCaractere()).toUpperCase());
+        ligne1.get(0).setText(lettres.get(0).toString().toUpperCase());
         for (int i = 1; i < ligne1.size(); i++) {
             ligne1.get(i).setText(".");
         }
     }
 
-    // Saisie de lettre
+    // Saisie de lettre bouton
     @FXML
     public void saisirLettre(ActionEvent actionEvent) {
-        Label caseGrille = grille.get(ligne).get(colonne);
+        caseGrille = grille.get(ligne).get(colonne);
         Button boutonSource = (Button) actionEvent.getSource();
         String boutonLettre = boutonSource.getText();
 
-        caseGrille.setText(boutonLettre);
-        caseGrille.setBackground(BACKGROUND_BLEU);
-        lettres.add(caseGrille.getText().charAt(0));
-        ++colonne;
-    }
-
-    @FXML
-    public void saisirLettreClavier(KeyEvent keyEvent) {
-        String lettreClavier = keyEvent.getCharacter();
-        // Lettre seulement
-        if (lettreClavier.matches("[a-zA-Z]")) {
-            Label caseGrille = grille.get(ligne).get(colonne);
-            caseGrille.setText(lettreClavier.toUpperCase());
+        if (!(colonne == motService.getMotATrouver().getLettres().size())) {
+            caseGrille.setText(boutonLettre);
             caseGrille.setBackground(BACKGROUND_BLEU);
-            lettres.add(lettreClavier.charAt(0));
+            lettres.add(caseGrille.getText());
             ++colonne;
-            System.out.println(lettres);
         }
-        if (keyEvent.getCode() == KeyCode.BACK_SPACE || keyEvent.getCode() == KeyCode.DELETE) {
-            System.out.println("BACK_SPACE détecté");
-            if (colonne > 1) {
-                Label caseGrille;
-                colonne = colonne - 1;
-                caseGrille = grille.get(ligne).get(colonne);
-                caseGrille.setText(".");
-                caseGrille.setBackground(null);
-                lettres.remove(colonne);
-                // System.out.println(lettres);
-            }
-        }
-        if (keyEvent.getCode() == KeyCode.ENTER) {
-            if (motService.getMotATrouver().getLettres().size() == lettres.size()) {
-
-                // TODO boucle de traitement mauvais mots
-                System.out.println("ENTER détecté");
-                while (lettres.size() > 1) {
-                    if (colonne > 1) {
-                        Label caseGrille;
-                        colonne = colonne - 1;
-                        caseGrille = grille.get(ligne).get(colonne);
-                        caseGrille.setText(".");
-                        caseGrille.setBackground(null);
-                        lettres.remove(colonne);
-                        // System.out.println(lettres);
-
-
-                    }
-                    // TODO boucle de traitement bon mots
-                    // Si mot valide -> ligne suivante
-                    // TODO afficher mot intermediaire
-                /*if (ligne < 5) {
-                    ++ligne;
-                    colonne = 1;
-                }*/
-                }
-            }
-
-        }
+        // LOG
+        System.out.println("motSaisi " + lettres);
+        System.out.println("motatrouver len: " + motService.getMotATrouver().getLettres().size());
+        System.out.println("lettres len: " + lettres.size());
+        System.out.println( "ligne " + ligne + " colonne "+ colonne);
     }
 
-    // Suppression et validation
+    // Bouton Supprimer
     @FXML
     public void supprimerLettre(ActionEvent actionEvent){
-        if (colonne>1){
-            Label caseGrille;
-            colonne = colonne-1;
+        if (colonne > 1){
+            colonne = colonne - 1;
             caseGrille = grille.get(ligne).get(colonne);
             caseGrille.setText(".");
             caseGrille.setBackground(null);
             lettres.remove(colonne);
         }
-
+        // LOG
+        System.out.println("motSaisi " + lettres);
+        System.out.println( "ligne " + ligne + " colonne "+ colonne);
     }
 
-    // TODO faire fonctionner
-
+    // Bouton entrer
     @FXML
     public void entrer(ActionEvent actionEvent){
-        // TODO boucle de traitement
-        // Si mot valide -> ligne suivante
-        // TODO afficher mot intermediaire
-       /* if (ligne < 5) {
+        if (colonne == motService.getMotATrouver().getLettres().size() && ligne < 5){
+            // TODO validation via backend
+            lettres.clear();
             ++ligne;
             colonne = 1;
-        }*/
+        }
+        // LOG
+        System.out.println("motSaisi " + lettres);
+        System.out.println( "ligne " + ligne + " colonne "+ colonne);
     }
 
-    // TODO faire fonctionner
+    @FXML
+    public void saisirToucheClavier(KeyEvent keyEvent) {
+        // La case a modifier
+        //caseGrille = grille.get(ligne).get(colonne);
+
+        // Gestion des touches
+        switch (keyEvent.getCode()) {
+            case BACK_SPACE:
+                if (colonne > 1){
+                    colonne = colonne -1;
+                    caseGrille = grille.get(ligne).get(colonne);
+                    caseGrille.setText(".");
+                    caseGrille.setBackground(null);
+                    lettres.remove(colonne);
+                }
+                break;
+            case ENTER:
+                if (colonne == motService.getMotATrouver().getLettres().size() && ligne < 6){
+                    // TODO validation via backend
+                    lettres.clear();
+                    ++ligne;
+                    colonne = 1;
+                    // TODO affichage motIntermediaire
+                }
+                break;
+            // Lettres
+            default:
+                if (keyEvent.getCode().toString().matches("[a-zA-Z]")) {
+                    System.out.println("detection default: " + keyEvent.getCode());
+                    caseGrille = grille.get(ligne).get(colonne);
+                    caseGrille.setText(keyEvent.getCode().toString());
+                    lettres.add(caseGrille.getText());
+                    caseGrille.setBackground(BACKGROUND_BLEU);
+                    ++colonne;
+                }
+                break;
+        }
+        // LOG
+        System.out.println("detection touche: " + keyEvent.getCode());
+        System.out.println("motSaisi " + lettres);
+        System.out.println( "ligne " + ligne + " colonne "+ colonne);
+    }
 
 }
