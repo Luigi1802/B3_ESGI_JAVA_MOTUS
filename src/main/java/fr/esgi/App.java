@@ -39,26 +39,6 @@ public class App extends Application {
         stage.show();
     }
 
-    /*@Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
-        Parent root = loader.load();
-        ModuleLayer.Controller grillesController = loader.getController();
-
-        Scene scene = new Scene(root);
-
-        // Gestion du clavier
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                System.out.println(keyEvent.getCode());
-            }
-        });
-
-        stage.setScene(scene);
-        stage.show();
-    }*/
-
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
@@ -70,21 +50,6 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
-
-        /*System.out.println("Bienvenue sur motus !");
-        boolean rejouer = true;
-        // Boucle de jeu (on relance une partie tant que le joueur le veut)
-        while (rejouer) {
-            // Lancement d'une partie
-            partieService.lancerNouvellePartie();
-            System.out.println("Voulez-vous rejouer ? (y/N)");
-            if (!scanner.nextLine().equalsIgnoreCase("Y")) {
-                rejouer = false;
-                System.out.println("À bientôt !");
-                System.exit(0);
-            }
-        }*/
-
     }
 
     public static ArrayList<Lettre> concatenerDeuxListesLettres(ArrayList<Lettre> listeFinale, ArrayList<Lettre> listeAAjouter){
