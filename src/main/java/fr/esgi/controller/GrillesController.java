@@ -3,11 +3,15 @@ package fr.esgi.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.text.Normalizer;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.ResourceBundle;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import fr.esgi.business.Lettre;
+import fr.esgi.business.Mot;
+import fr.esgi.business.StatutLettre;
+import fr.esgi.service.DictionnaireService;
+import fr.esgi.service.impl.DictionnaireServiceImpl;
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import fr.esgi.App;
@@ -16,11 +20,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.layout.Background;
 import javafx.scene.input.KeyEvent;
 
 import fr.esgi.service.PartieService;
@@ -38,14 +39,21 @@ public class GrillesController implements Initializable {
     private static PartieService partieService = new PartieServiceImpl();
     private static MancheService mancheService = new MancheServiceImpl();
     private static MotService motService = new MotServiceImpl();
+    private static DictionnaireService dictionnaireService = new DictionnaireServiceImpl();
 
     // Couleur de fond
     private static final BackgroundFill BACKGROUND_FILL_BLEU = new BackgroundFill(Color.web("#177E89"), null, null);
     private static final Background BACKGROUND_BLEU = new Background(BACKGROUND_FILL_BLEU);
-    private static final BackgroundFill BACKGROUND_FILL_JAUNE = new BackgroundFill(Color.web("#F7B735"), null, null);
+    private static final BackgroundFill BACKGROUND_FILL_JAUNE = new BackgroundFill(Color.web("#F7B735"), new CornerRadii(30d), null);
     private static final Background BACKGROUND_JAUNE = new Background(BACKGROUND_FILL_JAUNE);
     private static final BackgroundFill BACKGROUND_FILL_ROUGE = new BackgroundFill(Color.web("#DB3A34"), null, null);
     private static final Background BACKGROUND_ROUGE = new Background(BACKGROUND_FILL_ROUGE);
+
+    // Couleur de fond clavier
+    private static final BackgroundFill KEY_BACKGROUND_FILL_ROUGE = new BackgroundFill(Color.web("#DB3A34"), new CornerRadii(10d), null);
+    private static final Background KEY_BACKGROUND_ROUGE = new Background(KEY_BACKGROUND_FILL_ROUGE);
+    private static final BackgroundFill KEY_BACKGROUND_FILL_JAUNE = new BackgroundFill(Color.web("#F7B735"), new CornerRadii(10d), null);
+    private static final Background KEY_BACKGROUND_JAUNE = new Background(KEY_BACKGROUND_FILL_JAUNE);
 
     // Id Grille6 : pane et labels
     @FXML
@@ -96,8 +104,9 @@ public class GrillesController implements Initializable {
     private  Label G861,G862,G863,G864,G865,G866,G867,G868;
 
     @FXML
-    private Button suppr;
-
+    private Button suppr, entrer;
+    @FXML
+    private Button A,Z,E,R,T,Y,U,I,O,P,Q,S,D,F,G,H,J,K,L,M,W,X,C,V,B,N;
 
     // Grille de lignes
     ArrayList<ArrayList<Label>> grille = new ArrayList<ArrayList<Label>>();
@@ -125,21 +134,14 @@ public class GrillesController implements Initializable {
 
     // Initialisation des id
     public void initialize(URL location, ResourceBundle resources) {
-        // Lancement de la partie
-        //partieService.lancerNouvellePartie();
+        // Activation saisie clavier
+        Platform.runLater(() -> suppr.requestFocus());
 
-        // DEV
-        // Lancement de la manche
-        mancheService.lancerNouvelleManche(1);
-        // log
         System.out.println(motService.getMotATrouver().retournerMotEnString());
         System.out.println(motService.getMotIntermediaire().retournerMotEnString());
 
         // Initialisation grille
         initialiserGrille();
-
-        Platform.runLater(() -> suppr.requestFocus());
-
     }
 
     public void initialiserGrille() {
@@ -194,7 +196,7 @@ public class GrillesController implements Initializable {
         // Initialisation motSaisi avec premiere lettre de motATrouver
         lettres.add(motService.getMotATrouver().getLettres().get(0).getCaractere().toString());
         // Affichage premiere ligne
-        afficherPremiereLigne();
+        afficherLigneIntermediaire();
     }
 
     public void afficherPane(boolean p6, boolean p7, boolean p8) {
@@ -213,11 +215,178 @@ public class GrillesController implements Initializable {
         grille.add(ligne6);
     }
 
-    public void afficherPremiereLigne() {
-        // Première lettre suivie de '.'
-        ligne1.get(0).setText(lettres.get(0).toString().toUpperCase());
-        for (int i = 1; i < ligne1.size(); i++) {
-            ligne1.get(i).setText(".");
+    public void afficherLigneIntermediaire() {
+        String motInterString = motService.retournerMotIntermediaireFormate();
+        for (int i = 0; i < motInterString.length(); i++) {
+            grille.get(ligne).get(i).setText(String.valueOf(motInterString.charAt(i)).toUpperCase());
+            if (i == 0){
+                grille.get(ligne).get(i).setBackground(BACKGROUND_BLEU);
+            } else {
+                grille.get(ligne).get(i).setBackground(null);
+            }
+        }
+    }
+
+    public void afficherLigneVerifiee() {
+        for (Lettre lettre:motService.getMotSaisi().getLettres()) {
+            switch (lettre.getStatut()) {
+                case VALIDE:
+                    grille.get(ligne).get(lettre.getPosition()).setBackground(BACKGROUND_ROUGE);
+                    break;
+                case TROUVE:
+                    grille.get(ligne).get(lettre.getPosition()).setBackground(BACKGROUND_JAUNE);
+                    break;
+                default:
+                    grille.get(ligne).get(lettre.getPosition()).setBackground(null);
+                    break;
+            }
+        }
+    }
+
+    public void mettreAJourClavier(){
+        for (Lettre lettre:motService.getMotSaisi().getLettres()) {
+            switch (lettre.getCaractere()) {
+                case 'a':
+                    changerVisuelTouche(A, lettre.getStatut());
+                    break;
+                case 'b':
+                    changerVisuelTouche(B, lettre.getStatut());
+                    break;
+                case 'c':
+                    changerVisuelTouche(C, lettre.getStatut());
+                    break;
+                case 'd':
+                    changerVisuelTouche(D, lettre.getStatut());
+                    break;
+                case 'e':
+                    changerVisuelTouche(E, lettre.getStatut());
+                    break;
+                case 'f':
+                    changerVisuelTouche(F, lettre.getStatut());
+                    break;
+                case 'g':
+                    changerVisuelTouche(G, lettre.getStatut());
+                    break;
+                case 'h':
+                    changerVisuelTouche(H, lettre.getStatut());
+                    break;
+                case 'i':
+                    changerVisuelTouche(I, lettre.getStatut());
+                    break;
+                case 'j':
+                    changerVisuelTouche(J, lettre.getStatut());
+                    break;
+                case 'k':
+                    changerVisuelTouche(K, lettre.getStatut());
+                    break;
+                case 'l':
+                    changerVisuelTouche(L, lettre.getStatut());
+                    break;
+                case 'm':
+                    changerVisuelTouche(M, lettre.getStatut());
+                    break;
+                case 'n':
+                    changerVisuelTouche(N, lettre.getStatut());
+                    break;
+                case 'o':
+                    changerVisuelTouche(O, lettre.getStatut());
+                    break;
+                case 'p':
+                    changerVisuelTouche(P, lettre.getStatut());
+                    break;
+                case 'q':
+                    changerVisuelTouche(Q, lettre.getStatut());
+                    break;
+                case 'r':
+                    changerVisuelTouche(R, lettre.getStatut());
+                    break;
+                case 's':
+                    changerVisuelTouche(S, lettre.getStatut());
+                    break;
+                case 't':
+                    changerVisuelTouche(T, lettre.getStatut());
+                    break;
+                case 'u':
+                    changerVisuelTouche(U, lettre.getStatut());
+                    break;
+                case 'v':
+                    changerVisuelTouche(V, lettre.getStatut());
+                    break;
+                case 'w':
+                    changerVisuelTouche(W, lettre.getStatut());
+                    break;
+                case 'x':
+                    changerVisuelTouche(X, lettre.getStatut());
+                    break;
+                case 'y':
+                    changerVisuelTouche(Y, lettre.getStatut());
+                    break;
+                case 'z':
+                    changerVisuelTouche(Z, lettre.getStatut());
+                    break;
+            }
+        }
+    }
+
+    public void changerVisuelTouche(Button bouton, StatutLettre statut) {
+        switch (statut) {
+            case VALIDE:
+                bouton.setBackground(KEY_BACKGROUND_ROUGE);
+                //bouton.setStyle("-fx-focus-traversable: false;");
+                break;
+            case TROUVE:
+                if (bouton.getBackground() != KEY_BACKGROUND_ROUGE) {
+                    bouton.setBackground(KEY_BACKGROUND_JAUNE);
+                    //bouton.setStyle("-fx-focus-traversable: false;");
+                }
+                break;
+            case ABSENTE:
+                if (bouton.getBackground() != KEY_BACKGROUND_ROUGE && bouton.getBackground() != KEY_BACKGROUND_JAUNE) {
+                    bouton.setOpacity(0.3);
+                }
+                break;
+        }
+    }
+
+    public Mot convertirLettresEnMot() {
+        String lettresString = new String();
+        for (String lettre:lettres) {
+            lettresString += lettre.toLowerCase();
+        }
+        return motService.retournerStringEnMot(lettresString);
+    }
+
+    public void validerSaisie() {
+        Mot motSaisiInterface = convertirLettresEnMot();
+        motService.setMotSaisi(motSaisiInterface);
+        // Test si mot saisi est dans le dictionnaire
+        if (dictionnaireService.testerMotPresentDictionnaire(motService.getMotSaisi().retournerMotEnString())) {
+            //methode comparaison + nouvelle ligne
+            mancheService.getManche().ajouterEssai();
+            // Comparaison motSaisi - motATrouver
+            motService.comparateurMotsSaisiATrouver();
+            // Affichage résultat de la saisie précédente
+            afficherLigneVerifiee();
+            // Mise a jour du clavier
+            mettreAJourClavier();
+            // Test victoire
+            if (motService.testerValiditeMotSaisi()) {
+                mancheService.getManche().setHeureFin(LocalDateTime.now());
+                mancheService.getManche().setVictoire(true);
+                // TODO CHANGEMENT DE MANCHE
+            } else {
+                // Remise à blanc de lettres SAUF la première
+                lettres.subList(1, lettres.size()).clear();
+                ++ligne;
+                colonne = 1;
+                afficherLigneIntermediaire();
+            }
+        } else {
+            // Remise à blanc de la ligne et repositionnement case
+            // Remise à blanc de lettres SAUF la première
+            lettres.subList(1, lettres.size()).clear();
+            colonne = 1;
+            afficherLigneIntermediaire();
         }
     }
 
@@ -259,13 +428,10 @@ public class GrillesController implements Initializable {
     // Bouton entrer
     @FXML
     public void entrer(ActionEvent actionEvent){
-        if (colonne == motService.getMotATrouver().getLettres().size() && ligne < 5){
-            // TODO validation via backend
-            lettres.clear();
-            ++ligne;
-            colonne = 1;
+        if (colonne == motService.getMotATrouver().getLettres().size() && ligne < 6){
+            validerSaisie();
         }
-        // LOG
+        // TODO enlever LOG
         System.out.println("motSaisi " + lettres);
         System.out.println( "ligne " + ligne + " colonne "+ colonne);
     }
@@ -288,11 +454,7 @@ public class GrillesController implements Initializable {
                 break;
             case ENTER:
                 if (colonne == motService.getMotATrouver().getLettres().size() && ligne < 6){
-                    // TODO validation via backend
-                    lettres.clear();
-                    ++ligne;
-                    colonne = 1;
-                    // TODO affichage motIntermediaire
+                    validerSaisie();
                 }
                 break;
             // Lettres

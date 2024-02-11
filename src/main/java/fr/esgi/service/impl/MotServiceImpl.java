@@ -174,7 +174,6 @@ public class MotServiceImpl implements MotService{
         }
         return motSaisiFormate;
     }
-    // TODO à retirer une fois l'interface graphique en place
     @Override
     public String retournerMotIntermediaireFormate() {
         String motIntermediaireFormate = "";

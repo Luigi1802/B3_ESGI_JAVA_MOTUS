@@ -53,6 +53,6 @@ public class DictionnaireServiceImpl implements DictionnaireService {
     public ArrayList<String> recupererListeMots(){return listeMots;};
     @Override
     public boolean testerMotPresentDictionnaire(String mot){
-        return listeMots.contains(mot);
+        return listeMots.contains(mot.toLowerCase());
     }
 }
