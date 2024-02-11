@@ -12,8 +12,12 @@ import java.io.IOException;
 public interface PartieService {
 
     Partie getPartie();
+
     void setPartie(Partie partie);
+
     void lancerNouvellePartie() throws IOException;
 
     ArrayList<Manche> trierManchesParMot(ArrayList<Manche> manchesPartie);
+
     ArrayList<Manche> trierManchesParEssai(ArrayList<Manche> manchesPartie);
+}
