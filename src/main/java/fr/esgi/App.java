@@ -76,25 +76,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        //launch();
-        ArrayList<Manche> manches = new ArrayList<Manche>();
-        Manche m1 = mancheService.lancerNouvelleManche(1);
-        m1.setNbEssais(5);
-        manches.add(m1);
-        Manche m2 = mancheService.lancerNouvelleManche(2);
-        m2.setNbEssais(4);
-        manches.add(m2);
-        Manche m3 = mancheService.lancerNouvelleManche(3);
-        m3.setNbEssais(3);
-        manches.add(m3);
-        Manche m4 = mancheService.lancerNouvelleManche(4);
-        m4.setNbEssais(1);
-        manches.add(m4);
-
-        partieService.trierManchesParEssai(manches);
-        //partieService.trierManchesParMot(manches);
-
-        System.out.println(manches);
+        launch();
 
         /*System.out.println("Bienvenue sur motus !");
         boolean rejouer = true;
