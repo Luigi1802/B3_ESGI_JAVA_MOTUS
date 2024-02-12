@@ -120,6 +120,7 @@ public class GrillesController implements Initializable {
 
     // Liste des touches saisies
     ArrayList<String> lettres = new ArrayList<String>();
+
     //index
     int colonne;
     int ligne;
@@ -137,11 +138,16 @@ public class GrillesController implements Initializable {
         // Activation saisie clavier
         Platform.runLater(() -> suppr.requestFocus());
 
+        // Lancement d'une manche
+        mancheService.lancerManche();
+
+        // LOG
         System.out.println(motService.getMotATrouver().retournerMotEnString());
         System.out.println(motService.getMotIntermediaire().retournerMotEnString());
 
         // Initialisation grille
         initialiserGrille();
+        // TODO Indicateur visuel pour les précédentes manches gagnées
     }
 
     public void initialiserGrille() {
@@ -356,32 +362,53 @@ public class GrillesController implements Initializable {
         return motService.retournerStringEnMot(lettresString);
     }
 
-    public void validerSaisie() {
+    public void validerSaisie() throws IOException, InterruptedException {
         Mot motSaisiInterface = convertirLettresEnMot();
         motService.setMotSaisi(motSaisiInterface);
-        // Test si mot saisi est dans le dictionnaire
+        // Test si mot saisi est dans le dictionnaire, sinon resaisie du joueur
         if (dictionnaireService.testerMotPresentDictionnaire(motService.getMotSaisi().retournerMotEnString())) {
             //methode comparaison + nouvelle ligne
-            mancheService.getManche().ajouterEssai();
+            partieService.getMancheActuelle().ajouterEssai();
             // Comparaison motSaisi - motATrouver
             motService.comparateurMotsSaisiATrouver();
             // Affichage résultat de la saisie précédente
             afficherLigneVerifiee();
             // Mise a jour du clavier
             mettreAJourClavier();
-            // Test victoire
+            // Test si victoire, sinon essai suivant/manche perdue
             if (motService.testerValiditeMotSaisi()) {
-                mancheService.getManche().setHeureFin(LocalDateTime.now());
-                mancheService.getManche().setVictoire(true);
-                // TODO CHANGEMENT DE MANCHE
+                // Manche terminée
+                partieService.getMancheActuelle().setHeureFin(LocalDateTime.now());
+                partieService.getMancheActuelle().setVictoire(true);
+                // Si on est avant la manche 4, manche suivante, sinon partie terminée
+                if (partieService.getIdMancheActuelle() < 3) {
+                    // On passe à la manche suivante et on réaffiche la grille
+                    partieService.passerAMancheSuivante();
+                    App.setRoot("grilles");
+                } else {
+                    // Partie terminée
+                    partieService.getPartie().setVictoire(true);
+                    // TODO appel resumé
+                }
             } else {
-                // Remise à blanc de lettres SAUF la première
-                lettres.subList(1, lettres.size()).clear();
-                ++ligne;
-                colonne = 1;
-                afficherLigneIntermediaire();
+                // Si le nbEssais < 6 alors on continue sinon manche perdue
+                if (partieService.getMancheActuelle().getNbEssais() < 6) {
+                    // Remise à blanc de lettres SAUF la première
+                    lettres.subList(1, lettres.size()).clear();
+                    ++ligne;
+                    colonne = 1;
+                    afficherLigneIntermediaire();
+                } else {
+                    // Manche terminée
+                    partieService.getMancheActuelle().setHeureFin(LocalDateTime.now());
+                    partieService.getMancheActuelle().setVictoire(false);
+                    // Partie terminée
+                    partieService.getPartie().setVictoire(false);
+                    // TODO appel resumé
+                }
             }
         } else {
+            // TODO indicateur visuel que le mot n'est pas dans le dico
             // Remise à blanc de la ligne et repositionnement case
             // Remise à blanc de lettres SAUF la première
             lettres.subList(1, lettres.size()).clear();
@@ -427,7 +454,7 @@ public class GrillesController implements Initializable {
 
     // Bouton entrer
     @FXML
-    public void entrer(ActionEvent actionEvent){
+    public void entrer(ActionEvent actionEvent) throws IOException, InterruptedException {
         if (colonne == motService.getMotATrouver().getLettres().size() && ligne < 6){
             validerSaisie();
         }
@@ -437,7 +464,7 @@ public class GrillesController implements Initializable {
     }
 
     @FXML
-    public void saisirToucheClavier(KeyEvent keyEvent) {
+    public void saisirToucheClavier(KeyEvent keyEvent) throws IOException, InterruptedException {
         // La case a modifier
         //caseGrille = grille.get(ligne).get(colonne);
 

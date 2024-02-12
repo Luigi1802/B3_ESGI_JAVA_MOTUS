@@ -17,7 +17,6 @@ public class Manche {
     public Manche() {
         this.id = ++compteur;
         this.nbEssais = 0;
-        this.heureDebut = LocalDateTime.now();
     }
     public Manche(int numManche) {
         this();
@@ -55,6 +54,7 @@ public class Manche {
     public void setHeureFin(LocalDateTime heureFin) {
         this.heureFin = heureFin;
     }
+    public void setHeureDebut(LocalDateTime heureDebut) {this.heureDebut = heureDebut;}
     public boolean isVictoire() {
         return victoire;
     }

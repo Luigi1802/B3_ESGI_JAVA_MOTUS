@@ -7,6 +7,7 @@ import java.io.IOException;
 public interface MancheService {
     void setManche(Manche manche);
     Manche getManche();
-    Manche lancerNouvelleManche(int numManche) throws IOException;
+    Manche creerNouvelleManche(int numManche) throws IOException;
+    void lancerManche();
 
 }
