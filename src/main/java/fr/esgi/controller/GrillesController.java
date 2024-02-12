@@ -166,7 +166,8 @@ public class GrillesController implements Initializable {
         bouttonEncours.setStyle("-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #F7B735; -fx-background-radius: 10;");
         bouttonAbsent.setStyle("-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10; -fx-opacity: 0.3");
 
-        entrer.setDefaultButton(true);
+        suppr.setDefaultButton(true);
+
         entrer.setOnMouseEntered(event -> entrer.setStyle("-fx-background-color: #177E89;"));
         entrer.setOnMouseExited(event -> entrer.setStyle("-fx-background-color: null;"));
         suppr.setOnMouseEntered(event -> suppr.setStyle("-fx-background-color: #177E89;"));
@@ -276,6 +277,7 @@ public class GrillesController implements Initializable {
     }
     @FXML
     public void entrerSuppr(ActionEvent actionEvent) {
+        entrer.requestFocus();
         Button boutonSource = (Button) actionEvent.getSource();
         if (boutonSource.getId().equals("suppr")) {
             if (colonne > 1) {
@@ -450,6 +452,7 @@ public class GrillesController implements Initializable {
     // Saisie de lettre bouton
     @FXML
     public void saisirLettre(ActionEvent actionEvent) {
+        entrer.requestFocus();
         caseGrille = grille.get(ligne).get(colonne);
         Button boutonSource = (Button) actionEvent.getSource();
         String boutonLettre = boutonSource.getText();
