@@ -40,7 +40,6 @@ public class PartieServiceImpl implements PartieService {
     @Override
     public void lancerNouvellePartie() throws IOException {
         partie = new Partie();
-        partie.setVictoire(true);
         int compteurManches = 1;
         // Création des 4 manches
         while (compteurManches < 5) {

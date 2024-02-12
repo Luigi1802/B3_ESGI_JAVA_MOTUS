@@ -158,10 +158,18 @@ public class GrillesController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // Activation saisie clavier
         Platform.runLater(() -> entrer.requestFocus());
-
+        suppr.setDefaultButton(true);
         menu.setOnMouseEntered(event -> menu.setOpacity(0.5));
         menu.setOnMouseExited(event -> menu.setOpacity(1));
 
+        // Initialisation bouttons
+        bouttonTrouve.setStyle("-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #DB3A34; -fx-background-radius: 10;");
+        bouttonEncours.setStyle("-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #F7B735; -fx-background-radius: 10;");
+        bouttonAbsent.setStyle("-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10; -fx-opacity: 0.3");
+        entrer.setOnMouseEntered(event -> entrer.setStyle("-fx-background-color: #177E89;"));
+        entrer.setOnMouseExited(event -> entrer.setStyle("-fx-background-color: null;"));
+        suppr.setOnMouseEntered(event -> suppr.setStyle("-fx-background-color: #177E89;"));
+        suppr.setOnMouseExited(event -> suppr.setStyle("-fx-background-color: null;"));
 
         // Lancement d'une manche
         mancheService.lancerManche();
@@ -169,20 +177,6 @@ public class GrillesController implements Initializable {
         // LOG
         System.out.println(motService.getMotATrouver().retournerMotEnString());
         System.out.println(motService.getMotIntermediaire().retournerMotEnString());
-
-        //supprimer.setId("suppr");
-
-        // Initialisation bouttons
-        bouttonTrouve.setStyle("-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #DB3A34; -fx-background-radius: 10;");
-        bouttonEncours.setStyle("-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #F7B735; -fx-background-radius: 10;");
-        bouttonAbsent.setStyle("-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10; -fx-opacity: 0.3");
-
-        suppr.setDefaultButton(true);
-
-        entrer.setOnMouseEntered(event -> entrer.setStyle("-fx-background-color: #177E89;"));
-        entrer.setOnMouseExited(event -> entrer.setStyle("-fx-background-color: null;"));
-        suppr.setOnMouseEntered(event -> suppr.setStyle("-fx-background-color: #177E89;"));
-        suppr.setOnMouseExited(event -> suppr.setStyle("-fx-background-color: null;"));
 
         // Initialisation grille
         initialiserGrille();
@@ -288,7 +282,7 @@ public class GrillesController implements Initializable {
         }
     }
     @FXML
-    public void entrerSuppr(ActionEvent actionEvent) {
+    public void entrerSuppr(ActionEvent actionEvent) throws IOException, InterruptedException {
         entrer.requestFocus();
         Button boutonSource = (Button) actionEvent.getSource();
         if (boutonSource.getId().equals("suppr")) {
