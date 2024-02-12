@@ -52,6 +52,8 @@ public class GrillesController implements Initializable {
     private static final Background BACKGROUND_JAUNE = new Background(BACKGROUND_FILL_JAUNE);
     private static final BackgroundFill BACKGROUND_FILL_ROUGE = new BackgroundFill(Color.web("#DB3A34"), null, null);
     private static final Background BACKGROUND_ROUGE = new Background(BACKGROUND_FILL_ROUGE);
+    private static final BackgroundFill BACKGROUND_FILL_MANCHE = new BackgroundFill(Color.web("#41b923"), new CornerRadii(50d), null);
+    private static final Background BACKGROUND_MANCHE = new Background(BACKGROUND_FILL_MANCHE);
 
 
     /*TODO A supprimer
@@ -114,22 +116,21 @@ public class GrillesController implements Initializable {
     private Button suppr, entrer;
     @FXML
     private Button A,Z,E,R,T,Y,U,I,O,P,Q,S,D,F,G,H,J,K,L,M,W,X,C,V,B,N;
+    List<Button> listBouttons = new ArrayList<>();
+
+    private Button bouttonTrouve = new Button();
+    private Button bouttonEncours = new Button();
+    private Button bouttonAbsent = new Button();
+    private Button bouttonEntrerSuppr = new Button();
+    private Button supprimer = new Button();
 
     @FXML
     private Button menu;
     @FXML
     private Label mot_invalide;
-
-
-    List<Button> listBouttons = new ArrayList<>();
-
-
-    private Button bouttonTrouve = new Button();
-    private Button bouttonEncours=new Button();
-    private Button bouttonAbsent = new Button();
-    private Button bouttonEntrerSuppr = new Button();
-    private Button supprimer = new Button();
-
+    @FXML
+    private Label manche_1,manche_2,manche_3,manche_4;
+    ArrayList<Label> indicateursManches = new ArrayList<Label>();
 
     // Grille de lignes
     ArrayList<ArrayList<Label>> grille = new ArrayList<ArrayList<Label>>();
@@ -182,7 +183,21 @@ public class GrillesController implements Initializable {
 
         // Initialisation grille
         initialiserGrille();
-        // TODO Indicateur visuel pour les précédentes manches gagnées
+
+        // Indicateurs visuels des manches
+        setIndicateursManches();
+    }
+
+    private void setIndicateursManches() {
+        indicateursManches.add(manche_1);
+        indicateursManches.add(manche_2);
+        indicateursManches.add(manche_3);
+        indicateursManches.add(manche_4);
+        for(int i = 0; i < partieService.getIdMancheActuelle(); i++) {
+            indicateursManches.get(i).setBackground(BACKGROUND_MANCHE);
+            indicateursManches.get(i).setOpacity(1);
+        }
+        indicateursManches.get(partieService.getIdMancheActuelle()).setOpacity(1);
     }
 
     public void initialiserGrille() {
