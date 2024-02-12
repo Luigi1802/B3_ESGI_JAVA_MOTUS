@@ -1,13 +1,17 @@
 package fr.esgi;
 
 import fr.esgi.business.Lettre;
+import fr.esgi.business.Manche;
+import fr.esgi.service.MancheService;
 import fr.esgi.service.MotService;
 import fr.esgi.service.PartieService;
+import fr.esgi.service.impl.MancheServiceImpl;
 import fr.esgi.service.impl.MotServiceImpl;
 import fr.esgi.service.DictionnaireService;
 import fr.esgi.service.impl.DictionnaireServiceImpl;
 import fr.esgi.service.impl.PartieServiceImpl;
 
+import fr.esgi.utils.ComparateurMancheParMot;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +32,9 @@ public class App extends Application {
     private static DictionnaireService dictionnaireService = new DictionnaireServiceImpl();
     private static MotService motService = new MotServiceImpl();
     private static PartieService partieService = new PartieServiceImpl();
+
+    // DEV
+    private static MancheService mancheService = new MancheServiceImpl();
 
     private static Scene scene;
     private static Scanner scanner = new Scanner(System.in);
