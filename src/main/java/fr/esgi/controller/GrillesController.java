@@ -53,13 +53,14 @@ public class GrillesController implements Initializable {
     private static final BackgroundFill BACKGROUND_FILL_ROUGE = new BackgroundFill(Color.web("#DB3A34"), null, null);
     private static final Background BACKGROUND_ROUGE = new Background(BACKGROUND_FILL_ROUGE);
 
-    // Couleur de fond clavier
+
+    /*TODO A supprimer
     private static final BackgroundFill KEY_BACKGROUND_FILL_ROUGE = new BackgroundFill(Color.web("#DB3A34"), new CornerRadii(10d), null);
     private static final Background KEY_BACKGROUND_ROUGE = new Background(KEY_BACKGROUND_FILL_ROUGE);
     private static final BackgroundFill KEY_BACKGROUND_FILL_JAUNE = new BackgroundFill(Color.web("#F7B735"), new CornerRadii(10d), null);
     private static final Background KEY_BACKGROUND_JAUNE = new Background(KEY_BACKGROUND_FILL_JAUNE);
     private static final BackgroundFill KEY_BACKGROUND_FILL_BLEU_VIDE = new BackgroundFill(Color.web("#FFFFFF"), new CornerRadii(10d), null);
-    private static final Background KEY_BACKGROUND_BLEU_VIDE = new Background(KEY_BACKGROUND_FILL_BLEU_VIDE);
+    private static final Background KEY_BACKGROUND_BLEU_VIDE = new Background(KEY_BACKGROUND_FILL_BLEU_VIDE);*/
 
     // Id Grille6 : pane et labels
     @FXML
@@ -114,6 +115,9 @@ public class GrillesController implements Initializable {
     @FXML
     private Button A,Z,E,R,T,Y,U,I,O,P,Q,S,D,F,G,H,J,K,L,M,W,X,C,V,B,N;
 
+    @FXML
+    private Button menu;
+
 
     List<Button> listBouttons = new ArrayList<>();
 
@@ -123,8 +127,6 @@ public class GrillesController implements Initializable {
     private Button bouttonAbsent = new Button();
     private Button bouttonEntrerSuppr = new Button();
     private Button supprimer = new Button();
-
-
 
 
     // Grille de lignes
@@ -154,12 +156,16 @@ public class GrillesController implements Initializable {
     // Initialisation des id
     public void initialize(URL location, ResourceBundle resources) {
         // Activation saisie clavier
-        Platform.runLater(() -> suppr.requestFocus());
+        Platform.runLater(() -> entrer.requestFocus());
+
+        menu.setOnMouseEntered(event -> menu.setOpacity(0.5));
+        menu.setOnMouseExited(event -> menu.setOpacity(1));
+
 
         System.out.println(motService.getMotATrouver().retournerMotEnString());
         System.out.println(motService.getMotIntermediaire().retournerMotEnString());
 
-        supprimer.setId("suppr");
+        //supprimer.setId("suppr");
 
         // Initialisation bouttons
         bouttonTrouve.setStyle("-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #DB3A34; -fx-background-radius: 10;");
@@ -283,7 +289,7 @@ public class GrillesController implements Initializable {
             if (colonne > 1) {
                 colonne = colonne - 1;
                 caseGrille = grille.get(ligne).get(colonne);
-                caseGrille.setText(".");
+                caseGrille.setText(String.valueOf(motService.retournerMotIntermediaireFormate().charAt(colonne)).toUpperCase());
                 caseGrille.setBackground(null);
                 lettres.remove(colonne);
             }
@@ -481,7 +487,7 @@ public class GrillesController implements Initializable {
                 if (colonne > 1){
                     colonne = colonne -1;
                     caseGrille = grille.get(ligne).get(colonne);
-                    caseGrille.setText(".");
+                    caseGrille.setText(String.valueOf(motService.retournerMotIntermediaireFormate().charAt(colonne)).toUpperCase());
                     caseGrille.setBackground(null);
                     lettres.remove(colonne);
                 }
