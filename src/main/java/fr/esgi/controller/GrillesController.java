@@ -19,7 +19,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.input.KeyEvent;
@@ -30,6 +33,7 @@ import fr.esgi.service.MancheService;
 import fr.esgi.service.impl.MancheServiceImpl;
 import fr.esgi.service.MotService;
 import fr.esgi.service.impl.MotServiceImpl;
+import javafx.scene.shape.Rectangle;
 
 import static java.lang.Thread.sleep;
 import static javafx.scene.input.KeyCode.A;
@@ -49,11 +53,14 @@ public class GrillesController implements Initializable {
     private static final BackgroundFill BACKGROUND_FILL_ROUGE = new BackgroundFill(Color.web("#DB3A34"), null, null);
     private static final Background BACKGROUND_ROUGE = new Background(BACKGROUND_FILL_ROUGE);
 
-    // Couleur de fond clavier
+
+    /*TODO A supprimer
     private static final BackgroundFill KEY_BACKGROUND_FILL_ROUGE = new BackgroundFill(Color.web("#DB3A34"), new CornerRadii(10d), null);
     private static final Background KEY_BACKGROUND_ROUGE = new Background(KEY_BACKGROUND_FILL_ROUGE);
     private static final BackgroundFill KEY_BACKGROUND_FILL_JAUNE = new BackgroundFill(Color.web("#F7B735"), new CornerRadii(10d), null);
     private static final Background KEY_BACKGROUND_JAUNE = new Background(KEY_BACKGROUND_FILL_JAUNE);
+    private static final BackgroundFill KEY_BACKGROUND_FILL_BLEU_VIDE = new BackgroundFill(Color.web("#FFFFFF"), new CornerRadii(10d), null);
+    private static final Background KEY_BACKGROUND_BLEU_VIDE = new Background(KEY_BACKGROUND_FILL_BLEU_VIDE);*/
 
     // Id Grille6 : pane et labels
     @FXML
@@ -108,6 +115,20 @@ public class GrillesController implements Initializable {
     @FXML
     private Button A,Z,E,R,T,Y,U,I,O,P,Q,S,D,F,G,H,J,K,L,M,W,X,C,V,B,N;
 
+    @FXML
+    private Button menu;
+
+
+    List<Button> listBouttons = new ArrayList<>();
+
+
+    private Button bouttonTrouve = new Button();
+    private Button bouttonEncours=new Button();
+    private Button bouttonAbsent = new Button();
+    private Button bouttonEntrerSuppr = new Button();
+    private Button supprimer = new Button();
+
+
     // Grille de lignes
     ArrayList<ArrayList<Label>> grille = new ArrayList<ArrayList<Label>>();
     // Lignes de label (fxml) pour liage des id
@@ -135,10 +156,28 @@ public class GrillesController implements Initializable {
     // Initialisation des id
     public void initialize(URL location, ResourceBundle resources) {
         // Activation saisie clavier
-        Platform.runLater(() -> suppr.requestFocus());
+        Platform.runLater(() -> entrer.requestFocus());
+
+        menu.setOnMouseEntered(event -> menu.setOpacity(0.5));
+        menu.setOnMouseExited(event -> menu.setOpacity(1));
+
 
         System.out.println(motService.getMotATrouver().retournerMotEnString());
         System.out.println(motService.getMotIntermediaire().retournerMotEnString());
+
+        //supprimer.setId("suppr");
+
+        // Initialisation bouttons
+        bouttonTrouve.setStyle("-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #DB3A34; -fx-background-radius: 10;");
+        bouttonEncours.setStyle("-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #F7B735; -fx-background-radius: 10;");
+        bouttonAbsent.setStyle("-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10; -fx-opacity: 0.3");
+
+        suppr.setDefaultButton(true);
+
+        entrer.setOnMouseEntered(event -> entrer.setStyle("-fx-background-color: #177E89;"));
+        entrer.setOnMouseExited(event -> entrer.setStyle("-fx-background-color: null;"));
+        suppr.setOnMouseEntered(event -> suppr.setStyle("-fx-background-color: #177E89;"));
+        suppr.setOnMouseExited(event -> suppr.setStyle("-fx-background-color: null;"));
 
         // Initialisation grille
         initialiserGrille();
@@ -242,6 +281,32 @@ public class GrillesController implements Initializable {
             }
         }
     }
+    @FXML
+    public void entrerSuppr(ActionEvent actionEvent) {
+        entrer.requestFocus();
+        Button boutonSource = (Button) actionEvent.getSource();
+        if (boutonSource.getId().equals("suppr")) {
+            if (colonne > 1) {
+                colonne = colonne - 1;
+                caseGrille = grille.get(ligne).get(colonne);
+                caseGrille.setText(String.valueOf(motService.retournerMotIntermediaireFormate().charAt(colonne)).toUpperCase());
+                caseGrille.setBackground(null);
+                lettres.remove(colonne);
+            }
+            // LOG
+            System.out.println("motSaisi " + lettres);
+            System.out.println("ligne " + ligne + " colonne " + colonne);
+        }
+        if (boutonSource.getId().equals("entrer")) {
+            if (colonne == motService.getMotATrouver().getLettres().size() && ligne < 6) {
+                validerSaisie();
+            }
+            // TODO enlever LOG
+            System.out.println("motSaisi " + lettres);
+            System.out.println("ligne " + ligne + " colonne " + colonne);
+        }
+    }
+
 
     public void mettreAJourClavier(){
         for (Lettre lettre:motService.getMotSaisi().getLettres()) {
@@ -331,18 +396,19 @@ public class GrillesController implements Initializable {
     public void changerVisuelTouche(Button bouton, StatutLettre statut) {
         switch (statut) {
             case VALIDE:
-                bouton.setBackground(KEY_BACKGROUND_ROUGE);
+                //bouton.setBackground(KEY_BACKGROUND_ROUGE);
+                bouton.setStyle(bouttonTrouve.getStyle());
                 //bouton.setStyle("-fx-focus-traversable: false;");
                 break;
             case TROUVE:
-                if (bouton.getBackground() != KEY_BACKGROUND_ROUGE) {
-                    bouton.setBackground(KEY_BACKGROUND_JAUNE);
+                if (bouton.getStyle() != bouttonTrouve.getStyle()) {
+                    bouton.setStyle(bouttonEncours.getStyle());
                     //bouton.setStyle("-fx-focus-traversable: false;");
                 }
                 break;
             case ABSENTE:
-                if (bouton.getBackground() != KEY_BACKGROUND_ROUGE && bouton.getBackground() != KEY_BACKGROUND_JAUNE) {
-                    bouton.setOpacity(0.3);
+                if (bouton.getStyle() != bouttonTrouve.getStyle() && bouton.getStyle() != bouttonEncours.getStyle()) {
+                    bouton.setStyle(bouttonAbsent.getStyle());
                 }
                 break;
         }
@@ -355,7 +421,6 @@ public class GrillesController implements Initializable {
         }
         return motService.retournerStringEnMot(lettresString);
     }
-
     public void validerSaisie() {
         Mot motSaisiInterface = convertirLettresEnMot();
         motService.setMotSaisi(motSaisiInterface);
@@ -393,6 +458,7 @@ public class GrillesController implements Initializable {
     // Saisie de lettre bouton
     @FXML
     public void saisirLettre(ActionEvent actionEvent) {
+        entrer.requestFocus();
         caseGrille = grille.get(ligne).get(colonne);
         Button boutonSource = (Button) actionEvent.getSource();
         String boutonLettre = boutonSource.getText();
@@ -410,32 +476,6 @@ public class GrillesController implements Initializable {
         System.out.println( "ligne " + ligne + " colonne "+ colonne);
     }
 
-    // Bouton Supprimer
-    @FXML
-    public void supprimerLettre(ActionEvent actionEvent){
-        if (colonne > 1){
-            colonne = colonne - 1;
-            caseGrille = grille.get(ligne).get(colonne);
-            caseGrille.setText(".");
-            caseGrille.setBackground(null);
-            lettres.remove(colonne);
-        }
-        // LOG
-        System.out.println("motSaisi " + lettres);
-        System.out.println( "ligne " + ligne + " colonne "+ colonne);
-    }
-
-    // Bouton entrer
-    @FXML
-    public void entrer(ActionEvent actionEvent){
-        if (colonne == motService.getMotATrouver().getLettres().size() && ligne < 6){
-            validerSaisie();
-        }
-        // TODO enlever LOG
-        System.out.println("motSaisi " + lettres);
-        System.out.println( "ligne " + ligne + " colonne "+ colonne);
-    }
-
     @FXML
     public void saisirToucheClavier(KeyEvent keyEvent) {
         // La case a modifier
@@ -447,7 +487,7 @@ public class GrillesController implements Initializable {
                 if (colonne > 1){
                     colonne = colonne -1;
                     caseGrille = grille.get(ligne).get(colonne);
-                    caseGrille.setText(".");
+                    caseGrille.setText(String.valueOf(motService.retournerMotIntermediaireFormate().charAt(colonne)).toUpperCase());
                     caseGrille.setBackground(null);
                     lettres.remove(colonne);
                 }
@@ -475,4 +515,19 @@ public class GrillesController implements Initializable {
         System.out.println( "ligne " + ligne + " colonne "+ colonne);
     }
 
+
+    public void onMouseEntrer(MouseEvent mouseEvent)
+    {
+        Button boutonSource = (Button) mouseEvent.getSource();
+        if(boutonSource.getStyle()!=bouttonEncours.getStyle() && boutonSource.getStyle()!=bouttonTrouve.getStyle() && boutonSource.getStyle()!=bouttonAbsent.getStyle()){
+            boutonSource.setStyle("-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #177E89; -fx-background-radius: 10;");
+        }
+    }
+
+    public void onMouseSortir(MouseEvent mouseEvent){
+        Button boutonSource = (Button) mouseEvent.getSource();
+        if(boutonSource.getStyle()!=bouttonEncours.getStyle() && boutonSource.getStyle()!=bouttonTrouve.getStyle() && boutonSource.getStyle()!=bouttonAbsent.getStyle()){
+            boutonSource.setStyle("-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;");
+        }
+    }
 }

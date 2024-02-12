@@ -759,102 +759,102 @@
                   <RowConstraints maxHeight="63.9999755859375" minHeight="10.0" prefHeight="63.9999755859375" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="36.80002441406249" vgrow="SOMETIMES" />
                </rowConstraints>
-               <Button fx:id="A" alignment="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="A" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <Button fx:id="A" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color:null; -fx-background-radius: 10;" text="A" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="Z" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="Z" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <Button fx:id="Z" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="Z" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="E" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="E" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <Button fx:id="E" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="E" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="R" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="R" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <Button fx:id="R" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="R" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="T" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="T" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <Button fx:id="T" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="T" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="Y" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="Y" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <Button fx:id="Y" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="Y" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="U" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="U" textFill="WHITE" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <Button fx:id="U" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="U" textFill="WHITE" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="I" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="I" textFill="WHITE" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <Button fx:id="I" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="I" textFill="WHITE" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="O" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="O" textFill="WHITE" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <Button fx:id="O" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="O" textFill="WHITE" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="P" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="P" textFill="WHITE" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <Button fx:id="P" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="P" textFill="WHITE" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="S" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="S" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <Button fx:id="S" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="S" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="Q" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="Q" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <Button fx:id="Q" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="Q" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="D" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="D" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <Button fx:id="D" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="D" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="F" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="F" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <Button fx:id="F" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="F" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="G" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="G" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <Button fx:id="G" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="G" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="H" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="H" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <Button fx:id="H" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="H" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="J" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="J" textFill="WHITE" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <Button fx:id="J" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="J" textFill="WHITE" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="K" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="K" textFill="WHITE" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <Button fx:id="K" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="K" textFill="WHITE" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="L" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="L" textFill="WHITE" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <Button fx:id="L" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="L" textFill="WHITE" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
                </Button>
-               <Button fx:id="M" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="M" textFill="WHITE" wrapText="true" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <Button fx:id="M" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="M" textFill="WHITE" wrapText="true" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                   <font>
                      <Font name="System Bold" size="20.0" />
                   </font>
@@ -873,44 +873,44 @@
                   <rowConstraints>
                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
-                  <Button fx:id="suppr" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#supprimerLettre" onKeyPressed="#saisirToucheClavier" prefHeight="90.0" prefWidth="50.0" style="-fx-background-color: null;" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="suppr" onAction="#entrerSuppr" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#saisirToucheClavier" prefHeight="60" prefWidth="50.0" style="-fx-background-color: null; " GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="56.0" fitWidth="62.0">
                            <Image url="@images/imageSupprimer.png" />
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="W" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="W" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="W" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="30.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="W" wrapText="true" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="X" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="X" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="X" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="X" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="C" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="C" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="C" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="C" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="V" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="V" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="V" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="V" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="B" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="B" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="B" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="B" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="N" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="N" textFill="WHITE" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="N" onMouseEntered="#onMouseEntrer" onMouseExited="#onMouseSortir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saisirLettre" onKeyPressed="#saisirToucheClavier" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: null; -fx-background-radius: 10;" text="N" textFill="WHITE" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="entrer" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#entrer" onKeyPressed="#saisirToucheClavier" prefHeight="90.0" prefWidth="50.0" style="-fx-background-color: null;" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="entrer" onAction="#entrerSuppr" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#saisirToucheClavier" prefHeight="90.0" prefWidth="50.0" style="-fx-background-color: null;" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="56.0" fitWidth="68.0">
                            <Image url="@images/imageEntrer.png" />
