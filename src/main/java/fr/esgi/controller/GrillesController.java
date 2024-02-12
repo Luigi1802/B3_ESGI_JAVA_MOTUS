@@ -117,6 +117,8 @@ public class GrillesController implements Initializable {
 
     @FXML
     private Button menu;
+    @FXML
+    private Label mot_invalide;
 
 
     List<Button> listBouttons = new ArrayList<>();
@@ -468,7 +470,8 @@ public class GrillesController implements Initializable {
                 }
             }
         } else {
-            // TODO indicateur visuel que le mot n'est pas dans le dico
+            // Activation de l'incateur "Mot invalide"
+            mot_invalide.setVisible(true);
             // Remise à blanc de la ligne et repositionnement case
             // Remise à blanc de lettres SAUF la première
             lettres.subList(1, lettres.size()).clear();
@@ -480,6 +483,9 @@ public class GrillesController implements Initializable {
     // Saisie de lettre bouton
     @FXML
     public void saisirLettre(ActionEvent actionEvent) {
+        // Désactivation de l'indicateur "Mot invalide"
+        mot_invalide.setVisible(false);
+        //
         entrer.requestFocus();
         caseGrille = grille.get(ligne).get(colonne);
         Button boutonSource = (Button) actionEvent.getSource();
@@ -500,8 +506,9 @@ public class GrillesController implements Initializable {
   
     @FXML
     public void saisirToucheClavier(KeyEvent keyEvent) throws IOException, InterruptedException {
-        // La case a modifier
-        //caseGrille = grille.get(ligne).get(colonne);
+        // Désactivation de l'indicateur "Mot invalide"
+        mot_invalide.setVisible(false);
+        //
 
         // Gestion des touches
         switch (keyEvent.getCode()) {
@@ -538,8 +545,7 @@ public class GrillesController implements Initializable {
     }
 
 
-    public void onMouseEntrer(MouseEvent mouseEvent)
-    {
+    public void onMouseEntrer(MouseEvent mouseEvent){
         Button boutonSource = (Button) mouseEvent.getSource();
         if(boutonSource.getStyle()!=bouttonEncours.getStyle() && boutonSource.getStyle()!=bouttonTrouve.getStyle() && boutonSource.getStyle()!=bouttonAbsent.getStyle()){
             boutonSource.setStyle("-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #177E89; -fx-background-radius: 10;");
