@@ -873,7 +873,7 @@
                   <rowConstraints>
                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
-                  <Button fx:id="suppr" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#saisirToucheClavier" prefHeight="60" prefWidth="50.0" style="-fx-background-color: null; " GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="suppr" onAction="#entrerSuppr" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#saisirToucheClavier" prefHeight="60" prefWidth="50.0" style="-fx-background-color: null; " GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="56.0" fitWidth="62.0">
                            <Image url="@images/imageSupprimer.png" />
@@ -910,7 +910,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="entrer" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#saisirToucheClavier" prefHeight="90.0" prefWidth="50.0" style="-fx-background-color: null;" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="entrer" onAction="#entrerSuppr" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#saisirToucheClavier" prefHeight="90.0" prefWidth="50.0" style="-fx-background-color: null;" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="56.0" fitWidth="68.0">
                            <Image url="@images/imageEntrer.png" />

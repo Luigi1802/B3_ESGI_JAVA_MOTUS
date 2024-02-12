@@ -122,6 +122,8 @@ public class GrillesController implements Initializable {
     private Button bouttonEncours=new Button();
     private Button bouttonAbsent = new Button();
     private Button bouttonEntrerSuppr = new Button();
+    private Button supprimer = new Button();
+
 
 
 
@@ -156,6 +158,8 @@ public class GrillesController implements Initializable {
 
         System.out.println(motService.getMotATrouver().retournerMotEnString());
         System.out.println(motService.getMotIntermediaire().retournerMotEnString());
+
+        supprimer.setId("suppr");
 
         // Initialisation bouttons
         bouttonTrouve.setStyle("-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #DB3A34; -fx-background-radius: 10;");
@@ -270,6 +274,31 @@ public class GrillesController implements Initializable {
             }
         }
     }
+    @FXML
+    public void entrerSuppr(ActionEvent actionEvent) {
+        Button boutonSource = (Button) actionEvent.getSource();
+        if (boutonSource.getId().equals("suppr")) {
+            if (colonne > 1) {
+                colonne = colonne - 1;
+                caseGrille = grille.get(ligne).get(colonne);
+                caseGrille.setText(".");
+                caseGrille.setBackground(null);
+                lettres.remove(colonne);
+            }
+            // LOG
+            System.out.println("motSaisi " + lettres);
+            System.out.println("ligne " + ligne + " colonne " + colonne);
+        }
+        if (boutonSource.getId().equals("entrer")) {
+            if (colonne == motService.getMotATrouver().getLettres().size() && ligne < 6) {
+                validerSaisie();
+            }
+            // TODO enlever LOG
+            System.out.println("motSaisi " + lettres);
+            System.out.println("ligne " + ligne + " colonne " + colonne);
+        }
+    }
+
 
     public void mettreAJourClavier(){
         for (Lettre lettre:motService.getMotSaisi().getLettres()) {
