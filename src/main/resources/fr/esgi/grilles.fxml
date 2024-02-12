@@ -921,7 +921,7 @@
             </GridPane>
          </children>
       </Pane>
-      <Label fx:id="mot_invalide" alignment="CENTER" contentDisplay="CENTER" layoutX="657.0" layoutY="271.0" prefHeight="48.0" prefWidth="120.0" style="-fx-border-color: #DB3A34; -fx-border-width: 3; -fx-border-radius: 5;" text="Mot invalide" textAlignment="CENTER" textFill="#db3a34">
+      <Label fx:id="mot_invalide" alignment="CENTER" contentDisplay="CENTER" layoutX="651.0" layoutY="254.0" prefHeight="82.0" prefWidth="92.0" style="-fx-border-color: #DB3A34; -fx-border-width: 3; -fx-border-radius: 5;" text="MOT INVALIDE" textAlignment="CENTER" textFill="#db3a34" visible="false" wrapText="true">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -937,22 +937,22 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="manche_1" alignment="CENTER" contentDisplay="CENTER" prefHeight="48.0" prefWidth="57.0" style="-fx-border-color: #FFFFFF; -fx-border-width: 3; -fx-border-radius: 50;" text="1" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="manche_1" alignment="CENTER" contentDisplay="CENTER" opacity="0.3" prefHeight="48.0" prefWidth="57.0" style="-fx-border-color: #FFFFFF; -fx-border-width: 3; -fx-border-radius: 50;" text="1" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="manche_2" alignment="CENTER" contentDisplay="CENTER" prefHeight="48.0" prefWidth="46.0" style="-fx-border-color: #FFFFFF; -fx-border-width: 3; -fx-border-radius: 50;" text="2" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="1">
+            <Label fx:id="manche_2" alignment="CENTER" contentDisplay="CENTER" opacity="0.3" prefHeight="48.0" prefWidth="46.0" style="-fx-border-color: #FFFFFF; -fx-border-width: 3; -fx-border-radius: 50;" text="2" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="manche_3" alignment="CENTER" contentDisplay="CENTER" prefHeight="48.0" prefWidth="46.0" style="-fx-border-color: #FFFFFF; -fx-border-width: 3; -fx-border-radius: 50;" text="3" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="2">
+            <Label fx:id="manche_3" alignment="CENTER" contentDisplay="CENTER" opacity="0.3" prefHeight="48.0" prefWidth="46.0" style="-fx-border-color: #FFFFFF; -fx-border-width: 3; -fx-border-radius: 50;" text="3" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="2">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="manche_4" alignment="CENTER" contentDisplay="CENTER" prefHeight="48.0" prefWidth="46.0" style="-fx-border-color: #FFFFFF; -fx-border-width: 3; -fx-border-radius: 50;" text="4" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="3">
+            <Label fx:id="manche_4" alignment="CENTER" contentDisplay="CENTER" opacity="0.3" prefHeight="48.0" prefWidth="46.0" style="-fx-border-color: #FFFFFF; -fx-border-width: 3; -fx-border-radius: 50;" text="4" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
