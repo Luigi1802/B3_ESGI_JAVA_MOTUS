@@ -20,5 +20,5 @@ public interface PartieService {
 
     ArrayList<Manche> trierManchesParMot(ArrayList<Manche> manchesPartie);
 
-    ArrayList<Manche> trierManchesParEssai(ArrayList<Manche> manchesPartie);
+    ArrayList<Manche> trierManchesParTempsPasse(ArrayList<Manche> manchesPartie);
 }

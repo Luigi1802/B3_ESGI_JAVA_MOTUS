@@ -465,7 +465,6 @@ public class GrillesController implements Initializable {
                 } else {
                     // Partie terminée
                     partieService.getPartie().setVictoire(true);
-                    // TODO appel resumé
                     App.setRoot("resumePartie");
                 }
             } else {
@@ -482,7 +481,6 @@ public class GrillesController implements Initializable {
                     partieService.getMancheActuelle().setVictoire(false);
                     // Partie terminée
                     partieService.getPartie().setVictoire(false);
-                    // TODO appel resumé
                     App.setRoot("resumePartie");
 
                 }

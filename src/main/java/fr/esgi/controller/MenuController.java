@@ -32,12 +32,6 @@ public class MenuController implements Initializable {
         App.setRoot("nomDevs");
     }
 
-    // DEV
-    @FXML
-    private void switchToResumePartie() throws IOException {
-        App.setRoot("resumePartie");
-    }
-
     public void initialize(URL location, ResourceBundle resources) {
 
         //Survol bouttons menu

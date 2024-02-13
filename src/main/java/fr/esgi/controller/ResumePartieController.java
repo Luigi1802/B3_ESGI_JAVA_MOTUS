@@ -3,21 +3,29 @@ package fr.esgi.controller;
 import fr.esgi.App;
 import fr.esgi.business.Manche;
 import fr.esgi.business.Partie;
+import fr.esgi.service.MancheService;
 import fr.esgi.service.PartieService;
+import fr.esgi.service.impl.MancheServiceImpl;
 import fr.esgi.service.impl.PartieServiceImpl;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ResumePartieController implements Initializable {
     private static PartieService partieService = new PartieServiceImpl();
+    private static MancheService mancheService = new MancheServiceImpl();
 
     // Boutons
     @FXML
@@ -45,6 +53,11 @@ public class ResumePartieController implements Initializable {
     // Liste de manche jouées
     private static ArrayList<Manche> manchesJouees = new ArrayList<Manche>();
 
+    // Position des panes
+    ArrayList<Integer> positionX = new ArrayList<Integer>(List.of(54, 410, 54, 410));
+    ArrayList<Integer> positionY = new ArrayList<Integer>(List.of(152, 152, 419, 419));
+
+
     @FXML
     private void switchToMenu() throws IOException {
         App.setRoot("menu");
@@ -52,6 +65,8 @@ public class ResumePartieController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Nettoyage de mancheJouees pour une eventuelle seconde partie
+        manchesJouees.clear();
         // Hover sur boutons
         menu.setOnMouseEntered(event -> menu.setOpacity(0.5));
         menu.setOnMouseExited(event -> menu.setOpacity(1));
@@ -66,7 +81,7 @@ public class ResumePartieController implements Initializable {
         resumerManches();
 
         // DEV LOG
-        System.out.println(partieService.getPartie().getManches().get(0));
+        System.out.println(partieService.getPartie());
 
     }
 
@@ -95,11 +110,11 @@ public class ResumePartieController implements Initializable {
                 labelVictoireManche1.setStyle("-fx-text-fill: #db3a34");
             }
             // Mot à trouver
-            labelMotATrouverManche1.setText(rManche1.getMotATrouver().retournerMotEnString());
+            labelMotATrouverManche1.setText(rManche1.getMotATrouver().retournerMotEnString().toUpperCase());
             // Nombre d'essai
             labelNombreEssaiManche1.setText(String.valueOf(rManche1.getNbEssais()));
             // Temps passé
-            // TODO calcul temps de la manche
+            tempsPasseManche1.setText(TempsPasseFormate(rManche1));
             // Ajout pour le tri
             manchesJouees.add(rManche1);
         } else {
@@ -124,7 +139,7 @@ public class ResumePartieController implements Initializable {
             // Nombre d'essai
             labelNombreEssaiManche2.setText(String.valueOf(rManche2.getNbEssais()));
             // Temps passé
-            // TODO calcul temps de la manche
+            tempsPasseManche2.setText(TempsPasseFormate(rManche2));
             // Ajout pour le tri
             manchesJouees.add(rManche2);
         } else {
@@ -149,7 +164,7 @@ public class ResumePartieController implements Initializable {
             // Nombre d'essai
             labelNombreEssaiManche3.setText(String.valueOf(rManche3.getNbEssais()));
             // Temps passé
-            // TODO calcul temps de la manche
+            tempsPasseManche3.setText(TempsPasseFormate(rManche3));
             // Ajout pour le tri
             manchesJouees.add(rManche3);
         } else {
@@ -174,11 +189,77 @@ public class ResumePartieController implements Initializable {
             // Nombre d'essai
             labelNombreEssaiManche4.setText(String.valueOf(rManche4.getNbEssais()));
             // Temps passé
-            // TODO calcul temps de la manche
+            tempsPasseManche4.setText(TempsPasseFormate(rManche4));
             // Ajout pour le tri
             manchesJouees.add(rManche4);
         } else {
             paneManche4.setVisible(false);
+        }
+    }
+
+    public static String TempsPasseFormate(Manche manche) {
+        long tempsPasse;
+        long minutes;
+        long secondes;
+        String tempsPasseFormate;
+
+
+        tempsPasse = mancheService.calculerTempsPasse(manche);
+
+        if (tempsPasse > 59) {
+            minutes = tempsPasse/60;
+            secondes = tempsPasse%60;
+
+            tempsPasseFormate = minutes + " min " + secondes + " sec";
+        } else {
+            tempsPasseFormate = tempsPasse + " sec";
+        }
+
+        return tempsPasseFormate;
+    }
+
+    @FXML
+    public void trierParMot(ActionEvent actionEvent) {
+        partieService.trierManchesParMot(manchesJouees);
+        System.out.println(manchesJouees);
+
+        // Afficher trié
+        afficherPaneTriees();
+    }
+
+    @FXML
+    public void trierParTemps(ActionEvent actionEvent) {
+        partieService.trierManchesParTempsPasse(manchesJouees);
+        System.out.println(manchesJouees);
+
+        // Afficher trié
+        afficherPaneTriees();
+    }
+
+    public void afficherPaneTriees() {
+        for (int i = 0; i < manchesJouees.size(); i++) {
+            // LOG
+            System.out.println("manche " + manchesJouees.get(i).getNumManche() + " est " + i + "e" + " positionx " + positionX.get(i) + " positiony " + positionY.get(i));
+            switch (manchesJouees.get(i).getNumManche()) {
+                case 1:
+                    paneManche1.setLayoutX(positionX.get(i));
+                    paneManche1.setLayoutY(positionY.get(i));
+                    break;
+                case 2:
+                    paneManche2.setLayoutX(positionX.get(i));
+                    paneManche2.setLayoutY(positionY.get(i));
+                    break;
+                case 3:
+                    paneManche3.setLayoutX(positionX.get(i));
+                    paneManche3.setLayoutY(positionY.get(i));
+                    break;
+                case 4:
+                    paneManche4.setLayoutX(positionX.get(i));
+                    paneManche4.setLayoutY(positionY.get(i));
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

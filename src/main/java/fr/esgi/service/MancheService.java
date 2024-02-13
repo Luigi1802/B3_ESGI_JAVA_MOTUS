@@ -9,5 +9,6 @@ public interface MancheService {
     Manche getManche();
     Manche creerNouvelleManche(int numManche) throws IOException;
     void lancerManche();
+    Long calculerTempsPasse(Manche manche);
 
 }

@@ -7,11 +7,10 @@ import fr.esgi.controller.GrillesController;
 import fr.esgi.service.MancheService;
 import fr.esgi.service.PartieService;
 import fr.esgi.utils.ComparateurMancheParMot;
-import fr.esgi.utils.ComparateurMancheParEssai;
+import fr.esgi.utils.ComparateurMancheParTempsPasse;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import java.io.IOException;
 
@@ -20,8 +19,8 @@ public class PartieServiceImpl implements PartieService {
     private static Partie partie = new Partie();
     private static int idMancheActuelle;
     private static GrillesController controller = new GrillesController();
-    private ComparateurMancheParMot comparateurParMot = new ComparateurMancheParMot();
-    private ComparateurMancheParEssai comparateurParEssai = new ComparateurMancheParEssai();
+    private ComparateurMancheParMot comparateurMancheParMot = new ComparateurMancheParMot();
+    private ComparateurMancheParTempsPasse comparateurMancheTempsPasse = new ComparateurMancheParTempsPasse();
 
     public Partie getPartie() {
         return partie;
@@ -57,12 +56,12 @@ public class PartieServiceImpl implements PartieService {
     // TODO paramètre à changer en Partie et plus ArrayList une fois boucle de jeu opé
     @Override
     public ArrayList<Manche> trierManchesParMot(ArrayList<Manche> manchesPartie) {
-        Collections.sort(manchesPartie, comparateurParMot);
+        Collections.sort(manchesPartie, comparateurMancheParMot);
         return manchesPartie;
     }
     @Override
-    public ArrayList<Manche> trierManchesParEssai(ArrayList<Manche> manchesPartie) {
-        Collections.sort(manchesPartie, comparateurParEssai);
+    public ArrayList<Manche> trierManchesParTempsPasse(ArrayList<Manche> manchesPartie) {
+        Collections.sort(manchesPartie, comparateurMancheTempsPasse);
         return manchesPartie;
     }
 }

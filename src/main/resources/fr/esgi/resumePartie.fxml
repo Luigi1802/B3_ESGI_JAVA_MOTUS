@@ -27,12 +27,12 @@
              </ImageView>
           </graphic>
        </Button>
-       <Button fx:id="boutonTriSurLeMot" alignment="CENTER" contentDisplay="CENTER" layoutX="439.0" layoutY="87.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #ffffff; -fx-background-radius: 10;" text="Tri sur le mot" textFill="#177e89">
+       <Button fx:id="boutonTriSurLeMot" alignment="CENTER" contentDisplay="CENTER" layoutX="439.0" layoutY="87.0" mnemonicParsing="false" onAction="#trierParMot" prefHeight="30.0" prefWidth="140.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #ffffff; -fx-background-radius: 10;" text="Tri sur le mot" textFill="#177e89">
           <font>
              <Font name="System Bold" size="16.0" />
           </font>
        </Button>
-       <Button fx:id="boutonTriSurLeTemps" alignment="CENTER" contentDisplay="CENTER" layoutX="597.0" layoutY="87.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #ffffff; -fx-background-radius: 10;" text="Tri sur le temps" textFill="#177e89">
+       <Button fx:id="boutonTriSurLeTemps" alignment="CENTER" contentDisplay="CENTER" layoutX="597.0" layoutY="87.0" mnemonicParsing="false" onAction="#trierParTemps" prefHeight="30.0" prefWidth="150.0" style="-fx-border-color: #FFFFFF; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: #ffffff; -fx-background-radius: 10;" text="Tri sur le temps" textFill="#177e89">
           <font>
              <Font name="System Bold" size="16.0" />
           </font>
