@@ -220,6 +220,8 @@ public class ResumePartieController implements Initializable {
 
     @FXML
     public void trierParMot(ActionEvent actionEvent) {
+        boutonTriSurLeMot.setStyle("-fx-background-color: #b2b8b9; -fx-border-color: #b2b8b9; -fx-background-radius: 10; -fx-border-radius: 10;");
+        boutonTriSurLeTemps.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ffffff; -fx-background-radius: 10; -fx-border-radius: 10;");
         partieService.trierManchesParMot(manchesJouees);
         System.out.println(manchesJouees);
 
@@ -229,6 +231,8 @@ public class ResumePartieController implements Initializable {
 
     @FXML
     public void trierParTemps(ActionEvent actionEvent) {
+        boutonTriSurLeTemps.setStyle("-fx-background-color: #b2b8b9; -fx-border-color: #b2b8b9; -fx-background-radius: 10; -fx-border-radius: 10;");
+        boutonTriSurLeMot.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ffffff; -fx-background-radius: 10; -fx-border-radius: 10;");
         partieService.trierManchesParTempsPasse(manchesJouees);
         System.out.println(manchesJouees);
 
