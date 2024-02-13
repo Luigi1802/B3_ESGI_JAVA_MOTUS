@@ -42,10 +42,5 @@
             <Font name="Calibri Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="aSupp" layoutX="642.0" layoutY="643.0" mnemonicParsing="false" onAction="#switchToResumePartie" prefHeight="30.0" prefWidth="136.0" style="-fx-background-color: #ffffff; -fx-border-color: #ffffff; -fx-border-radius: 30;" text="Résumé Partie (tmp)" textFill="#177e89">
-         <font>
-            <Font name="Calibri Bold" size="11.0" />
-         </font>
-      </Button>
     </AnchorPane>
 </VBox>

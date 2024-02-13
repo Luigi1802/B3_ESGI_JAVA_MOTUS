@@ -465,7 +465,7 @@ public class GrillesController implements Initializable {
                 } else {
                     // Partie terminée
                     partieService.getPartie().setVictoire(true);
-                    // TODO appel resumé
+                    App.setRoot("resumePartie");
                 }
             } else {
                 // Si le nbEssais < 6 alors on continue sinon manche perdue
@@ -481,7 +481,8 @@ public class GrillesController implements Initializable {
                     partieService.getMancheActuelle().setVictoire(false);
                     // Partie terminée
                     partieService.getPartie().setVictoire(false);
-                    // TODO appel resumé
+                    App.setRoot("resumePartie");
+
                 }
             }
         } else {

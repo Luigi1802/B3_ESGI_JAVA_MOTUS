@@ -11,6 +11,7 @@ import fr.esgi.service.PartieService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -61,5 +62,9 @@ public class MancheServiceImpl implements MancheService {
 
         // Mise en objet Mot la chaine de caractere stringMotATrouver
         return motService.retournerStringEnMot(stringMotATrouver);
+    }
+
+    public Long calculerTempsPasse(Manche manche) {
+        return ChronoUnit.SECONDS.between(manche.getHeureDebut(), manche.getHeureFin());
     }
 }
