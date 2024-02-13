@@ -15,7 +15,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.esgi.controller.ResumePartieController">
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: #084c61;">
-      <Label fx:id="labelVictoirePartie" layoutX="54.0" layoutY="80.0" text="Partie perdue !" textFill="#db3a34">
+      <Label fx:id="labelVictoirePartie" layoutX="54.0" layoutY="80.0" text="-" textFill="#db3a34">
          <font>
             <Font name="System Bold Italic" size="36.0" />
          </font>
@@ -54,7 +54,7 @@
                    <Font name="System Bold" size="26.0" />
                 </font>
              </Label>
-             <Label fx:id="labelVictoireManche1" text="Gagnée" textFill="#41b923" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+             <Label fx:id="labelVictoireManche1" text="-" textFill="#3b9a1e" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                 <font>
                    <Font name="System Bold Italic" size="24.0" />
                 </font>
@@ -75,7 +75,7 @@
                       <Insets left="15.0" />
                    </GridPane.margin>
                 </Label>
-                <Label fx:id="labelMotATrouverManche1" text="MINION" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                <Label fx:id="labelMotATrouverManche1" text="-" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                    <font>
                       <Font name="System Bold" size="20.0" />
                    </font>
@@ -97,7 +97,7 @@
                       <Insets left="15.0" />
                    </GridPane.margin>
                 </Label>
-                <Label fx:id="labelNombreEssaiManche1" text="4" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                <Label fx:id="labelNombreEssaiManche1" text="-" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                    <font>
                       <Font name="System Bold" size="20.0" />
                    </font>
@@ -122,7 +122,7 @@
                       <Insets left="15.0" />
                    </GridPane.margin>
                 </Label>
-                <Label fx:id="tempsPasseManche1" text="2 min 34 sec" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                <Label fx:id="tempsPasseManche1" text="-" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                    <font>
                       <Font name="System Bold" size="20.0" />
                    </font>
@@ -149,7 +149,7 @@
                         <Font name="System Bold" size="26.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelVictoireManche2" text="Gagnée" textFill="#41b923" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Label fx:id="labelVictoireManche2" text="-" textFill="#3b9a1e" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font name="System Bold Italic" size="24.0" />
                      </font>
@@ -171,7 +171,7 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="labelMotATrouverManche2" text="CHANGE" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                        <Label fx:id="labelMotATrouverManche2" text="-" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -195,7 +195,7 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="labelNombreEssaiManche2" text="2" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                        <Label fx:id="labelNombreEssaiManche2" text="-" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -222,7 +222,7 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="tempsPasseManche2" text="1 min 09 sec" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                        <Label fx:id="tempsPasseManche2" text="-" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -252,7 +252,7 @@
                         <Font name="System Bold" size="26.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelVictoireManche3" text="Gagnée" textFill="#41b923" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Label fx:id="labelVictoireManche3" text="-" textFill="#3b9a1e" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font name="System Bold Italic" size="24.0" />
                      </font>
@@ -274,7 +274,7 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="labelMotATrouverManche3" text="VOITURE" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                        <Label fx:id="labelMotATrouverManche3" text="-" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -298,7 +298,7 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="labelNombreEssaiManche3" text="5" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                        <Label fx:id="labelNombreEssaiManche3" text="-" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -325,7 +325,7 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="tempsPasseManche3" text="4 min 56 sec" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                        <Label fx:id="tempsPasseManche3" text="-" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -355,7 +355,7 @@
                         <Font name="System Bold" size="26.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelVictoireManche4" text="Perdue" textFill="#e12209" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Label fx:id="labelVictoireManche4" text="-" textFill="#e12209" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font name="System Bold Italic" size="24.0" />
                      </font>
@@ -377,7 +377,7 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="labelMotATrouverManche4" text="MANQUER" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                        <Label fx:id="labelMotATrouverManche4" text="-" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -401,7 +401,7 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="labelNombreEssaiManche4" text="6" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                        <Label fx:id="labelNombreEssaiManche4" text="-" textFill="#177e89" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
