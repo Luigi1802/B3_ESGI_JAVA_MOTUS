@@ -6,17 +6,21 @@ import fr.esgi.business.Mot;
 import fr.esgi.service.DictionnaireService;
 import fr.esgi.service.MancheService;
 import fr.esgi.service.MotService;
+import fr.esgi.service.PartieService;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Random;
 import java.util.Scanner;
 
 public class MancheServiceImpl implements MancheService {
     private static DictionnaireService dictionnaireService = new DictionnaireServiceImpl();
     private static MotService motService = new MotServiceImpl();
+    private static PartieService partieService = new PartieServiceImpl();
+
 
     private static Random random = new Random();
-    private static Scanner scanner = new Scanner(System.in);
 
     private static Manche manche = new Manche();
 
@@ -27,11 +31,15 @@ public class MancheServiceImpl implements MancheService {
     public Manche getManche() {return manche;}
 
     @Override
-    public Manche lancerNouvelleManche(int numManche) {
+    public Manche creerNouvelleManche(int numManche) throws IOException {
         manche = new Manche(numManche);
-        // Initialisation du mot à trouver
-        motService.setMotATrouver(initMotATrouver());
-        manche.setMotATrouver(motService.getMotATrouver());
+        manche.setMotATrouver(initMotATrouver());
+        return manche;
+    }
+
+    @Override
+    public void lancerManche(){
+        motService.setMotATrouver(partieService.getMancheActuelle().getMotATrouver());
         // Clear de motSaisi et motIntermediaire
         motService.setMotSaisi(new Mot());
         motService.setMotIntermediaire(new Mot());
@@ -39,45 +47,7 @@ public class MancheServiceImpl implements MancheService {
         Lettre premiereLettre = motService.getMotATrouver().getLettres().get(0);
         premiereLettre.setStatutValide();
         motService.getMotIntermediaire().ajouterLettre(premiereLettre);
-        // Boucle des saisies joueur
-        for (int i = 0; i < 6; i++){
-            System.out.println(motService.retournerMotIntermediaireFormate());
-            motService.setMotSaisi(motService.retournerStringEnMot(scanner.nextLine()));
-            // Test si mot de la bonne taille et dans le dictionnaire
-            while (motService.getMotSaisi().getLettres().size() != motService.getMotATrouver().getLettres().size()
-                    || !dictionnaireService.testerMotPresentDictionnaire(motService.getMotSaisi().retournerMotEnString())) {
-                if (motService.getMotSaisi().getLettres().size() != motService.getMotATrouver().getLettres().size()) {
-                    System.out.println("Le mot doit compter "+motService.getMotATrouver().getLettres().size()+" lettres.");
-                } else {
-                    System.out.println("Le mot saisi n'existe pas dans le dictionnaire.");
-                }
-                motService.setMotSaisi(motService.retournerStringEnMot(scanner.nextLine()));
-            }
-            while (motService.getMotSaisi().getLettres().size() != motService.getMotATrouver().getLettres().size()) {
-                System.out.println("Le mot doit compter "+motService.getMotATrouver().getLettres().size()+" lettres.");
-                motService.setMotSaisi(motService.retournerStringEnMot(scanner.nextLine()));
-            }
-            while (!dictionnaireService.testerMotPresentDictionnaire(motService.getMotSaisi().retournerMotEnString())) {
-                System.out.println("Le mot saisi n'existe pas dans le dictionnaire.");
-                motService.setMotSaisi(motService.retournerStringEnMot(scanner.nextLine()));
-            }
-            manche.ajouterEssai();
-            // Comparaison motSaisi - motATrouver
-            motService.comparateurMotsSaisiATrouver();
-            // Affichage motSaisi traité
-            System.out.println(motService.retournerMotSaisiFormate());
-            // Test victoire
-            if (motService.testerValiditeMotSaisi()) {
-                System.out.println("Manche gagnée !");
-                manche.setHeureFin(LocalDateTime.now());
-                manche.setVictoire(true);
-                return manche;
-            }
-        }
-        System.out.println("Manche perdue...");
-        manche.setHeureFin(LocalDateTime.now());
-        manche.setVictoire(false);
-        return manche;
+        partieService.getMancheActuelle().setHeureDebut(LocalDateTime.now());
     }
 
     private static Mot initMotATrouver() {
@@ -90,5 +60,10 @@ public class MancheServiceImpl implements MancheService {
 
         // Mise en objet Mot la chaine de caractere stringMotATrouver
         return motService.retournerStringEnMot(stringMotATrouver);
+    }
+
+    public Long calculerTempsPasse(Manche manche) {
+        // Temps écoulé entre le début d'une manche et sa fin (manche gagné ou 6 essais incorrects)
+        return ChronoUnit.SECONDS.between(manche.getHeureDebut(), manche.getHeureFin());
     }
 }

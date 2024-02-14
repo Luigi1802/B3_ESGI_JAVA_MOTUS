@@ -1,42 +1,32 @@
 package fr.esgi;
 
 import fr.esgi.business.Lettre;
-import fr.esgi.business.Manche;
-import fr.esgi.business.Mot;
-import fr.esgi.business.Partie;
+import fr.esgi.service.MancheService;
 import fr.esgi.service.MotService;
 import fr.esgi.service.PartieService;
+import fr.esgi.service.impl.MancheServiceImpl;
 import fr.esgi.service.impl.MotServiceImpl;
 import fr.esgi.service.DictionnaireService;
 import fr.esgi.service.impl.DictionnaireServiceImpl;
 import fr.esgi.service.impl.PartieServiceImpl;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.*;
 
 /**
  * JavaFX App
  */
 public class App extends Application {
-
-
-    private static DictionnaireService dictionnaireService = new DictionnaireServiceImpl();
-    private static MotService motService = new MotServiceImpl();
-    private static PartieService partieService = new PartieServiceImpl();
-
-
     private static Scene scene;
-    private static Scanner scanner = new Scanner(System.in);
-
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 1920, 1080);
+        scene = new Scene(loadFXML("menu"));
         stage.setScene(scene);
         stage.show();
     }
@@ -51,27 +41,6 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        //launch();
-        System.out.println("Bienvenue sur motus !");
-        boolean rejouer = true;
-        // Boucle de jeu (on relance une partie tant que le joueur le veut)
-        while (rejouer) {
-            // Lancement d'une partie
-            partieService.lancerNouvellePartie();
-            System.out.println("Voulez-vous rejouer ? (y/N)");
-            if (!scanner.nextLine().equalsIgnoreCase("Y")) {
-                rejouer = false;
-                System.out.println("À bientôt !");
-                System.exit(0);
-            }
-        }
+        launch();
     }
-
-    public static ArrayList<Lettre> concatenerDeuxListesLettres(ArrayList<Lettre> listeFinale, ArrayList<Lettre> listeAAjouter){
-        for(Lettre lettre:listeAAjouter){
-            listeFinale.add(lettre);
-        }
-        return listeFinale;
-    }
-
 }
