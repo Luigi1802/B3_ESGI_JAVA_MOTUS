@@ -5,6 +5,9 @@ import fr.esgi.utils.ComparateurLettreParPosition;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+/**
+ * Classe métier concernant les mots. Chaque Mot con tient une liste de ses lettres sous la forme d'une classe métier Lettre.
+ */
 public class Mot {
     private Long id;
     private ArrayList<Lettre> lettres;
@@ -27,6 +30,10 @@ public class Mot {
         this.lettres = lettres;
     }
 
+    /**
+     * Prend la liste de Lettre composant le mot, récupère ses caractères et les concatène.
+     * @return le Mot sous un format de chaîne de caractère.
+     */
     public String retournerMotEnString(){
         return lettres.stream().sorted(new ComparateurLettreParPosition()).map(Lettre::getCaractere).map(String::valueOf).collect(Collectors.joining());
     }

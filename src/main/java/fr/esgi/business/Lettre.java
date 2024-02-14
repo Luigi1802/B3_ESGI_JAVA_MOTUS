@@ -2,6 +2,9 @@ package fr.esgi.business;
 
 import java.util.Objects;
 
+/**
+ * Classe métier concernant les lettres d'un mot. Elle contient le caractère de la lettre d'un mot, sa position et son statut
+ */
 public class Lettre {
     private Long id;
     private Character caractere;
@@ -84,23 +87,43 @@ public class Lettre {
         return Objects.hash(getCaractere(), getPosition(), getStatut());
     }
 
+    /**
+     * Méthode qui test si l'objet en paramètre est une Lettre avec le statut TROUVE et le même caractère.
+     * @param o
+     * @return true si l'objet en paramètre a le statut TROUVE et le même caractère.
+     */
     public boolean estTrouve(Object o) {
         if (this == o) return true;
         if (!(o instanceof Lettre)) return false;
         Lettre lettre = (Lettre) o;
         return Objects.equals(getCaractere(), lettre.getCaractere()) && Objects.equals(StatutLettre.TROUVE, lettre.getStatut());}
+
+    /**
+     * Méthode qui test si l'objet en paramètre est une Lettre avec le statut VALIDE et le même caractère.
+     * @param o
+     * @return true si l'objet en paramètre a le statut VALIDE et le même caractère.
+     */
     public boolean estValide(Object o) {
         if (this == o) return true;
         if (!(o instanceof Lettre)) return false;
         Lettre lettre = (Lettre) o;
         return Objects.equals(getCaractere(), lettre.getCaractere()) && Objects.equals(StatutLettre.VALIDE, lettre.getStatut());}
 
+    /**
+     * Méthode qui test si l'objet en paramètre est une Lettre avec le statut ABSENT et le même caractère.
+     * @param o
+     * @return true si l'objet en paramètre a le statut ABSENT et le même caractère.
+     */
     public boolean estAbsent(Object o) {
         if (this == o) return true;
         if (!(o instanceof Lettre)) return false;
         Lettre lettre = (Lettre) o;
         return Objects.equals(getCaractere(), lettre.getCaractere()) && Objects.equals(StatutLettre.ABSENTE, lettre.getStatut());}
 
+    /**
+     * Permet d'afficher les valeurs des variables de Lettre.
+     * @return Un String contenant les valeurs de Lettre
+     */
     @Override
     public String toString() {
         return "\nLettre{" +
