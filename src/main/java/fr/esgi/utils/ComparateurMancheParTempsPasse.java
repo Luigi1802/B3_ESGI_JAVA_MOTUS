@@ -1,12 +1,10 @@
 package fr.esgi.utils;
 
 import fr.esgi.business.Manche;
-
-import java.util.Comparator;
-
 import fr.esgi.service.MancheService;
 import fr.esgi.service.impl.MancheServiceImpl;
 
+import java.util.Comparator;
 
 public class ComparateurMancheParTempsPasse implements Comparator<Manche> {
     private static MancheService mancheService = new MancheServiceImpl();

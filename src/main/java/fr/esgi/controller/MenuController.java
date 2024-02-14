@@ -10,10 +10,8 @@ import fr.esgi.service.impl.PartieServiceImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.fxml.Initializable;
-import javafx.scene.input.KeyEvent;
 
 public class MenuController implements Initializable {
-
     private static PartieService partieService = new PartieServiceImpl();
 
     @FXML
@@ -33,7 +31,6 @@ public class MenuController implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-
         //Survol bouttons menu
         boutonPartie.setOnMouseEntered(event -> boutonPartie.setOpacity(0.5));
         boutonPartie.setOnMouseExited(event -> boutonPartie.setOpacity(1));

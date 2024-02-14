@@ -2,7 +2,6 @@ package fr.esgi.controller;
 
 import fr.esgi.App;
 import fr.esgi.business.Manche;
-import fr.esgi.business.Partie;
 import fr.esgi.service.MancheService;
 import fr.esgi.service.PartieService;
 import fr.esgi.service.impl.MancheServiceImpl;
@@ -13,15 +12,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ResumePartieController implements Initializable {
@@ -66,8 +61,17 @@ public class ResumePartieController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Style
+        styliserEcran();
         // Nettoyage de mancheJouees pour une eventuelle seconde partie
         manchesJouees.clear();
+        // Etat de la partie
+        statuerEtatPartie();
+        // Remplir les résumés de manche
+        resumerManches();
+    }
+
+    public void styliserEcran() {
         // Hover sur boutons
         menu.setOnMouseEntered(event -> menu.setOpacity(0.5));
         menu.setOnMouseExited(event -> menu.setOpacity(1));
@@ -75,15 +79,6 @@ public class ResumePartieController implements Initializable {
         boutonTriSurLeMot.setOnMouseExited(event -> boutonTriSurLeMot.setOpacity(1));
         boutonTriSurLeTemps.setOnMouseEntered(event -> boutonTriSurLeTemps.setOpacity(0.5));
         boutonTriSurLeTemps.setOnMouseExited(event -> boutonTriSurLeTemps.setOpacity(1));
-
-        // Etat de la partie
-        statuerEtatPartie();
-        // Remplir les résumés de manche
-        resumerManches();
-
-        // DEV LOG
-        System.out.println(partieService.getPartie());
-
     }
 
     public void statuerEtatPartie() {
@@ -204,7 +199,6 @@ public class ResumePartieController implements Initializable {
         long secondes;
         String tempsPasseFormate;
 
-
         tempsPasse = mancheService.calculerTempsPasse(manche);
 
         if (tempsPasse > 59) {
@@ -215,7 +209,6 @@ public class ResumePartieController implements Initializable {
         } else {
             tempsPasseFormate = tempsPasse + " sec";
         }
-
         return tempsPasseFormate;
     }
 
@@ -226,7 +219,6 @@ public class ResumePartieController implements Initializable {
         boutonTriSurLeMot.setOpacity(0.5);
         boutonTriSurLeMot.setOnMouseExited(event -> boutonTriSurLeMot.setOpacity(0.5));
         partieService.trierManchesParMot(manchesJouees);
-        System.out.println(manchesJouees);
 
         // Afficher trié
         afficherPaneTriees();
@@ -239,7 +231,6 @@ public class ResumePartieController implements Initializable {
         boutonTriSurLeMot.setOpacity(1);
         boutonTriSurLeMot.setOnMouseExited(event -> boutonTriSurLeMot.setOpacity(1));
         partieService.trierManchesParTempsPasse(manchesJouees);
-        System.out.println(manchesJouees);
 
         // Afficher trié
         afficherPaneTriees();
@@ -247,8 +238,6 @@ public class ResumePartieController implements Initializable {
 
     public void afficherPaneTriees() {
         for (int i = 0; i < manchesJouees.size(); i++) {
-            // LOG
-            System.out.println("manche " + manchesJouees.get(i).getNumManche() + " est " + i + "e" + " positionx " + positionX.get(i) + " positiony " + positionY.get(i));
             switch (manchesJouees.get(i).getNumManche()) {
                 case 1:
                     paneManche1.setLayoutX(positionX.get(i));

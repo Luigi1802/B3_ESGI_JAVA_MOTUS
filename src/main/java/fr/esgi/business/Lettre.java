@@ -65,13 +65,6 @@ public class Lettre {
         this.statut = StatutLettre.ABSENTE;
     }
 
-    //public int getOccurence() {
-    //    return occurence;
-    //}
-    //public void setOccurence(int occurence) {
-    //    this.occurence = occurence;
-    //}
-
     // toString et autres
 
     @Override
