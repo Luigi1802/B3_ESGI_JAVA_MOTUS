@@ -11,6 +11,5 @@ public interface MotService {
     Mot getMotSaisi();
     Mot getMotIntermediaire();
     Mot getMotATrouver();
-    String retournerMotSaisiFormate();
     String retournerMotIntermediaireFormate();
 }

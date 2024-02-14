@@ -2,10 +2,8 @@ package fr.esgi.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.Normalizer;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 import fr.esgi.business.Lettre;
 import fr.esgi.business.Mot;
@@ -19,10 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.*;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.input.KeyEvent;
@@ -33,10 +28,6 @@ import fr.esgi.service.MancheService;
 import fr.esgi.service.impl.MancheServiceImpl;
 import fr.esgi.service.MotService;
 import fr.esgi.service.impl.MotServiceImpl;
-import javafx.scene.shape.Rectangle;
-
-import static java.lang.Thread.sleep;
-import static javafx.scene.input.KeyCode.A;
 
 public class GrillesController implements Initializable {
 
@@ -54,15 +45,6 @@ public class GrillesController implements Initializable {
     private static final Background BACKGROUND_ROUGE = new Background(BACKGROUND_FILL_ROUGE);
     private static final BackgroundFill BACKGROUND_FILL_MANCHE = new BackgroundFill(Color.web("#41b923"), new CornerRadii(50d), null);
     private static final Background BACKGROUND_MANCHE = new Background(BACKGROUND_FILL_MANCHE);
-
-
-    /*TODO A supprimer
-    private static final BackgroundFill KEY_BACKGROUND_FILL_ROUGE = new BackgroundFill(Color.web("#DB3A34"), new CornerRadii(10d), null);
-    private static final Background KEY_BACKGROUND_ROUGE = new Background(KEY_BACKGROUND_FILL_ROUGE);
-    private static final BackgroundFill KEY_BACKGROUND_FILL_JAUNE = new BackgroundFill(Color.web("#F7B735"), new CornerRadii(10d), null);
-    private static final Background KEY_BACKGROUND_JAUNE = new Background(KEY_BACKGROUND_FILL_JAUNE);
-    private static final BackgroundFill KEY_BACKGROUND_FILL_BLEU_VIDE = new BackgroundFill(Color.web("#FFFFFF"), new CornerRadii(10d), null);
-    private static final Background KEY_BACKGROUND_BLEU_VIDE = new Background(KEY_BACKGROUND_FILL_BLEU_VIDE);*/
 
     // Id Grille6 : pane et labels
     @FXML
@@ -116,13 +98,10 @@ public class GrillesController implements Initializable {
     private Button suppr, entrer;
     @FXML
     private Button A,Z,E,R,T,Y,U,I,O,P,Q,S,D,F,G,H,J,K,L,M,W,X,C,V,B,N;
-    List<Button> listBouttons = new ArrayList<>();
 
     private Button bouttonTrouve = new Button();
     private Button bouttonEncours = new Button();
     private Button bouttonAbsent = new Button();
-    private Button bouttonEntrerSuppr = new Button();
-    private Button supprimer = new Button();
 
     @FXML
     private Button menu;
@@ -176,16 +155,13 @@ public class GrillesController implements Initializable {
 
         // Lancement d'une manche
         mancheService.lancerManche();
-
-        // LOG
-        System.out.println(motService.getMotATrouver().retournerMotEnString());
-        System.out.println(motService.getMotIntermediaire().retournerMotEnString());
-
         // Initialisation grille
         initialiserGrille();
-
         // Indicateurs visuels des manches
         setIndicateursManches();
+
+        // LOG facilitant le dev et la correction
+        System.out.println("Mode omniscient, mot à trouver: " + motService.getMotATrouver().retournerMotEnString());
     }
 
     private void setIndicateursManches() {
@@ -310,17 +286,11 @@ public class GrillesController implements Initializable {
                 caseGrille.setBackground(null);
                 lettres.remove(colonne);
             }
-            // LOG
-            System.out.println("motSaisi " + lettres);
-            System.out.println("ligne " + ligne + " colonne " + colonne);
         }
         if (boutonSource.getId().equals("entrer")) {
             if (colonne == motService.getMotATrouver().getLettres().size() && ligne < 6) {
                 validerSaisie();
             }
-            // TODO enlever LOG
-            System.out.println("motSaisi " + lettres);
-            System.out.println("ligne " + ligne + " colonne " + colonne);
         }
     }
 
@@ -413,14 +383,11 @@ public class GrillesController implements Initializable {
     public void changerVisuelTouche(Button bouton, StatutLettre statut) {
         switch (statut) {
             case VALIDE:
-                //bouton.setBackground(KEY_BACKGROUND_ROUGE);
                 bouton.setStyle(bouttonTrouve.getStyle());
-                //bouton.setStyle("-fx-focus-traversable: false;");
                 break;
             case TROUVE:
                 if (bouton.getStyle() != bouttonTrouve.getStyle()) {
                     bouton.setStyle(bouttonEncours.getStyle());
-                    //bouton.setStyle("-fx-focus-traversable: false;");
                 }
                 break;
             case ABSENTE:
@@ -501,7 +468,6 @@ public class GrillesController implements Initializable {
     public void saisirLettre(ActionEvent actionEvent) {
         // Désactivation de l'indicateur "Mot invalide"
         mot_invalide.setVisible(false);
-        //
         entrer.requestFocus();
         caseGrille = grille.get(ligne).get(colonne);
         Button boutonSource = (Button) actionEvent.getSource();
@@ -513,19 +479,12 @@ public class GrillesController implements Initializable {
             lettres.add(caseGrille.getText());
             ++colonne;
         }
-        // LOG
-        System.out.println("motSaisi " + lettres);
-        System.out.println("motatrouver len: " + motService.getMotATrouver().getLettres().size());
-        System.out.println("lettres len: " + lettres.size());
-        System.out.println( "ligne " + ligne + " colonne "+ colonne);
     }
   
     @FXML
     public void saisirToucheClavier(KeyEvent keyEvent) throws IOException, InterruptedException {
         // Désactivation de l'indicateur "Mot invalide"
         mot_invalide.setVisible(false);
-        //
-
         // Gestion des touches
         switch (keyEvent.getCode()) {
             case BACK_SPACE:
@@ -545,7 +504,6 @@ public class GrillesController implements Initializable {
             // Lettres
             default:
                 if (keyEvent.getCode().toString().matches("[a-zA-Z]")) {
-                    System.out.println("detection default: " + keyEvent.getCode());
                     caseGrille = grille.get(ligne).get(colonne);
                     caseGrille.setText(keyEvent.getCode().toString());
                     lettres.add(caseGrille.getText());
@@ -554,10 +512,6 @@ public class GrillesController implements Initializable {
                 }
                 break;
         }
-        // LOG
-        System.out.println("detection touche: " + keyEvent.getCode());
-        System.out.println("motSaisi " + lettres);
-        System.out.println( "ligne " + ligne + " colonne "+ colonne);
     }
 
 

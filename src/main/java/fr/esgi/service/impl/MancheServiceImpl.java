@@ -1,6 +1,5 @@
 package fr.esgi.service.impl;
 
-import fr.esgi.App;
 import fr.esgi.business.Lettre;
 import fr.esgi.business.Manche;
 import fr.esgi.business.Mot;
@@ -22,7 +21,6 @@ public class MancheServiceImpl implements MancheService {
 
 
     private static Random random = new Random();
-    private static Scanner scanner = new Scanner(System.in);
 
     private static Manche manche = new Manche();
 
@@ -65,6 +63,7 @@ public class MancheServiceImpl implements MancheService {
     }
 
     public Long calculerTempsPasse(Manche manche) {
+        // Temps écoulé entre le début d'une manche et sa fin (manche gagné ou 6 essais incorrects)
         return ChronoUnit.SECONDS.between(manche.getHeureDebut(), manche.getHeureFin());
     }
 }
