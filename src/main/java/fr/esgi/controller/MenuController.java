@@ -30,6 +30,11 @@ public class MenuController implements Initializable {
         App.setRoot("nomDevs");
     }
 
+    /**
+     * Cette méthode sert à initialiser la fenêtre FXML et préparer les interaction possibles pour les utilisateurs.
+     * @param location
+     * @param resources
+     */
     public void initialize(URL location, ResourceBundle resources) {
         //Survol bouttons menu
         boutonPartie.setOnMouseEntered(event -> boutonPartie.setOpacity(0.5));

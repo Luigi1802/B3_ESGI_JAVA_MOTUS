@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Classe service servant à manipuler les mots.
+ */
 public class MotServiceImpl implements MotService{
     private static Mot motSaisi = new Mot();
     private static Mot motATrouver = new Mot();
@@ -46,6 +49,11 @@ public class MotServiceImpl implements MotService{
         MotServiceImpl.motSaisi = motSaisi;
     }
 
+    /**
+     * Recupere un String correspondant à un mot. Créer un Mot à partir de cette chaîne de caractère. Divise la chaîne en caractère individuels, créé une Lettre associée à chaque caractère et les met dans la liste de Lettre du Mot.
+     * @param stringMot Une chaîne de cara  ctère correspondant à un mot.
+     * @return La chaîne de caractère mise en paramètre convertie en un nouveau Mot.
+     */
     @Override
     public Mot retournerStringEnMot(String stringMot) {
         Mot stringEnMot = new Mot();
@@ -59,7 +67,12 @@ public class MotServiceImpl implements MotService{
         return stringEnMot;
     }
 
-    // Algorithme de comparaison retranscrivant le principe du jeu
+    /**
+     * Gère le motSaisi, le motATrouver et le motIntermediaire.<br>
+     * motSaisi et motATrouver sont comparés selon trois critères : trouver les lettres au bon endroit TROUVE, trouver les lettres existantes mais pas au bon endroit VALIDE trouver les lettres ABSENTES.<br>
+     * Les Lettre du motSaisi sont comparées au motATrouver pour changer au fur et à mesure le statut de ses lettres. A la fin du code les motSaisi est réordonné via la position de ses Lettre et ainsi utilisable pour l'affichage.<br>
+     * Les Lettre du mot intermédiaire sont mises à jour en ne conservant chaque Lettre qu'une seule fois à chaque fois avec le statut le plus fort conservé pour chaque Lettre TROUVE>VALIDE>DEFAUT et ABSENT>DEFAUT.<br>
+     */
     @Override
     public void comparateurMotsSaisiATrouver(){
         ArrayList<Lettre> lettresMotSaisi = new ArrayList<>(motSaisi.getLettres());
@@ -146,6 +159,11 @@ public class MotServiceImpl implements MotService{
                 }
         );
     }
+
+    /**
+     * Test si toutes les Lettre d'un mot ont le statut VALIDE.
+     * @return Renvoie true si toutes les Lettre sont valide
+     */
     public boolean testerValiditeMotSaisi(){
         boolean validite = true;
         for (Lettre lettre:motSaisi.getLettres()) {

@@ -27,22 +27,36 @@ public class ResumePartieController implements Initializable {
     @FXML
     private Button menu, boutonTriSurLeMot, boutonTriSurLeTemps;
 
-    // Affichage état de la partie
+    /**
+     * Affichage état de la partie
+     */
     @FXML
     private Label labelVictoirePartie;
-    // Bloc de manche
+
+    /**
+     * Bloc de manche
+     */
     @FXML
     private Pane paneManche1, paneManche2, paneManche3, paneManche4;
-    // Affichage état de la manche
+    /**
+     * Affichage état de la manche
+     */
     @FXML
     Label labelVictoireManche1, labelVictoireManche2, labelVictoireManche3, labelVictoireManche4;
-    // Affichage mot à trouver manche
+
+    /**
+     * Affichage mot à trouver manche
+     */
     @FXML
     Label labelMotATrouverManche1, labelMotATrouverManche2, labelMotATrouverManche3, labelMotATrouverManche4;
-    // Affichage nombre d'éssai manche
+    /**
+     * Affichage nombre d'éssai manche
+     */
     @FXML
     Label labelNombreEssaiManche1, labelNombreEssaiManche2, labelNombreEssaiManche3, labelNombreEssaiManche4;
-    // Affichage temps passé manche
+    /**
+     * Affichage temps passé manche
+     */
     @FXML
     Label tempsPasseManche1, tempsPasseManche2, tempsPasseManche3, tempsPasseManche4;
 
@@ -71,6 +85,10 @@ public class ResumePartieController implements Initializable {
         resumerManches();
     }
 
+
+    /**
+     * Cette méthode gère l'hovering des boutons servant à montrer les boutons survolés par la souris de l'utilisateur.
+     */
     public void styliserEcran() {
         // Hover sur boutons
         menu.setOnMouseEntered(event -> menu.setOpacity(0.5));
@@ -81,6 +99,9 @@ public class ResumePartieController implements Initializable {
         boutonTriSurLeTemps.setOnMouseExited(event -> boutonTriSurLeTemps.setOpacity(1));
     }
 
+    /**
+     * Permet d'afficher le statut de la partie.
+     */
     public void statuerEtatPartie() {
         if (partieService.getPartie().isVictoire()) {
             labelVictoirePartie.setText("Partie gagnée!");
@@ -91,6 +112,9 @@ public class ResumePartieController implements Initializable {
         }
     }
 
+    /**
+     * Méthode qui a pour but de résumer les détails de chaque manche jouée et de les afficher dans l'interface utilisateur. Pour chaque manche (de la première à la quatrième), les détails suivants sont résumés : victoire ou défaite, mot à trouver, nombre d'essais, temps passé. Chaque manche est récupérée depuis la partie en cours. Si le nombre d'essais effectués dans la manche est supérieur à zéro, cela signifie que la manche a été jouée. Dans ce cas, les détails de la manche sont affichés et ajoutés à la liste manchesJouees. Sinon, le panneau de la manche est caché.
+     */
     public void resumerManches() {
         // Resume manche 1
         Manche rManche1 = partieService.getPartie().getManches().get(0);
@@ -193,6 +217,11 @@ public class ResumePartieController implements Initializable {
         }
     }
 
+    /**
+     * Cette méthode a pour objectif de formater le temps passé dans une manche donnée en une chaîne de caractères lisible par l'utilisateur. Elle prend en paramètree une Manche contenant l'heure de début et l'heure de fin. Elle récupère le temps passé et le converti en string.
+     * @param manche Manche pour laquelle on cherche la durée.
+     * @return La durée de la manche convertie en String
+     */
     public static String TempsPasseFormate(Manche manche) {
         long tempsPasse;
         long minutes;
@@ -212,6 +241,10 @@ public class ResumePartieController implements Initializable {
         return tempsPasseFormate;
     }
 
+    /**
+     * Bouton pour trier les resultats par mot.
+     * @param actionEvent
+     */
     @FXML
     public void trierParMot(ActionEvent actionEvent) {
         boutonTriSurLeTemps.setOpacity(1);
@@ -223,7 +256,10 @@ public class ResumePartieController implements Initializable {
         // Afficher trié
         afficherPaneTriees();
     }
-
+    /**
+     * Bouton pour trier les resultats par temps.
+     * @param actionEvent
+     */
     @FXML
     public void trierParTemps(ActionEvent actionEvent) {
         boutonTriSurLeTemps.setOpacity(0.5);
@@ -235,7 +271,9 @@ public class ResumePartieController implements Initializable {
         // Afficher trié
         afficherPaneTriees();
     }
-
+    /**
+     * Permet d'afficher les resultats par le tri selectionné.
+     */
     public void afficherPaneTriees() {
         for (int i = 0; i < manchesJouees.size(); i++) {
             switch (manchesJouees.get(i).getNumManche()) {

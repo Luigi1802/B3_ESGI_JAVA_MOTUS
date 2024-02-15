@@ -3,6 +3,7 @@ package fr.esgi.business;
 import fr.esgi.utils.ComparateurLettreParPosition;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -30,12 +31,29 @@ public class Mot {
         this.lettres = lettres;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Mot)) return false;
+        Mot mot = (Mot) o;
+        return Objects.equals(getLettres(), mot.getLettres());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getLettres());
+    }
+
     /**
      * Prend la liste de Lettre composant le mot, récupère ses caractères et les concatène.
      * @return le Mot sous un format de chaîne de caractère.
      */
     public String retournerMotEnString(){
         return lettres.stream().sorted(new ComparateurLettreParPosition()).map(Lettre::getCaractere).map(String::valueOf).collect(Collectors.joining());
+    }
+
+    public void ajouterLettre(Lettre lettre) {
+        this.lettres.add(lettre);
     }
 
     // toString et autre
@@ -47,7 +65,5 @@ public class Mot {
                 '}';
     }
 
-    public void ajouterLettre(Lettre lettre) {
-        this.lettres.add(lettre);
-    }
+
 }
