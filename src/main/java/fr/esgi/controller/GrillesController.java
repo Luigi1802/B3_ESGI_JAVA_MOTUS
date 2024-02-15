@@ -137,6 +137,13 @@ public class GrillesController implements Initializable {
     }
 
     // Initialisation des id
+
+    /**
+     * Cette méthode sert à initialiser la fenêtre FXML et préparer les interaction possibles pour les utilisateurs.
+     *
+     * @param location
+     * @param resources
+     */
     public void initialize(URL location, ResourceBundle resources) {
         // Activation saisie clavier
         Platform.runLater(() -> entrer.requestFocus());

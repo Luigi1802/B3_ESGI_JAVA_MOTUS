@@ -30,6 +30,12 @@ public class MancheServiceImpl implements MancheService {
     @Override
     public Manche getManche() {return manche;}
 
+    /**
+     * Méthode servant à générer une nouvelle Manche. La nouvelle manche prend en paramètre un numéro de manche.
+     * @param numManche Numéro de la manche dans une partie.
+     * @return Manche générée
+     * @throws IOException
+     */
     @Override
     public Manche creerNouvelleManche(int numManche) throws IOException {
         manche = new Manche(numManche);
@@ -37,6 +43,9 @@ public class MancheServiceImpl implements MancheService {
         return manche;
     }
 
+    /**
+     * Méthode permettant de lancer une manche au sein d'une partie. Elle génère le mot à trouver en le récupérant dans un dictionnaire. Elle initialise à vide les variables motIntermediaire et le motSaisi qui seront utilisées par la suite.
+     */
     @Override
     public void lancerManche(){
         motService.setMotATrouver(partieService.getMancheActuelle().getMotATrouver());
@@ -50,6 +59,10 @@ public class MancheServiceImpl implements MancheService {
         partieService.getMancheActuelle().setHeureDebut(LocalDateTime.now());
     }
 
+    /**
+     * Méthode servant à créer la liste de mots dans laquelle sera pioché au hasard un mot à trouver. Converti la chaine de caractère ainsi piochée en Mot avant de le renvoyer.
+     * @return Retourne le mot pioché converti en un Mot
+     */
     private static Mot initMotATrouver() {
         // Creation de la liste de mots à partir des trois dictionnaires
         dictionnaireService.creerListeMots();
@@ -62,6 +75,11 @@ public class MancheServiceImpl implements MancheService {
         return motService.retournerStringEnMot(stringMotATrouver);
     }
 
+    /**
+     * Méthode servant à calculer la durée d'une manche. Elle calcule la différence entree l'heure de début et l'heure de fin de la manche.
+     * @param manche un Long correspondant au temps qu'a durée la manche.
+     * @return
+     */
     public Long calculerTempsPasse(Manche manche) {
         // Temps écoulé entre le début d'une manche et sa fin (manche gagné ou 6 essais incorrects)
         return ChronoUnit.SECONDS.between(manche.getHeureDebut(), manche.getHeureFin());

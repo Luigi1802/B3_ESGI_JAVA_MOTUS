@@ -3,6 +3,9 @@ package fr.esgi.business;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+/**
+ * Classe métier permettant de gérer les manches d'une partie.
+ */
 public class Manche {
     private Long id;
     private int numManche;
@@ -81,6 +84,11 @@ public class Manche {
     public void ajouterEssai(){
         ++nbEssais;
     }
+
+    /**
+     * Méthode permettant de calculer la durée d'une manche d'une partie.
+     * @return Durée de la manche.
+     */
     public Long calculerTempsPasse(){
         if (heureFin!=null) {
             return Duration.between(heureDebut, heureFin).getSeconds();

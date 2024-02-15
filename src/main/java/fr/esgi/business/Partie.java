@@ -2,6 +2,9 @@ package fr.esgi.business;
 
 import java.util.ArrayList;
 
+/**
+ * Classe métier gérant les parties
+ */
 public class Partie {
     private Long id;
     private ArrayList<Manche> manches;
@@ -40,6 +43,11 @@ public class Partie {
                 ", victoire=" + victoire +
                 '}';
     }
+
+    /**
+     * Ajout d'une manche à la liste des manches d'une partie
+     * @param manche Manche
+     */
     public void ajouterManche(Manche manche) {
         this.manches.add(manche);
     }
