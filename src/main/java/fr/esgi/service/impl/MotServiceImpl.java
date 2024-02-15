@@ -174,25 +174,6 @@ public class MotServiceImpl implements MotService{
         }
         return validite;
     }
-    // TODO à retirer une fois l'interface graphique en place
-    @Override
-    public String retournerMotSaisiFormate() {
-        String motSaisiFormate = "";
-        for (Lettre lettre:motSaisi.getLettres()) {
-            switch (lettre.getStatut()) {
-                case VALIDE:
-                    motSaisiFormate += "["+lettre.getCaractere()+"]";
-                    break;
-                case TROUVE:
-                    motSaisiFormate += "("+lettre.getCaractere()+")";
-                    break;
-                default:
-                    motSaisiFormate += lettre.getCaractere();
-                    break;
-            }
-        }
-        return motSaisiFormate;
-    }
     @Override
     public String retournerMotIntermediaireFormate() {
         String motIntermediaireFormate = "";

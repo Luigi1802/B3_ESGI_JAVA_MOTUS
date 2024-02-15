@@ -36,6 +36,7 @@ public class DictionnaireServiceImpl implements DictionnaireService {
             url = new URL(urlPath);
         } catch (MalformedURLException e) {
             System.out.println("Fichier teste indisponible, raison : " + e.getMessage());
+            System.out.println("Il est possible que vous ne soyez pas connecté à internet. Si le problème persiste, veuillez contacter le support.");
             System.exit(-1);
         }
         try{
