@@ -6,6 +6,9 @@ import fr.esgi.service.impl.MancheServiceImpl;
 
 import java.util.Comparator;
 
+/**
+ * Cette interface de comparaison permet d'ordonner des Manche par ordre croissant de durée de manche.
+ */
 public class ComparateurMancheParTempsPasse implements Comparator<Manche> {
     private static MancheService mancheService = new MancheServiceImpl();
 

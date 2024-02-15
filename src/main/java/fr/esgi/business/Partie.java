@@ -1,7 +1,11 @@
 package fr.esgi.business;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
+/**
+ * Classe métier gérant les parties
+ */
 public class Partie {
     private Long id;
     private ArrayList<Manche> manches;
@@ -31,6 +35,19 @@ public class Partie {
         this.victoire = victoire;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Partie)) return false;
+        Partie partie = (Partie) o;
+        return isVictoire() == partie.isVictoire() && Objects.equals(getManches(), partie.getManches());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getManches(), isVictoire());
+    }
+
     // toString et autre
     @Override
     public String toString() {
@@ -40,6 +57,11 @@ public class Partie {
                 ", victoire=" + victoire +
                 '}';
     }
+
+    /**
+     * Ajout d'une manche à la liste des manches d'une partie
+     * @param manche Manche
+     */
     public void ajouterManche(Manche manche) {
         this.manches.add(manche);
     }

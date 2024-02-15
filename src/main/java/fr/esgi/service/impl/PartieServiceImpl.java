@@ -34,6 +34,7 @@ public class PartieServiceImpl implements PartieService {
 
     public int getIdMancheActuelle() {return idMancheActuelle;}
 
+
     @Override
     public void lancerNouvellePartie() throws IOException {
         partie = new Partie();
