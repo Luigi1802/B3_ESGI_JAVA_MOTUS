@@ -1,6 +1,10 @@
 package fr.esgi.service;
 
 import fr.esgi.business.Mot;
+
+/**
+ * Classe service servant à manipuler les mots.
+ */
 public interface MotService {
     Mot retournerStringEnMot(String stringMot);
     void comparateurMotsSaisiATrouver();
