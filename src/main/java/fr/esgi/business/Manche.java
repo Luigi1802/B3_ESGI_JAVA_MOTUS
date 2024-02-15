@@ -2,6 +2,7 @@ package fr.esgi.business;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * Classe métier permettant de gérer les manches d'une partie.
@@ -65,7 +66,20 @@ public class Manche {
         this.victoire = victoire;
     }
 
-// toString et autre
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Manche)) return false;
+        Manche manche = (Manche) o;
+        return getNumManche() == manche.getNumManche() && getNbEssais() == manche.getNbEssais() && isVictoire() == manche.isVictoire() && Objects.equals(getMotATrouver(), manche.getMotATrouver()) && Objects.equals(getHeureDebut(), manche.getHeureDebut()) && Objects.equals(getHeureFin(), manche.getHeureFin());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNumManche(), getMotATrouver(), getNbEssais(), getHeureDebut(), getHeureFin(), isVictoire());
+    }
+
+    // toString et autre
 
 
     @Override
