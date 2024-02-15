@@ -1,6 +1,7 @@
 package fr.esgi.business;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Classe métier gérant les parties
@@ -32,6 +33,19 @@ public class Partie {
     }
     public void setVictoire(boolean victoire) {
         this.victoire = victoire;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Partie)) return false;
+        Partie partie = (Partie) o;
+        return isVictoire() == partie.isVictoire() && Objects.equals(getManches(), partie.getManches());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getManches(), isVictoire());
     }
 
     // toString et autre
