@@ -36,7 +36,7 @@ public class GrillesController implements Initializable {
     private static MotService motService = new MotServiceImpl();
     private static DictionnaireService dictionnaireService = new DictionnaireServiceImpl();
 
-    // Couleur de fond
+    // Couleur de fond pour les cases de la grille
     private static final BackgroundFill BACKGROUND_FILL_BLEU = new BackgroundFill(Color.web("#177E89"), null, null);
     private static final Background BACKGROUND_BLEU = new Background(BACKGROUND_FILL_BLEU);
     private static final BackgroundFill BACKGROUND_FILL_JAUNE = new BackgroundFill(Color.web("#F7B735"), new CornerRadii(30d), null);
@@ -99,6 +99,7 @@ public class GrillesController implements Initializable {
     @FXML
     private Button A,Z,E,R,T,Y,U,I,O,P,Q,S,D,F,G,H,J,K,L,M,W,X,C,V,B,N;
 
+    //Bouttons pour set le style des boutons du clavier visuel.
     private Button bouttonTrouve = new Button();
     private Button bouttonEncours = new Button();
     private Button bouttonAbsent = new Button();
@@ -140,7 +141,6 @@ public class GrillesController implements Initializable {
 
     /**
      * Cette méthode sert à initialiser la fenêtre FXML et préparer les interaction possibles pour les utilisateurs.
-     *
      * @param location
      * @param resources
      */
@@ -170,7 +170,10 @@ public class GrillesController implements Initializable {
         // LOG facilitant le dev et la correction
         System.out.println("Mode omniscient, mot à trouver: " + motService.getMotATrouver().retournerMotEnString());
     }
-
+    /**
+     * Cette méthode sert à modifier les indcateurs de manches.
+     *
+     */
     private void setIndicateursManches() {
         indicateursManches.add(manche_1);
         indicateursManches.add(manche_2);
@@ -182,7 +185,14 @@ public class GrillesController implements Initializable {
         }
         indicateursManches.get(partieService.getIdMancheActuelle()).setOpacity(1);
     }
-
+    /**
+     * Cette méthode sert à initialiser:
+     * - Les grilles.
+     * - Depart premiere ligne.
+     * - Ligne
+     * - Colonne
+     * - Premiere lettre du mot
+     */
     public void initialiserGrille() {
         // Grille selon longueur du mot
         switch (motService.getMotATrouver().getLettres().size()) {
@@ -238,12 +248,21 @@ public class GrillesController implements Initializable {
         afficherLigneIntermediaire();
     }
 
+    /**
+     * Set quelle grille doit etre visible.
+     * @param p6
+     * @param p7
+     * @param p8
+     */
     public void afficherPane(boolean p6, boolean p7, boolean p8) {
         pane6.setVisible(p6);
         pane7.setVisible(p7);
         pane8.setVisible(p8);
     }
 
+    /**
+     * Ajout des lignes de jeu pour la grille.
+     */
     public void ajouterLignesdansGrille() {
         // Ajout dans notre tableau a deux dmension
         grille.add(ligne1);
@@ -254,6 +273,9 @@ public class GrillesController implements Initializable {
         grille.add(ligne6);
     }
 
+    /**
+     * Modification de la ligne intermediaire en cours pour la verification visuel du mot.
+     */
     public void afficherLigneIntermediaire() {
         String motInterString = motService.retournerMotIntermediaireFormate();
         for (int i = 0; i < motInterString.length(); i++) {
@@ -266,6 +288,9 @@ public class GrillesController implements Initializable {
         }
     }
 
+    /**
+     * Modification de la ligne testée pour la verification visuel du mot.
+     */
     public void afficherLigneVerifiee() {
         for (Lettre lettre:motService.getMotSaisi().getLettres()) {
             switch (lettre.getStatut()) {
@@ -281,6 +306,13 @@ public class GrillesController implements Initializable {
             }
         }
     }
+
+    /**
+     *Test les touches supprimer et entrer afin de faire les actions associées.
+     * @param actionEvent
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @FXML
     public void entrerSuppr(ActionEvent actionEvent) throws IOException, InterruptedException {
         entrer.requestFocus();
@@ -301,7 +333,9 @@ public class GrillesController implements Initializable {
         }
     }
 
-
+    /**
+     *Mise à jour des lettres du clavier visuel en utilisant un switch.
+     */
     public void mettreAJourClavier(){
         for (Lettre lettre:motService.getMotSaisi().getLettres()) {
             switch (lettre.getCaractere()) {
@@ -387,6 +421,11 @@ public class GrillesController implements Initializable {
         }
     }
 
+    /**
+     * Modification du style du bouton du clavier en fonction du statut de la lettre.
+     * @param bouton
+     * @param statut
+     */
     public void changerVisuelTouche(Button bouton, StatutLettre statut) {
         switch (statut) {
             case VALIDE:
@@ -405,6 +444,10 @@ public class GrillesController implements Initializable {
         }
     }
 
+    /**
+     *Récupère la variable globale lettres qui est une liste de String, concatène les éléments de la liste en un seule String, converti le String en Mot et retourne le mot.
+     * @return Un Mot, résultat d'une méthode transformant un String en Mot
+     */
     public Mot convertirLettresEnMot() {
         String lettresString = new String();
         for (String lettre:lettres) {
@@ -413,6 +456,11 @@ public class GrillesController implements Initializable {
         return motService.retournerStringEnMot(lettresString);
     }
 
+    /**
+     * Permet de valider la saisi du mot en le comparent au mot à trouver et de gerer les manches dans la partie
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void validerSaisie() throws IOException, InterruptedException {
         Mot motSaisiInterface = convertirLettresEnMot();
         motService.setMotSaisi(motSaisiInterface);
@@ -470,6 +518,10 @@ public class GrillesController implements Initializable {
         }
     }
 
+    /**
+     * Permet de mettre en memoire la lettre saisi sur le clavier virtuel
+     * @param actionEvent
+     */
     // Saisie de lettre bouton
     @FXML
     public void saisirLettre(ActionEvent actionEvent) {
@@ -487,7 +539,13 @@ public class GrillesController implements Initializable {
             ++colonne;
         }
     }
-  
+
+    /**
+     * * Permet de mettre en memoire la lettre saisi sur le clavier physique
+     * @param keyEvent
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @FXML
     public void saisirToucheClavier(KeyEvent keyEvent) throws IOException, InterruptedException {
         // Désactivation de l'indicateur "Mot invalide"
@@ -521,7 +579,10 @@ public class GrillesController implements Initializable {
         }
     }
 
-
+    /**
+     *Cette méthode gère l'hovering des boutons servant à montrer les boutons survolés par la souris de l'utilisateur lors de l'entree de la souris.
+     * @param mouseEvent
+     */
     public void onMouseEntrer(MouseEvent mouseEvent){
         Button boutonSource = (Button) mouseEvent.getSource();
         if(boutonSource.getStyle()!=bouttonEncours.getStyle() && boutonSource.getStyle()!=bouttonTrouve.getStyle() && boutonSource.getStyle()!=bouttonAbsent.getStyle()){
@@ -529,6 +590,10 @@ public class GrillesController implements Initializable {
         }
     }
 
+    /**
+     *Cette méthode gère l'hovering des boutons servant à montrer les boutons survolés par la souris de l'utilisateur lors de la sortie de la souris.
+     * @param mouseEvent
+     */
     public void onMouseSortir(MouseEvent mouseEvent){
         Button boutonSource = (Button) mouseEvent.getSource();
         if(boutonSource.getStyle()!=bouttonEncours.getStyle() && boutonSource.getStyle()!=bouttonTrouve.getStyle() && boutonSource.getStyle()!=bouttonAbsent.getStyle()){
