@@ -99,6 +99,9 @@ public class ResumePartieController implements Initializable {
         boutonTriSurLeTemps.setOnMouseExited(event -> boutonTriSurLeTemps.setOpacity(1));
     }
 
+    /**
+     * Permet d'afficher le statut de la partie.
+     */
     public void statuerEtatPartie() {
         if (partieService.getPartie().isVictoire()) {
             labelVictoirePartie.setText("Partie gagnée!");
@@ -238,7 +241,10 @@ public class ResumePartieController implements Initializable {
         return tempsPasseFormate;
     }
 
-
+    /**
+     * Bouton pour trier les resultats par mot.
+     * @param actionEvent
+     */
     @FXML
     public void trierParMot(ActionEvent actionEvent) {
         boutonTriSurLeTemps.setOpacity(1);
@@ -250,7 +256,10 @@ public class ResumePartieController implements Initializable {
         // Afficher trié
         afficherPaneTriees();
     }
-
+    /**
+     * Bouton pour trier les resultats par temps.
+     * @param actionEvent
+     */
     @FXML
     public void trierParTemps(ActionEvent actionEvent) {
         boutonTriSurLeTemps.setOpacity(0.5);
@@ -262,7 +271,9 @@ public class ResumePartieController implements Initializable {
         // Afficher trié
         afficherPaneTriees();
     }
-
+    /**
+     * Permet d'afficher les resultats par le tri selectionné.
+     */
     public void afficherPaneTriees() {
         for (int i = 0; i < manchesJouees.size(); i++) {
             switch (manchesJouees.get(i).getNumManche()) {
